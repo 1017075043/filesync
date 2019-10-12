@@ -1,0 +1,410 @@
+#include "wnh_filesync_control.h"
+
+void wnh_filesync_control::get_server_status_info_while() //获取服务端状态信息(循环)
+{
+    while(1)
+    {
+        if(!unblock_connect(ip, to_string(port)))
+        {
+            WNHERROR(ip << ":" << port << ", 无法链接, 服务端不在线");
+            close(socket_num);
+            return;
+        }
+        if(!send_start_session_info())
+        {
+            close(socket_num);
+            return;
+        }
+        string server_status_info_file_path;
+        for(int i = 0; i < MAXIMUM_NUMBER_OF_REQUESTS_PER_SESSION; i++)
+        {
+            if(!send_get_server_status_info(server_status_info_file_path))
+            {
+                close(socket_num);
+                return;
+            }
+
+            if(server_status_info_file_path != WNH_FILESYNC_GET_SERVER_STATUS_IGNORE_INFO)
+            {
+                if(!download_file(server_status_info_file_path, server_status_info_file_path + SERVER_STATUS_INFO_FILE_SUFFIX))
+                {
+                    close(socket_num);
+                    return;
+                }
+                show_server_status_info(server_status_info_file_path + SERVER_STATUS_INFO_FILE_SUFFIX); //显示服务端状态
+            }
+            if(i != 9)
+            {
+                sleep(REQUEST_INTERVAL);
+            }
+        }
+        send_end_session_info();
+        sleep(REQUEST_INTERVAL);
+    }
+    return;
+}
+
+void wnh_filesync_control::get_server_status_info() //获取服务端状态信息
+{
+    if(!unblock_connect(ip, to_string(port)))
+    {
+        WNHERROR(ip << ":" << port << ", 无法链接, 服务端不在线");
+        close(socket_num);
+        return;
+    }
+    if(!send_start_session_info())
+    {
+        close(socket_num);
+        return;
+    }
+    string server_status_info_file_path;
+    if(!send_get_server_status_info(server_status_info_file_path))
+    {
+        close(socket_num);
+        return;
+    }
+    if(!download_file(server_status_info_file_path, server_status_info_file_path + SERVER_STATUS_INFO_FILE_SUFFIX))
+    {
+        close(socket_num);
+        return;
+    }
+    show_server_status_info(server_status_info_file_path + SERVER_STATUS_INFO_FILE_SUFFIX); //显示服务端状态
+    send_end_session_info();
+    return;
+}
+
+bool wnh_filesync_control::send_get_server_status_info(string & server_status_info_file_path) //向服务器发送获取服务端状态信息信号, 且获取服务端状态信息文件路径
+{
+    if(send_info(WNH_FILESYNC_GET_SERVER_STATUS_INFO))
+    {
+        string info;
+        if(!accept_info(info))
+        {
+            WNHERROR(SERVER_INFO_LOGS << ", 向服务器请求获取服务端状态信息失败了" << ", errno=" << errno << ", mesg=" << strerror(errno));
+            return false;
+        }
+        if(info.substr(0, strlen(WNH_FILESYNC_GET_SERVER_STATUS_INFO)) == WNH_FILESYNC_GET_SERVER_STATUS_INFO)
+        {
+            server_status_info_file_path = info.substr(strlen(WNH_FILESYNC_GET_SERVER_STATUS_INFO));
+            WNHDEBUG(SERVER_INFO_LOGS <<  "向服务器请求获取服务端状态信息成功, 服务端状态信息文件路径:" << server_status_info_file_path);
+            return true;
+        }
+        else
+        {
+            WNHERROR(SERVER_INFO_LOGS << "向服务器请求获取服务端状态信息, 但是并没得到得到的正常回复");
+            return false;
+        }
+    }
+    WNHERROR(SERVER_INFO_LOGS << "向服务器请求获取服务端状态信息, errno=" << errno << ", mesg=" << strerror(errno));
+    return false;
+}
+
+bool wnh_filesync_control::show_server_status_info(const string & server_status_info_file_path) //显示服务端状态
+{
+    static bool temp_id = false;
+    if(temp_id)
+    {
+        WNH_DISPLAY_STYLE_MOVEUP(7);
+    }
+    else
+    {
+        temp_id = true;
+    }
+    status_info.read_config_ini(server_status_info_file_path, false);
+    string pid; //服务端进程号
+    string start_time; //服务端启动时间
+    string client_num; //客户端全部数量
+    string online_client_num; //在线客户端数量
+    string offline_client_num; //离线客户端数量
+    string task_num; //全部任务数(全部客户端)
+    string complete_task_num; //已完成任务数(全部客户端)
+    string unfinished_task_num; //未完成任务数(全部客户端)
+    string fail_task_num; //失败任务数(全部客户端)
+    string event_num; //未转化事件数量(全部客户端)
+    for(int i = 0; i <= status_info.unit_num; i++)
+    {
+        if(status_info.unit[i]->name == WNH_FILESYNC_SERVER_STATUS_ID)
+        {
+            pid = status_info.unit[i]->conf.get_one_config("pid");
+            start_time = status_info.unit[i]->conf.get_one_config("start_time");
+            client_num = status_info.unit[i]->conf.get_one_config("client_num");
+            online_client_num = status_info.unit[i]->conf.get_one_config("online_client_num");
+            offline_client_num = status_info.unit[i]->conf.get_one_config("offline_client_num");
+            task_num = status_info.unit[i]->conf.get_one_config("task_num");
+            complete_task_num = status_info.unit[i]->conf.get_one_config("complete_task_num");
+            unfinished_task_num = status_info.unit[i]->conf.get_one_config("unfinished_task_num");
+            fail_task_num = status_info.unit[i]->conf.get_one_config("fail_task_num");
+            event_num = status_info.unit[i]->conf.get_one_config("event_num");
+
+            WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
+            show_server_status_info_son(pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
+            break;
+        }
+    }
+    status_info.clean_configure_ini();
+    if(unlink(server_status_info_file_path.c_str()) != 0)
+    {
+        WNHWARN("临时文件," << server_status_info_file_path << ", 删除失败, errno=" << errno << ", mesg=" << strerror(errno));
+    }
+    return true;
+}
+
+int wnh_filesync_control::show_server_status_info(const string & server_status_info_file_path, const int & offset) //显示服务端状态
+{
+    static bool temp_id = false;
+    if(temp_id)
+    {
+        WNH_DISPLAY_STYLE_MOVEUP(offset);
+    }
+    else
+    {
+        temp_id = true;
+    }
+    status_info.read_config_ini(server_status_info_file_path, false);
+    string pid; //服务端进程号
+    string start_time; //服务端启动时间
+    string client_num; //客户端全部数量
+    string online_client_num; //在线客户端数量
+    string offline_client_num; //离线客户端数量
+    string task_num; //全部任务数(全部客户端)
+    string complete_task_num; //已完成任务数(全部客户端)
+    string unfinished_task_num; //未完成任务数(全部客户端)
+    string fail_task_num; //失败任务数(全部客户端)
+    string event_num; //未转化事件数量(全部客户端)
+    for(int i = 0; i <= status_info.unit_num; i++)
+    {
+        if(status_info.unit[i]->name == WNH_FILESYNC_SERVER_STATUS_ID)
+        {
+            pid = status_info.unit[i]->conf.get_one_config("pid");
+            start_time = status_info.unit[i]->conf.get_one_config("start_time");
+            client_num = status_info.unit[i]->conf.get_one_config("client_num");
+            online_client_num = status_info.unit[i]->conf.get_one_config("online_client_num");
+            offline_client_num = status_info.unit[i]->conf.get_one_config("offline_client_num");
+            task_num = status_info.unit[i]->conf.get_one_config("task_num");
+            complete_task_num = status_info.unit[i]->conf.get_one_config("complete_task_num");
+            unfinished_task_num = status_info.unit[i]->conf.get_one_config("unfinished_task_num");
+            fail_task_num = status_info.unit[i]->conf.get_one_config("fail_task_num");
+            event_num = status_info.unit[i]->conf.get_one_config("event_num");
+
+            WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
+            show_server_status_info_son(pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
+            break;
+        }
+    }
+    status_info.clean_configure_ini();
+    if(unlink(server_status_info_file_path.c_str()) != 0)
+    {
+        WNHWARN("临时文件," << server_status_info_file_path << ", 删除失败, errno=" << errno << ", mesg=" << strerror(errno));
+    }
+    return 7;
+}
+
+void wnh_filesync_control::get_server_status_info_while_v1() //获取服务端状态信息(循环)
+{
+    while(1)
+    {
+        if(!unblock_connect(ip, to_string(port)))
+        {
+            WNHERROR(ip << ":" << port << ", 无法链接, 服务端不在线");
+            close(socket_num);
+            return;
+        }
+        if(!send_start_session_info())
+        {
+            close(socket_num);
+            return;
+        }
+        string server_status_info;
+        for(int i = 0; i < MAXIMUM_NUMBER_OF_REQUESTS_PER_SESSION; i++)
+        {
+            if(!send_get_server_status_info_v1(server_status_info))
+            {
+                close(socket_num);
+                return;
+            }
+            if(server_status_info != WNH_FILESYNC_GET_SERVER_STATUS_IGNORE_INFO)
+            {
+                show_server_status_info_v1(server_status_info); //显示服务端状态
+            }
+            if(i != 9)
+            {
+                sleep(REQUEST_INTERVAL);
+            }
+        }
+        send_end_session_info();
+        sleep(REQUEST_INTERVAL);
+    }
+    return;
+}
+
+void wnh_filesync_control::get_server_status_info_v1() //获取服务端状态信息
+{
+    if(!unblock_connect(ip, to_string(port)))
+    {
+        WNHERROR(ip << ":" << port << ", 无法链接, 服务端不在线");
+        close(socket_num);
+        return;
+    }
+    if(!send_start_session_info())
+    {
+        close(socket_num);
+        return;
+    }
+    string server_status_info;
+    if(!send_get_server_status_info_v1(server_status_info))
+    {
+        close(socket_num);
+        return;
+    }
+    show_server_status_info_v1(server_status_info); //显示服务端状态
+    send_end_session_info();
+    return;
+}
+
+bool wnh_filesync_control::send_get_server_status_info_v1(string & server_status_info) //向服务器发送获取服务端状态信息信号, 且获取服务端状态信息
+{
+    if(send_info(WNH_FILESYNC_GET_SERVER_STATUS_INFO))
+    {
+        string info;
+        if(!accept_info(info))
+        {
+            WNHERROR(SERVER_INFO_LOGS << ", 向服务器请求获取服务端状态信息失败了" << ", errno=" << errno << ", mesg=" << strerror(errno));
+            return false;
+        }
+        if(info.substr(0, strlen(WNH_FILESYNC_GET_SERVER_STATUS_INFO)) == WNH_FILESYNC_GET_SERVER_STATUS_INFO)
+        {
+            server_status_info = info.substr(strlen(WNH_FILESYNC_GET_SERVER_STATUS_INFO));
+            WNHDEBUG(SERVER_INFO_LOGS <<  "向服务器请求获取服务端状态信息成功, 服务端状态信息:" << server_status_info);
+            return true;
+        }
+        else
+        {
+            WNHERROR(SERVER_INFO_LOGS << "向服务器请求获取服务端状态信息, 但是并没得到得到的正常回复");
+            return false;
+        }
+    }
+    WNHERROR(SERVER_INFO_LOGS << "向服务器请求获取服务端状态信息, errno=" << errno << ", mesg=" << strerror(errno));
+    return false;
+}
+
+bool wnh_filesync_control::show_server_status_info_v1(const string & server_status_info) //显示服务端状态
+{
+    static bool temp_id = false;
+    if(temp_id)
+    {
+        WNH_DISPLAY_STYLE_MOVEUP(8);
+    }
+    else
+    {
+        temp_id = true;
+    }
+    string server_status_info_temp = server_status_info;
+    string pid; //服务端进程号
+    string start_time; //服务端启动时间
+    string client_num; //客户端全部数量
+    string online_client_num; //在线客户端数量
+    string offline_client_num; //离线客户端数量
+    string task_num; //全部任务数(全部客户端)
+    string complete_task_num; //已完成任务数(全部客户端)
+    string unfinished_task_num; //未完成任务数(全部客户端)
+    string fail_task_num; //失败任务数(全部客户端)
+    string event_num; //未转化事件数量(全部客户端)
+    pid = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    start_time = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    client_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    online_client_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    offline_client_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    task_num =server_status_info_temp. substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    complete_task_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    unfinished_task_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    fail_task_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    event_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+
+    WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
+    show_server_status_info_son(pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
+    return true;
+}
+
+int wnh_filesync_control::show_server_status_info_v1(const string & server_status_info, const int & offset) //显示服务端状态
+{
+    static bool temp_id = false;
+    if(temp_id)
+    {
+        WNH_DISPLAY_STYLE_MOVEUP(offset);
+    }
+    else
+    {
+        temp_id = true;
+    }
+    string server_status_info_temp = server_status_info;
+    string pid; //服务端进程号
+    string start_time; //服务端启动时间
+    string client_num; //客户端全部数量
+    string online_client_num; //在线客户端数量
+    string offline_client_num; //离线客户端数量
+    string task_num; //全部任务数(全部客户端)
+    string complete_task_num; //已完成任务数(全部客户端)
+    string unfinished_task_num; //未完成任务数(全部客户端)
+    string fail_task_num; //失败任务数(全部客户端)
+    string event_num; //未转化事件数量(全部客户端)
+    pid = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    start_time = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    client_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    online_client_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    offline_client_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    task_num =server_status_info_temp. substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    complete_task_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    unfinished_task_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    fail_task_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+    server_status_info_temp = server_status_info_temp.substr(server_status_info_temp.find(",")+1);
+    event_num = server_status_info_temp.substr(0, server_status_info_temp.find(","));
+
+    WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
+    show_server_status_info_son(pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
+    return 8;
+}
+
+bool wnh_filesync_control::show_server_status_info_son(string & pid, string & start_time, string & client_num, string & online_client_num, string & offline_client_num, string & task_num, string & complete_task_num, string & unfinished_task_num, string & fail_task_num, string & event_num) //显示服务端状态
+{
+    pid = format_string_centre_fill(pid, 8, ' ');
+    start_time = format_string_centre_fill(start_time, 19, ' ');
+    client_num = format_string_centre_fill(client_num, 7, ' ');
+    online_client_num = format_string_centre_fill(online_client_num, 12, ' ');
+    offline_client_num = format_string_centre_fill(offline_client_num, 12, ' ');
+    task_num = format_string_centre_fill(task_num, 10, ' ');
+    complete_task_num = format_string_centre_fill(complete_task_num, 12, ' ');
+    unfinished_task_num = format_string_centre_fill(unfinished_task_num, 12, ' ');
+    fail_task_num = format_string_centre_fill(fail_task_num, 10, ' ');
+    event_num = format_string_centre_fill(event_num, 12, ' ');
+    WNH_DISPLAY_STYLE_HIDE_CURSOR();
+    cout << WNH_COLOR_BOLDWHITE << "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "│                                                  " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 服务端状态信息显示" << WNH_COLOR_BOLDWHITE << "                                                │" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "├─────────┬───────────────────┬────────┬─────────────┬─────────────┬───────────┬─────────────┬─────────────┬───────────┬─────────────┤" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "服务端PID" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "   服务端启动时间  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "客户端数"   << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "在线客户端数 "     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "离线客户端数 "       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "全部任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "已完成任务数 "      << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "未完成任务数 "       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "失败任务数 "   << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "未转化事件数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "├─────────┼───────────────────┼────────┼─────────────┼─────────────┼───────────┼─────────────┼─────────────┼───────────┼─────────────┤" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << pid        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << start_time         << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << client_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << online_client_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED  << offline_client_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED  << fail_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << event_num    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "└─────────┴───────────────────┴────────┴─────────────┴─────────────┴───────────┴─────────────┴─────────────┴───────────┴─────────────┘" << WNH_COLOR_WHITE << endl;
+    WNH_DISPLAY_STYLE_SHOW_CURSOR_S();
+    return true;
+}
+
+
+
+

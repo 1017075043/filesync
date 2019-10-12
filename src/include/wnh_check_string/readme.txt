@@ -1,0 +1,1 @@
+wnh_check_string提供了字符串规则校验的功能

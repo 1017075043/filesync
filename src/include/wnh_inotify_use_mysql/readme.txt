@@ -1,0 +1,1 @@
+wnh_inotify_use_mysql可用于监视服务器文件的事件，使用mysql数据库进行数据存储。

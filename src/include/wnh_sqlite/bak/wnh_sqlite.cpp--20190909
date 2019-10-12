@@ -1,0 +1,159 @@
+#include "wnh_sqlite.h"
+
+wnh_sqlite::wnh_sqlite()
+{
+    db=nullptr;
+    zErrMsg = nullptr;
+}
+
+wnh_sqlite::~wnh_sqlite()
+{
+    sqlite3_close(db);//关闭数据库
+}
+
+bool wnh_sqlite::create_db(const string &db_name) //创建一个数据库
+{
+    int rc;
+    rc = sqlite3_open(db_name.c_str(), &db); //打开指定的数据库文件,如果不存在将创建一个同名的数据库文件
+    if(rc)
+    {
+        WNHERROR("打开数据库:" << db_name << ", 失败了 errno=" << errno << ", mesg=" << strerror(errno));
+        sqlite3_close(db);
+        return false;
+    }
+    WNHDEBUG("打开数据库:" << db_name << ", 成功 ^-^");
+    return true;
+}
+
+bool wnh_sqlite::sql_query(const string &sql) //执行一条不会有结果返回的sql语句
+{
+    sqlite3_exec( db , sql.c_str() , 0 , 0 , &zErrMsg);
+    if(zErrMsg != nullptr)
+    {
+        WNHERROR("sql:" << sql << " 执行错误, 错误信息:" << zErrMsg);
+        return false;
+    }
+    WNHDEBUG("sql:" << sql << " 执行成功");
+    return true;
+}
+
+bool wnh_sqlite::sql_query(const string &sql, string &result)//执行一条有一个结果返回的sql语句
+{
+    char **azResult; //二维数组存放结果
+    //查询数据
+    //int sqlite3_get_table(sqlite3*, const char *sql,char***result , int *nrow , int *ncolumn ,char **errmsg );
+    //result中是以数组的形式存放你所查询的数据，首先是表名，再是数据。
+    //nrow ,ncolumn分别为查询语句返回的结果集的行数，列数，没有查到结果时返回0
+    int nrow, ncolumn;
+    sqlite3_get_table( db , sql.c_str() , &azResult , &nrow , &ncolumn , &zErrMsg );
+    if(zErrMsg != nullptr)
+    {
+        WNHERROR("sql:" << sql << " 执行错误, 错误信息:" << zErrMsg);
+        return false;
+    }
+
+    result = azResult[1];
+
+    //释放掉  azResult 的内存空间
+    sqlite3_free_table( azResult );
+    if(zErrMsg != nullptr)
+    {
+        WNHERROR("释放掉azResult的内存空间, 失败了");
+    }
+
+    WNHDEBUG("sql:" << sql << " 执行成功, 共有" << nrow << "行, " << ncolumn << "列, 查询结果如下:");
+    WNHDEBUG(result);
+    return true;
+}
+
+bool wnh_sqlite::sql_query(const string &sql, string *&result, int &ncolumn) //执行一条有多行结果返回的sql语句
+{
+    char **azResult; //二维数组存放结果
+    //查询数据
+    //int sqlite3_get_table(sqlite3*, const char *sql,char***result , int *nrow , int *ncolumn ,char **errmsg );
+    //result中是以数组的形式存放你所查询的数据，首先是表名，再是数据。
+    //nrow ,ncolumn分别为查询语句返回的结果集的行数，列数，没有查到结果时返回0
+    int nrow;
+    sqlite3_get_table( db , sql.c_str() , &azResult , &nrow , &ncolumn , &zErrMsg );
+    if(zErrMsg != nullptr)
+    {
+        WNHERROR("sql:" << sql << " 执行错误, 错误信息:" << zErrMsg);
+        return false;
+    }
+
+    result = new string [ncolumn];
+    for(int i=ncolumn ; i<( nrow + 1 ) * ncolumn ; i++ )
+    {
+        result[i-ncolumn] = azResult[i];
+    }
+
+    //释放掉  azResult 的内存空间
+    sqlite3_free_table( azResult );
+    if(zErrMsg != nullptr)
+    {
+        WNHERROR("释放掉azResult的内存空间, 失败了");
+    }
+
+    WNHDEBUG("sql:" << sql << " 执行成功, 共有" << nrow << "行, " << ncolumn << "列, 查询结果如下:");
+    string temp;
+    for(int j = 0 ; j < ncolumn; j ++)
+    {
+        temp += result[j];
+        temp += ", ";
+    }
+    WNHDEBUG(temp);
+    return true;
+}
+
+bool wnh_sqlite::sql_query(const string &sql, string **&result, int &nrow ,int &ncolumn) //执行一条有多行结果返回的sql语句
+{
+    char **azResult; //二维数组存放结果
+    //查询数据
+    //int sqlite3_get_table(sqlite3*, const char *sql,char***result , int *nrow , int *ncolumn ,char **errmsg );
+    //result中是以数组的形式存放你所查询的数据，首先是表名，再是数据。
+    //nrow ,ncolumn分别为查询语句返回的结果集的行数，列数，没有查到结果时返回0
+    sqlite3_get_table( db , sql.c_str() , &azResult , &nrow , &ncolumn , &zErrMsg );
+    if(zErrMsg != nullptr)
+    {
+        WNHERROR("sql:" << sql << " 执行错误, 错误信息:" << zErrMsg);
+        return false;
+    }
+
+    result = new string *[nrow];
+    for (int i = 0; i < nrow; i++)
+    {
+        result[i] = new string[ncolumn];
+    }
+    int a =0, b = 0;
+    for(int i=ncolumn ; i<( nrow + 1 ) * ncolumn ; i++ )
+    {
+        WNHDEBUG("result[" << a << "][" << b << "]=" << azResult[i]);
+        result[a][b++] = azResult[i];
+        if((i+1) % ncolumn == 0)
+        {
+            a += 1;
+            b = 0;
+        }
+    }
+
+    //释放掉  azResult 的内存空间
+    sqlite3_free_table( azResult );
+    if(zErrMsg != nullptr)
+    {
+        WNHERROR("释放掉azResult的内存空间, 失败了");
+    }
+
+    WNHDEBUG("sql:" << sql << " 执行成功, 共有" << nrow << "行, " << ncolumn << "列, 查询结果如下:");
+    string temp;
+    for(int i = 0 ; i < nrow; i ++)
+    {
+        for(int j = 0 ; j < ncolumn; j ++)
+        {
+            temp += result[i][j];
+            temp += ", ";
+        }
+        WNHDEBUG(temp);
+        temp = "";
+    }
+    return true;
+}

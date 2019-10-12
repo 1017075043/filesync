@@ -1,0 +1,1 @@
+wnh_string_rule_one_list是一个单链表类，其可以进行字符串规则的存储。
