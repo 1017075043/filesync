@@ -14,6 +14,9 @@
 //客户端状态信息文件后缀
 #define CLIENT_STATUS_INFO_FILE_SUFFIX ".control"
 
+//同步规则信息文件后缀
+#define SYNC_RULE_INFO_FILE_SUFFIX ".control"
+
 //单次会话最大请求次数
 #define MAXIMUM_NUMBER_OF_REQUESTS_PER_SESSION 60
 

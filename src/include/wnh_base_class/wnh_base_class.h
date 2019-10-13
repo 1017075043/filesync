@@ -9,7 +9,6 @@ using namespace std;
 #include "../wnh_define/wnh_base_define_function.h"
 #include "../wnh_define/wnh_tips_define.h"
 
-
 #define LEFTSTRIP 0
 #define RIGHTSTRIP 1
 #define BOTHSTRIP 2
@@ -32,7 +31,10 @@ public:
     void format_string_right_centre_v1(string & str, const unsigned int & length, const string & chr); //使用指定字符将字符串左右填充到指定长度
     string format_string_centre_fill(const string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串左右填充到指定长度
     void format_string_right_centre_v1(string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串左右填充到指定长度
-
+    unsigned long get_capital_letters_num(const string & str); //获取大写字母的数量
+    unsigned long get_lower_letters_num(const string & str); //获取小写字母的数量
+    unsigned long get_digital_num(const string & str); //获取数字的数量
+    unsigned long get_chinese_num(const string & str); //获取中文的数量
 
     //template <typename T> string to_binary(T value);//将任意进制的值转换为二进制
 

@@ -130,7 +130,7 @@ bool wnh_filesync_control::show_client_status_info(const string & client_status_
             string unfinished_task_num = status_info.unit[i]->conf.get_one_config("unfinished_task_num"); //未完成任务数
             string fail_task_num = status_info.unit[i]->conf.get_one_config("fail_task_num"); //失败任务数
             status == "0" ? status_temp = false : status_temp = true;
-            status == "0" ? status = "offline" : status = "online";
+            status == "0" ? status = "离线" : status = "在线";
             //LOCALTIMENUM = (unsigned long)t;
             char timestring[20] = "";
             time_t t = (time_t)stoul(begin_connect_time, 0, 10);
@@ -203,7 +203,7 @@ int wnh_filesync_control::show_client_status_info(const string & client_status_i
             string unfinished_task_num = status_info.unit[i]->conf.get_one_config("unfinished_task_num"); //未完成任务数
             string fail_task_num = status_info.unit[i]->conf.get_one_config("fail_task_num"); //失败任务数
             status == "0" ? status_temp = false : status_temp = true;
-            status == "0" ? status = "offline" : status = "online";
+            status == "0" ? status = "离线" : status = "在线";
             //LOCALTIMENUM = (unsigned long)t;
             char timestring[20] = "";
             time_t t = (time_t)stoul(begin_connect_time, 0, 10);

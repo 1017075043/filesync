@@ -67,9 +67,10 @@ string & wnh_base_class::replace_all_distinct(string & str, const string & old_v
 string wnh_base_class::format_string_right_fill(const string & str, const unsigned int & length, const char & chr) //使用指定字符将字符串右填充到指定长度
 {
     string str_temp = str;
-    if(length > str.length())
+    unsigned long num = get_chinese_num(str);
+    if(length > str.length() - num)
     {
-        unsigned int str_length = str.length();
+        unsigned int str_length = str.length() - num;
         for(unsigned int i =0; i <= length - str_length; i ++)
         {
             str_temp = str_temp + chr;
@@ -81,9 +82,10 @@ string wnh_base_class::format_string_right_fill(const string & str, const unsign
 string wnh_base_class::format_string_centre_fill(const string & str, const unsigned int & length, const char & chr) //使用指定字符将字符串左右填充到指定长度
 {
     string str_temp = str;
-    if(length > str_temp.length())
+    unsigned long num = get_chinese_num(str);
+    if(length > str_temp.length() - num)
     {
-        unsigned int str_length = str_temp.length();
+        unsigned int str_length = str_temp.length() - num;
         if((length - str_length) % 2 != 0)
         {
             for(unsigned int i =0; i <= (length - str_length)/2; i ++)
@@ -98,7 +100,7 @@ string wnh_base_class::format_string_centre_fill(const string & str, const unsig
                 str_temp = chr + str_temp;
             }
         }
-        str_length = str_temp.length();
+        str_length = str_temp.length() - num;
         for(unsigned int i =0; i <= length - str_length; i ++)
         {
             str_temp = str_temp + chr;
@@ -106,6 +108,66 @@ string wnh_base_class::format_string_centre_fill(const string & str, const unsig
     }
     return str_temp;
 }
+
+unsigned long wnh_base_class::get_capital_letters_num(const string & str) //获取大写字母的数量
+{
+    unsigned long num = 0;
+    for(unsigned int i = 0; i < str.length(); ++i)
+    {
+        // 大写字母
+        if(str[i] >= 'A' && str[i] <= 'Z')
+        {
+            num ++;
+        }
+    }
+    WNHDEBUG("统计到大写字母的个数=" << num);
+    return num;
+}
+
+unsigned long wnh_base_class::get_lower_letters_num(const string & str) //获取小写字母的数量
+{
+    unsigned long num = 0;
+    for(unsigned int i = 0; i < str.length(); ++i)
+    {
+        // 小写字母
+        if(str[i] >= 'a' && str[i] <= 'z')
+        {
+            num ++;
+        }
+    }
+    WNHDEBUG("统计到小写字母的个数=" << num);
+    return num;
+}
+
+unsigned long wnh_base_class::get_digital_num(const string & str) //获取数字的数量
+{
+    unsigned long num = 0;
+    for(unsigned int i = 0; i < str.length(); ++i)
+    {
+        if(str[i] >= '0' && str[i] <= '9')
+        {
+            num ++;
+        }
+    }
+    WNHDEBUG("统计到数字的个数=" << num);
+    return num;
+}
+
+unsigned long wnh_base_class::get_chinese_num(const string & str) //获取中文的数量
+{
+    unsigned long num = 0;
+    for(unsigned int i = 0; i < str.length(); ++i)
+    {
+        if (str[i]& 0x80)
+        {
+            num ++;
+        }
+    }
+    //在string中一个中文占了3个字节
+    WNHDEBUG("统计到中文的个数=" << num / 3);
+    return num / 3;
+}
+
 
 //template <typename T> string wnh_base_class::to_binary(T value)//将任意进制的值转换为二进制
 //{

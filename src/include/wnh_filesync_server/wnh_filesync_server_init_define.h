@@ -30,7 +30,9 @@
 #define DEFAULT_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".list"
 //默认服务端状态状态路径格式
 #define DEFAULT_SERVER_STATUS_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "server_status-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
-//默客户端状态状态路径格式
+//默认客户端状态状态路径格式
 #define DEFAULT_client_STATUS_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "client_status-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+//默认同步规则信息路径格式
+#define DEFAULT_SYNC_RULE_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_rule-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
 
 #endif

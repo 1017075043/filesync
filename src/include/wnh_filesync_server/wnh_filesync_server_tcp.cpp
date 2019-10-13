@@ -75,6 +75,10 @@ bool wnh_filesync_server::build_session(const int & nfp, const CONNECT_INFO & CO
             {
                 continue;
             }
+            if(accept_get_sync_rule_info(nfp, info, CONNECT_INFO))
+            {
+                continue;
+            }
             if(accept_end_session_info(nfp, info))//接收结束会话信息
             {
                 WNHINFO(CONNECT_INFO_LOGS << "会话结束");

@@ -148,6 +148,9 @@ public:
 
     void clean_temp_dir_file(); //清理临时目录
     void clean_temp_dir_file_son(const string & temp_dir_path); //清理临时目录
+
+    bool accept_get_sync_rule_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO); //接收获取同步规则信息信息
+    bool create_sync_rule_info(const string & client_status_info_file_path); //创建同步规则信息文件
 };
 
 #endif

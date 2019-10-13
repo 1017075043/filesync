@@ -3,6 +3,7 @@
 
 using namespace std;
 
+#include "../../filesync_define.h"
 #include "wnh_filesync_control_define.h"
 #include "../wnh_define/wnh_filesync_tcp_define.h"
 #include "../wnh_tcp_client/wnh_tcp_client.h"
@@ -22,6 +23,7 @@ public:
     ~wnh_filesync_control();
 
     wnh_config_ini status_info;
+    wnh_config_ini sync_rule_info;
 
     void get_server_status_info(); //获取服务端状态信息
     void get_server_status_info_while(); //获取服务端状态信息(循环)
@@ -47,7 +49,12 @@ public:
     void get_server_and_client_status_info_while(); //获取服务端和客户端状态信息(循环)
 
     void ues_instructions(); //使用说明
-	void control_use_instructions(); //控制端使用说明
+    void control_use_instructions(); //控制端使用说明
+    void show_system_var(); //显示系统变量
+
+    void get_synv_rule_info(); //获取客户端状态信息
+    bool send_get_sync_rule_info(string & sync_rule_info_file_path); //向服务器发送获取同步规则信息信号, 且获取同步规则信息文件路径
+    bool show_sync_info_info(const string & sync_info_info_file_path); //显示同步规则信息
 
 };
 

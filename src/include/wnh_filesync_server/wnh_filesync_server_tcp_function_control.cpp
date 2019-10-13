@@ -244,3 +244,57 @@ bool wnh_filesync_server::create_client_status_info(const string & client_status
     return true;
 }
 
+bool wnh_filesync_server::accept_get_sync_rule_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO) //接收获取同步规则信息信息
+{
+    if(info.substr(0, strlen(WNH_FILESYNC_GET_SYNC_RULE_INFO)) == WNH_FILESYNC_GET_SYNC_RULE_INFO)
+    {
+        string sync_rule_info_file_path;
+        sync_rule_info_file_path = sync_rule_info_file_path + DEFAULT_SYNC_RULE_PATH_FORMAT;
+        if(!create_sync_rule_info(sync_rule_info_file_path))
+        {
+            sync_rule_info_file_path = WNH_FILESYNC_GET_SYNC_RULE_FAIL_INFO;
+        }
+        if(send_info(nfp, WNH_FILESYNC_GET_SYNC_RULE_INFO + sync_rule_info_file_path))
+        {
+            WNHINFO(CONNECT_INFO_LOGS << "接收获取同步规则信息同步规则信息信息, 同步规则信息文件路径:" << sync_rule_info_file_path);
+            return true;
+        }
+        WNHERROR(CONNECT_INFO_LOGS << "回复接收获取同步规则信息时失败了, 同步规则信息文件路径:" << sync_rule_info_file_path);
+        return true;
+    }
+    return false;
+}
+
+bool wnh_filesync_server::create_sync_rule_info(const string & sync_rule_info_file_path) //创建同步规则信息文件
+{
+    ofstream file_open;
+    file_open.open(sync_rule_info_file_path, ios::out | ios::trunc);
+    if(!file_open.is_open())
+    {
+        WNHERROR("打开文件" << sync_rule_info_file_path <<  "失败, errno=" << errno << ", mesg=" << strerror(errno));
+        return false;
+    }
+    set<string>::iterator it; //定义前向迭代器
+    for(int i = 0; i < sync_rule_num; i++)
+    {
+        file_open << "[" << WNH_FILESYNC_GET_SYNC_RULE_ID << "_" << i << "]" << endl;
+        file_open << "src_dir=" << sync_rule[i].src_dir << endl;
+        for(int n = 0; n < (int)sync_rule[i].dst_dir.size(); n++)
+        {
+            file_open << "dst_ip_and_dir=" << sync_rule[i].dst_ip[n] << "," << sync_rule[i].dst_dir[n] << endl;
+        }
+        for(it = sync_rule[i].ignore_rule.begin(); it != sync_rule[i].ignore_rule.end(); it++)
+        {
+            file_open << "ignore_rule=" << *it << endl;
+        }
+        for(it = sync_rule[i].ignore_dir.begin(); it != sync_rule[i].ignore_dir.end(); it++)
+        {
+            file_open << "ignore_dir=" << *it << endl;
+        }
+        file_open << endl;
+    }
+    file_open.close();
+    return true;
+}
+
+

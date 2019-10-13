@@ -2,7 +2,7 @@
 #define __filesync_define__
 
 //export FILESYNC_START_MODE=control
-#define FILESYNC_START_MODE                     "FILESYNC_START_MODE"           //默认启动模式
+#define FILESYNC_START_MODE                     "FILESYNC_START_MODE"           //程序启动模式
 #define FILESYNC_START_MODE_DEFAUL              "control"                       //默认启动模式
 //export FILESYNC_SERVER_IP=127.0.0.1
 #define FILESYNC_SERVER_IP                      "FILESYNC_SERVER_IP"            //服务端服务器IP,针对客户端,控制端的配置

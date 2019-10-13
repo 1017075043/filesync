@@ -107,29 +107,29 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
 
     if(filesync_start_mode == "server")
     {
-        WNHDEBUG("启动参数, filesync_start_mode=" << filesync_start_mode);
-        WNHDEBUG("启动参数, filesync_server_config_path=" << filesync_server_config_path);
-        WNHDEBUG("启动参数, filesync_server_pid_path=" << filesync_server_pid_path);
-        WNHDEBUG("启动参数, filesync_server_root_limit=" << filesync_server_root_limit);
-        WNHDEBUG("启动参数, filesync_server_logs_level=" << filesync_server_logs_level);
+        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode);
+        WNHINFO("启动参数, filesync_server_config_path=" << filesync_server_config_path);
+        WNHINFO("启动参数, filesync_server_pid_path=" << filesync_server_pid_path);
+        WNHINFO("启动参数, filesync_server_root_limit=" << filesync_server_root_limit);
+        WNHINFO("启动参数, filesync_server_logs_level=" << filesync_server_logs_level);
     }
     else if(filesync_start_mode == "client")
     {
-        WNHDEBUG("启动参数, filesync_start_mode=" << filesync_start_mode);
-        WNHDEBUG("启动参数, filesync_server_ip=" << filesync_server_ip);
-        WNHDEBUG("启动参数, filesync_server_port=" << filesync_server_port);
-        WNHDEBUG("启动参数, filesync_client_pid_path=" << filesync_client_pid_path);
-        WNHDEBUG("启动参数, filesync_client_root_limit=" << filesync_client_root_limit);
-        WNHDEBUG("启动参数, filesync_client_logs_level=" << filesync_client_logs_level);
+        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode);
+        WNHINFO("启动参数, filesync_server_ip=" << filesync_server_ip);
+        WNHINFO("启动参数, filesync_server_port=" << filesync_server_port);
+        WNHINFO("启动参数, filesync_client_pid_path=" << filesync_client_pid_path);
+        WNHINFO("启动参数, filesync_client_root_limit=" << filesync_client_root_limit);
+        WNHINFO("启动参数, filesync_client_logs_level=" << filesync_client_logs_level);
     }
     else if(filesync_start_mode == "control")
     {
-        WNHDEBUG("启动参数, filesync_start_mode=" << filesync_start_mode);
-        WNHDEBUG("启动参数, filesync_control_use_parameter=" << filesync_control_use_parameter);
-        WNHDEBUG("启动参数, filesync_server_ip=" << filesync_server_ip);
-        WNHDEBUG("启动参数, filesync_server_port=" << filesync_server_port);
-        WNHDEBUG("启动参数, filesync_control_pid_path=" << filesync_control_pid_path);
-        WNHDEBUG("启动参数, filesync_control_root_limit=" << filesync_control_root_limit);
-        WNHDEBUG("启动参数, filesync_control_logs_level=" << filesync_control_logs_level);
+        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode);
+        WNHINFO("启动参数, filesync_control_use_parameter=" << filesync_control_use_parameter);
+        WNHINFO("启动参数, filesync_server_ip=" << filesync_server_ip);
+        WNHINFO("启动参数, filesync_server_port=" << filesync_server_port);
+        WNHINFO("启动参数, filesync_control_pid_path=" << filesync_control_pid_path);
+        WNHINFO("启动参数, filesync_control_root_limit=" << filesync_control_root_limit);
+        WNHINFO("启动参数, filesync_control_logs_level=" << filesync_control_logs_level);
     }
 }

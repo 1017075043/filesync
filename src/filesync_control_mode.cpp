@@ -36,7 +36,7 @@ void filesync::control_mode()
     }
 
     wnh_filesync_control control(filesync_server_ip, stoi(filesync_server_port, NULL, 10));
-	if(filesync_control_use_parameter == "0" || filesync_control_use_parameter == "show use")
+    if(filesync_control_use_parameter == "0" || filesync_control_use_parameter == "show use")
     {
         control.ues_instructions();
     }
@@ -67,6 +67,14 @@ void filesync::control_mode()
     else if(filesync_control_use_parameter == "7" || filesync_control_use_parameter == "show client s")
     {
         control.get_client_status_info_while();
+    }
+    else if(filesync_control_use_parameter == "8" || filesync_control_use_parameter == "show sync rule")
+    {
+        control.get_synv_rule_info();
+    }
+    else if(filesync_control_use_parameter == "9" || filesync_control_use_parameter == "show system var")
+    {
+        control.show_system_var();
     }
     else
     {

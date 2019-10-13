@@ -50,4 +50,14 @@
 //客户器状态标签名
 #define WNH_FILESYNC_CLIENT_STATUS_ID "client_status"
 
+//控制端向服务器发送请求获取同步规则信息
+#define WNH_FILESYNC_GET_SYNC_RULE_INFO "WNH_FILESYNC_GET_SYNC_RULE_INFO:"
+//控制端向服务器发送请求获取同步规则失败信息
+#define WNH_FILESYNC_GET_SYNC_RULE_FAIL_INFO "WNH_FILESYNC_GET_SYNC_RULE_FAIL_INFO"
+//控制端向服务器发送请求获取同步规则忽略信息
+#define WNH_FILESYNC_GET_SYNC_RULE_IGNORE_INFO "WNH_FILESYNC_GET_SYNC_RULE_IGNORE_INFO"
+
+//同步规则标签名
+#define WNH_FILESYNC_GET_SYNC_RULE_ID "sync_rule"
+
 #endif
