@@ -47,6 +47,7 @@ public:
     void get_server_and_client_status_info_while(); //获取服务端和客户端状态信息(循环)
 
     void ues_instructions(); //使用说明
+	void control_use_instructions(); //控制端使用说明
 
 };
 

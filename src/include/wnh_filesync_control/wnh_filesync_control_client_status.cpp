@@ -112,10 +112,10 @@ bool wnh_filesync_control::show_client_status_info(const string & client_status_
         temp_id = true;
     }
     WNH_DISPLAY_STYLE_HIDE_CURSOR();
-    cout << WNH_COLOR_BOLDWHITE << "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐" << WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│                                                  " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 客户端状态信息显示" << WNH_COLOR_BOLDWHITE << "                                                │" << WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┬───────────┬───────────────────┬───────────────────┬────────────┬──────────────┬─────────────┬───────────┤" << WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "         客户端IP         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "客户端状态 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  客户端启动时间   " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "客户端最后活动时间 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << " 全部任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << " 已完成任务数 "  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "未完成任务数 "     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "失败任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐" << WNH_COLOR_RESET << endl;
+    cout << WNH_COLOR_BOLDWHITE << "│                                                  " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 客户端状态信息显示" << WNH_COLOR_BOLDWHITE << "                                                │" << WNH_COLOR_RESET << endl;
+    cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┬───────────┬───────────────────┬───────────────────┬────────────┬──────────────┬─────────────┬───────────┤" << WNH_COLOR_RESET << endl;
+    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "         客户端IP         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "客户端状态 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  客户端启动时间   " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "客户端最后活动时间 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << " 全部任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << " 已完成任务数 "  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "未完成任务数 "     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "失败任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
     bool status_temp = true;
     for(int i = 0; i <= status_info.unit_num; i++)
     {
@@ -150,18 +150,18 @@ bool wnh_filesync_control::show_client_status_info(const string & client_status_
             unfinished_task_num = format_string_centre_fill(unfinished_task_num, 12, ' ');
             fail_task_num = format_string_centre_fill(fail_task_num, 10, ' ');
             //WNHINFO("客户端IP:" << client_ip << ", 状态:" << status << ", 启动时间:" << begin_connect_time << ", 最后活动时间:" << last_connect_time << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数:" << fail_task_num );
-            cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┼───────────┼───────────────────┼───────────────────┼────────────┼──────────────┼─────────────┼───────────┤" << WNH_COLOR_WHITE << endl;
+            cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┼───────────┼───────────────────┼───────────────────┼────────────┼──────────────┼─────────────┼───────────┤" << WNH_COLOR_RESET << endl;
             if(status_temp == true)
             {
-                cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << client_ip                    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << status        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << begin_connect_time    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << last_connect_time     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << fail_task_num  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_WHITE << endl;
+                cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << client_ip                    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << status        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << begin_connect_time    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << last_connect_time     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << fail_task_num  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
             }
             else
             {
-                cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << client_ip                    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED   << status        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << begin_connect_time    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED  << last_connect_time     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << fail_task_num  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_WHITE << endl;
+                cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << client_ip                    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED   << status        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << begin_connect_time    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED  << last_connect_time     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << fail_task_num  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
             }
         }
     }
-    cout << WNH_COLOR_BOLDWHITE << "└──────────────────────────┴───────────┴───────────────────┴───────────────────┴────────────┴──────────────┴─────────────┴───────────┘" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "└──────────────────────────┴───────────┴───────────────────┴───────────────────┴────────────┴──────────────┴─────────────┴───────────┘" << WNH_COLOR_RESET << endl;
     WNH_DISPLAY_STYLE_SHOW_CURSOR_S();
     status_info.clean_configure_ini();
     if(unlink(client_status_info_file_path.c_str()) != 0)
@@ -185,10 +185,10 @@ int wnh_filesync_control::show_client_status_info(const string & client_status_i
         temp_id = true;
     }
     WNH_DISPLAY_STYLE_HIDE_CURSOR();
-    cout << WNH_COLOR_BOLDWHITE << "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐" << WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│                                                  " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 客户端状态信息显示" << WNH_COLOR_BOLDWHITE << "                                                │" << WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┬───────────┬───────────────────┬───────────────────┬────────────┬──────────────┬─────────────┬───────────┤" << WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "         客户端IP         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "客户端状态 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  客户端启动时间   " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "客户端最后活动时间 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << " 全部任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << " 已完成任务数 "  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "未完成任务数 "     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "失败任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐" << WNH_COLOR_RESET << endl;
+    cout << WNH_COLOR_BOLDWHITE << "│                                                  " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 客户端状态信息显示" << WNH_COLOR_BOLDWHITE << "                                                │" << WNH_COLOR_RESET << endl;
+    cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┬───────────┬───────────────────┬───────────────────┬────────────┬──────────────┬─────────────┬───────────┤" << WNH_COLOR_RESET << endl;
+    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "         客户端IP         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "客户端状态 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  客户端启动时间   " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "客户端最后活动时间 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << " 全部任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << " 已完成任务数 "  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "未完成任务数 "     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "失败任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
     bool status_temp = true;
     for(int i = 0; i <= status_info.unit_num; i++)
     {
@@ -223,18 +223,18 @@ int wnh_filesync_control::show_client_status_info(const string & client_status_i
             unfinished_task_num = format_string_centre_fill(unfinished_task_num, 12, ' ');
             fail_task_num = format_string_centre_fill(fail_task_num, 10, ' ');
             //WNHINFO("客户端IP:" << client_ip << ", 状态:" << status << ", 启动时间:" << begin_connect_time << ", 最后活动时间:" << last_connect_time << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数:" << fail_task_num );
-            cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┼───────────┼───────────────────┼───────────────────┼────────────┼──────────────┼─────────────┼───────────┤" << WNH_COLOR_WHITE << endl;
+            cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┼───────────┼───────────────────┼───────────────────┼────────────┼──────────────┼─────────────┼───────────┤" << WNH_COLOR_RESET << endl;
             if(status_temp == true)
             {
-                cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << client_ip                    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << status        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << begin_connect_time    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << last_connect_time     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << fail_task_num  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_WHITE << endl;
+                cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << client_ip                    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << status        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << begin_connect_time    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << last_connect_time     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << fail_task_num  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
             }
             else
             {
-                cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << client_ip                    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED   << status        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << begin_connect_time    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED  << last_connect_time     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << fail_task_num  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_WHITE << endl;
+                cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << client_ip                    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED   << status        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << begin_connect_time    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED  << last_connect_time     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << fail_task_num  << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
             }
         }
     }
-    cout << WNH_COLOR_BOLDWHITE << "└──────────────────────────┴───────────┴───────────────────┴───────────────────┴────────────┴──────────────┴─────────────┴───────────┘" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_BOLDWHITE << "└──────────────────────────┴───────────┴───────────────────┴───────────────────┴────────────┴──────────────┴─────────────┴───────────┘" << WNH_COLOR_RESET << endl;
     WNH_DISPLAY_STYLE_SHOW_CURSOR_S();
     status_info.clean_configure_ini();
     if(unlink(client_status_info_file_path.c_str()) != 0)

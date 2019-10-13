@@ -35,33 +35,36 @@ void filesync::control_mode()
         return ;
     }
 
-    WNHINFO(PROGRAM_NAME << "程序启动,启动方式:控制端");
     wnh_filesync_control control(filesync_server_ip, stoi(filesync_server_port, NULL, 10));
-    if(filesync_control_use_parameter == "1" || filesync_control_use_parameter == "list")
+	if(filesync_control_use_parameter == "0" || filesync_control_use_parameter == "show use")
     {
         control.ues_instructions();
     }
-    else if(filesync_control_use_parameter == "2" || filesync_control_use_parameter == "server client")
+    else if(filesync_control_use_parameter == "1" || filesync_control_use_parameter == "show list")
+    {
+        control.control_use_instructions();
+    }
+    else if(filesync_control_use_parameter == "2" || filesync_control_use_parameter == "show server client")
     {
         control.get_server_and_client_status_info();
     }
-    else if(filesync_control_use_parameter == "3" || filesync_control_use_parameter == "server client s")
+    else if(filesync_control_use_parameter == "3" || filesync_control_use_parameter == "show server client s")
     {
         control.get_server_and_client_status_info_while();
     }
-    else if(filesync_control_use_parameter == "4" || filesync_control_use_parameter == "server")
+    else if(filesync_control_use_parameter == "4" || filesync_control_use_parameter == "show server")
     {
         control.get_server_status_info_v1();
     }
-    else if(filesync_control_use_parameter == "5" || filesync_control_use_parameter == "server s")
+    else if(filesync_control_use_parameter == "5" || filesync_control_use_parameter == "show server s")
     {
         control.get_server_status_info_while_v1();
     }
-    else if(filesync_control_use_parameter == "6" || filesync_control_use_parameter == "client")
+    else if(filesync_control_use_parameter == "6" || filesync_control_use_parameter == "show client")
     {
         control.get_client_status_info();
     }
-    else if(filesync_control_use_parameter == "7" || filesync_control_use_parameter == "client s")
+    else if(filesync_control_use_parameter == "7" || filesync_control_use_parameter == "show client s")
     {
         control.get_client_status_info_while();
     }

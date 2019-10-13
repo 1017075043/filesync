@@ -33,7 +33,7 @@
 #define FILESYNC_CLIENT_ROOT_LIMIT_DEFAULT      "limit root"                    //默认root用户限制,针对客户端的配置
 //export FILESYNC_CONTROL_USE_PARAMETER=1
 #define FILESYNC_CONTROL_USE_PARAMETER          "FILESYNC_CONTROL_USE_PARAMETER"//客户端默认使用参数,针对控制端的配置
-#define FILESYNC_CONTROL_USE_PARAMETER_DEFAULT  "1"                             //默认客户端默认使用参数,针对控制端的配置
+#define FILESYNC_CONTROL_USE_PARAMETER_DEFAULT  "0"                             //默认客户端默认使用参数,针对控制端的配置
 //export FILESYNC_COMTROL_PID_PATH=/var/run/filesync_control.pid
 #define FILESYNC_CONTROL_PID_PATH               "FILESYNC_COMTROL_PID_PATH"     //PID文件路径,针对控制端的配置
 #define FILESYNC_CONTROL_PID_PATH_DEFAULT       "/var/run/filesync_control.pid" //默认PID文件路径,针对控制端的配置
