@@ -28,7 +28,8 @@ src/include/wnh_string_one_list \
 src/include/wnh_string_rule_one_list \
 src/include/wnh_string_string_one_list \
 src/include/wnh_config_ini \
-src/include/wnh_jwsmtp
+src/include/wnh_jwsmtp \
+src/include/wnh_license
 
 filesync_SOURCES = src/filesync.cpp
 
@@ -56,4 +57,5 @@ src/include/wnh_string_one_list/lib_wnh_string_one_list.la \
 src/include/wnh_string_rule_one_list/lib_wnh_string_rule_one_list.la \
 src/include/wnh_string_string_one_list/lib_wnh_string_string_one_list.la \
 src/include/wnh_config_ini/lib_wnh_config_ini.la \
-src/include/wnh_jwsmtp/lib_wnh_jwsmtp.la
+src/include/wnh_jwsmtp/lib_wnh_jwsmtp.la \
+src/include/wnh_license/lib_wnh_license.la

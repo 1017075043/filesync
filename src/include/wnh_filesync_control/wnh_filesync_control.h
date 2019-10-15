@@ -8,6 +8,7 @@ using namespace std;
 #include "../wnh_define/wnh_filesync_tcp_define.h"
 #include "../wnh_tcp_client/wnh_tcp_client.h"
 #include "../wnh_config_ini/wnh_config_ini.h"
+#include "../wnh_system_operation/wnh_system_operation.h"
 
 class wnh_filesync_control : public wnh_tcp_client
 {
@@ -25,6 +26,7 @@ public:
     wnh_config_ini status_info;
     wnh_config_ini sync_rule_info;
 
+    void create_temp_list_dir();
     void get_server_status_info(); //获取服务端状态信息
     void get_server_status_info_while(); //获取服务端状态信息(循环)
     bool send_get_server_status_info(string & server_status_info_file_path); //向服务器发送获取服务端状态信息信号, 且获取服务端状态信息文件路径

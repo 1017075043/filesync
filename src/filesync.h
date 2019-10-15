@@ -11,6 +11,7 @@ using namespace std;
 #include "include/wnh_filesync_client/wnh_filesync_client.h"
 #include "include/wnh_filesync_server/wnh_filesync_server.h"
 #include "include/wnh_filesync_control/wnh_filesync_control.h"
+#include "include/wnh_license/wnh_license.h"
 
 #include "filesync_define.h"
 

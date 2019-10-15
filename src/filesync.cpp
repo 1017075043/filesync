@@ -11,6 +11,10 @@ int main(int argc, char **argv)
 {
     filesync program; //定义一个程序类
     program.init.INIT(); //初始化
+    wnh_license li;
+    li.get_interfaces_info();
+    li.get_cpu_id_by_asm();
+
     program.startup_mode((const int)argc, (const char**)argv);
     return 0;
 }

@@ -99,9 +99,9 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     }
     else
     {
-		filesync_control_use_parameter = filesync_start_mode;
-		filesync_start_mode = "control";
-		WNHINFO("filesync_control_use_parameter=" << filesync_control_use_parameter);
+        filesync_control_use_parameter = filesync_start_mode;
+        filesync_start_mode = "control";
+        //WNHINFO("filesync_control_use_parameter=" << filesync_control_use_parameter);
         //WNHERROR("错误的启动方式, 以服务端方式启动:filesync server 配置文件,以客户端方式启动:filesync client IP PORT, 以控制端方式启动:filesync control parameter IP PORT");
     }
 
