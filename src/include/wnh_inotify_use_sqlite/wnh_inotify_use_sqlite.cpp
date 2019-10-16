@@ -2,11 +2,12 @@
 
 wnh_inotify_use_sqlite::wnh_inotify_use_sqlite()
 {
-
+    WNHDEBUG("wnh_inotify_use_sqlite 构造");
 }
 
 wnh_inotify_use_sqlite::~wnh_inotify_use_sqlite()
 {
+    WNHDEBUG("~wnh_inotify_use_sqlite 析构");
     //delete register_watch_dir_path;
 }
 

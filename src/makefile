@@ -29,7 +29,7 @@ include/wnh_inotify_ex/wnh_inotify_ex.cpp\
 include/wnh_int_double_string_one_list/wnh_int_double_string_one_list.cpp\
 include/wnh_mysql/wnh_mysql.cpp\
 include/wnh_check_string/wnh_check_string.cpp\
-include/wnh_hash/wnh_hash.cpp\
+include/wnh_openssl/wnh_openssl.cpp\
 include/wnh_config_ini/wnh_config_ini.cpp\
 include/wnh_filesync_client/wnh_filesync_client.cpp\
 include/wnh_filesync_server/wnh_filesync_server.cpp\

@@ -2,12 +2,13 @@
 
 wnh_config_ini::wnh_config_ini()
 {
-    WNHDEBUG("wnh_config_ini初始化");
+    WNHDEBUG("wnh_config_ini 构造");
     use_id = false;
 }
 
 wnh_config_ini::~wnh_config_ini()
 {
+    WNHDEBUG("~wnh_config_ini 析构");
     clean_configure_ini();
 }
 

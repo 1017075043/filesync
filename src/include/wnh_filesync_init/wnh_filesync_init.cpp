@@ -16,11 +16,13 @@ int LOGLEVEL = WNH_INFO_XS;
 
 wnh_filesync_init::wnh_filesync_init()
 {
+    WNHDEBUG("wnh_filesync_init 构造");
     //INIT();
 }
 
 wnh_filesync_init::~wnh_filesync_init()
 {
+    WNHDEBUG("~wnh_filesync_init 析构");
     GETSYSTEMLOCALTIMESONID = false;
     if(LOGLEVEL != WNH_DEBUG_S && LOGLEVEL != WNH_INFO_S && LOGLEVEL != WNH_WARN_S && LOGLEVEL != WNH_ERROR_S && LOGLEVEL != WNH_DEBUG_XS && LOGLEVEL != WNH_INFO_XS && LOGLEVEL != WNH_WARN_XS && LOGLEVEL != WNH_ERROR_XS)
     {

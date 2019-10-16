@@ -5,6 +5,7 @@
 
 wnh_filesync_client::wnh_filesync_client()
 {
+    WNHDEBUG("wnh_filesync_client 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:客户端");
     init();
     this->ip = IP;
@@ -14,6 +15,7 @@ wnh_filesync_client::wnh_filesync_client()
 
 wnh_filesync_client::wnh_filesync_client(const string &conf_parameter)
 {
+    WNHDEBUG("wnh_filesync_client 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:客户端");
     init();
     string ip_address_and_port = conf_parameter;
@@ -24,6 +26,7 @@ wnh_filesync_client::wnh_filesync_client(const string &conf_parameter)
 
 wnh_filesync_client::wnh_filesync_client(const int argc, const char **argv)
 {
+    WNHDEBUG("wnh_filesync_client 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:客户端");
     init();
     string ip_address_and_port = argv[2];
@@ -34,6 +37,7 @@ wnh_filesync_client::wnh_filesync_client(const int argc, const char **argv)
 
 wnh_filesync_client::wnh_filesync_client(const string &ip, const int &port)
 {
+    WNHDEBUG("wnh_filesync_client 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:客户端");
     init();
     this->ip = ip;
@@ -43,7 +47,7 @@ wnh_filesync_client::wnh_filesync_client(const string &ip, const int &port)
 
 wnh_filesync_client::~wnh_filesync_client()
 {
-
+    WNHDEBUG("~wnh_filesync_client 析构");
 }
 
 void wnh_filesync_client::init()

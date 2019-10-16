@@ -25,6 +25,7 @@ using namespace std;
 
 #include "wnh_license_define.h"
 #include "../wnh_base_class/wnh_base_class.h"
+#include "../wnh_openssl/wnh_openssl.h"
 
 class wnh_license : public wnh_base_class
 {
@@ -45,5 +46,6 @@ public:
     string get_sysntem_core_info(); //获取linux操作系统内核信息
 
     string get_uuid(); //获取uuid
+    string get_server_serial_number(); //获取服务器序列号
 };
 #endif

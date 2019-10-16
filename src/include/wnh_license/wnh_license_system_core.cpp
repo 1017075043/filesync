@@ -2,6 +2,7 @@
 
 string wnh_license::get_sysntem_core_info() //获取linux操作系统内核信息
 {
+    string sysntem_core_info;
     struct utsname uts;
     if(uname(&uts) >= 0) {
         //            char sysname[_UTSNAME_SYSNAME_LENGTH];
@@ -10,11 +11,12 @@ string wnh_license::get_sysntem_core_info() //获取linux操作系统内核信�
         //            char version[_UTSNAME_VERSION_LENGTH];
         //            char machine[_UTSNAME_MACHINE_LENGTH];
         //printf("The version is %s\n", uts.release);
-        WNHINFO("sysname=" << uts.sysname);
-        WNHINFO("nodename=" << uts.nodename);
-        WNHINFO("release=" << uts.release);
-        WNHINFO("version=" << uts.version);
-        WNHINFO("machine=" << uts.machine);
+        sysntem_core_info = sysntem_core_info + "sysname=" + uts.sysname + "\n";
+        sysntem_core_info = sysntem_core_info + "nodename=" + uts.nodename + "\n";
+        sysntem_core_info = sysntem_core_info + "release=" + uts.release + "\n";
+        sysntem_core_info = sysntem_core_info + "version=" + uts.version + "\n";
+        sysntem_core_info = sysntem_core_info + "machine=" + uts.machine + "\n";
+        WNHDEBUG("sysntem_core_info=" << sysntem_core_info);
     }
-    return "";
+    return sysntem_core_info;
 }

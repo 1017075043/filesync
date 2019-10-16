@@ -19,7 +19,7 @@ src/include/wnh_tcp_client \
 src/include/wnh_tcp_server \
 src/include/wnh_inotify_use_sqlite \
 src/include/wnh_sqlite \
-src/include/wnh_hash \
+src/include/wnh_openssl \
 src/include/wnh_system_operation \
 src/include/wnh_int_double_string_one_list \
 src/include/wnh_int_string_one_list \
@@ -48,7 +48,7 @@ src/include/wnh_tcp_client/lib_wnh_tcp_client.la \
 src/include/wnh_tcp_server/lib_wnh_tcp_server.la \
 src/include/wnh_inotify_use_sqlite/lib_wnh_inotify_use_sqlite.la \
 src/include/wnh_sqlite/lib_wnh_sqlite.la \
-src/include/wnh_hash/lib_wnh_hash.la \
+src/include/wnh_openssl/lib_wnh_openssl.la \
 src/include/wnh_system_operation/lib_wnh_system_operation.la \
 src/include/wnh_int_double_string_one_list/lib_wnh_int_double_string_one_list.la \
 src/include/wnh_int_string_one_list/lib_wnh_int_string_one_list.la \

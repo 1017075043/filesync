@@ -2,12 +2,14 @@
 
 wnh_sqlite::wnh_sqlite()
 {
+    WNHDEBUG("wnh_sqlite 构造");
     db=nullptr;
     zErrMsg = nullptr;
 }
 
 wnh_sqlite::~wnh_sqlite()
 {
+    WNHDEBUG("~wnh_sqlite 析构");
     sqlite3_close(db);//关闭数据库
 }
 

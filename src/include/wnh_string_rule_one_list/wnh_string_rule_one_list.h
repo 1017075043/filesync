@@ -19,7 +19,10 @@ protected:
     matsh_node matsh_register;
 
     wnh_string_string_one_list list;
+
 public:
+    wnh_string_rule_one_list();
+    ~wnh_string_rule_one_list();
     void analyse_rule(string rule, Node *&unit);//分析一个rule,将结果存放在Node中
     void add_head(string rule);//向头节点添加一个子节点
     void add_end(string rule);//向尾节点添加一个子节点

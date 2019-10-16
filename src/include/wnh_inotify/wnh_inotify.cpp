@@ -2,12 +2,12 @@
 
 wnh_inotify::wnh_inotify()
 {
-
+    WNHDEBUG("wnh_inotify 构造");
 }
 
 wnh_inotify::~wnh_inotify()
 {
-
+    WNHDEBUG("~wnh_inotify 析构");
 }
 
 void wnh_inotify::init()
@@ -173,24 +173,24 @@ bool wnh_inotify::start_watch(USE_MODE mode)//开始inotify监控
     start_watch_switch = true;
     switch(mode)
     {
-        case front_show:
-        {
-            thread start_watch_thread(&wnh_inotify::start_watch_front_show, this);
-            start_watch_thread.detach();
-            WNHDEBUG("监控子线程启动完成,启动方式:前端显示 mode=front_show");
-            break;
-        }
-        case back_record:
-        {
-            thread start_watch_thread(&wnh_inotify::start_watch_back_record, this);
-            start_watch_thread.detach();
-            WNHDEBUG("监控子线程启动完成,启动方式:后台记录 mode=back_record");
-            break;
-        }
-        default:
-        {
-            break;
-        }
+    case front_show:
+    {
+        thread start_watch_thread(&wnh_inotify::start_watch_front_show, this);
+        start_watch_thread.detach();
+        WNHDEBUG("监控子线程启动完成,启动方式:前端显示 mode=front_show");
+        break;
+    }
+    case back_record:
+    {
+        thread start_watch_thread(&wnh_inotify::start_watch_back_record, this);
+        start_watch_thread.detach();
+        WNHDEBUG("监控子线程启动完成,启动方式:后台记录 mode=back_record");
+        break;
+    }
+    default:
+    {
+        break;
+    }
     }
     return true;
 }
@@ -306,40 +306,40 @@ inline void wnh_inotify::show_ignore_event(const string unit, int mask)//显示�
 {
     switch(mask)
     {
-        case WNH_INOTIFY_IN_ATTRIB:
-        {
-            WNHDEBUG("判定忽略事件 " << unit << " 属性被修改");
-            break;
-        }
-        case WNH_INOTIFY_IN_CREATE:
-        {
-            WNHDEBUG("判定忽略事件 " << unit << " 被创建");
-            break;
-        }
-        case WNH_INOTIFY_IN_DELETE:
-        {
-            WNHDEBUG("判定忽略事件 " << unit << " 被删除");
-            break;
-        }
-        case WNH_INOTIFY_IN_MODIFY:
-        {
-            WNHDEBUG("判定忽略事件 " << unit << " 内容被修改");
-            break;
-        }
-        case WNH_INOTIFY_IN_MOVED_FROM:
-        {
-            WNHDEBUG("判定忽略事件 " << unit << " 被移除");
-            break;
-        }
-        case WNH_INOTIFY_IN_MOVED_TO:
-        {
-            WNHDEBUG("判定忽略事件 " << unit << " 被移入");
-            break;
-        }
-        default:
-        {
-            break;
-        }
+    case WNH_INOTIFY_IN_ATTRIB:
+    {
+        WNHDEBUG("判定忽略事件 " << unit << " 属性被修改");
+        break;
+    }
+    case WNH_INOTIFY_IN_CREATE:
+    {
+        WNHDEBUG("判定忽略事件 " << unit << " 被创建");
+        break;
+    }
+    case WNH_INOTIFY_IN_DELETE:
+    {
+        WNHDEBUG("判定忽略事件 " << unit << " 被删除");
+        break;
+    }
+    case WNH_INOTIFY_IN_MODIFY:
+    {
+        WNHDEBUG("判定忽略事件 " << unit << " 内容被修改");
+        break;
+    }
+    case WNH_INOTIFY_IN_MOVED_FROM:
+    {
+        WNHDEBUG("判定忽略事件 " << unit << " 被移除");
+        break;
+    }
+    case WNH_INOTIFY_IN_MOVED_TO:
+    {
+        WNHDEBUG("判定忽略事件 " << unit << " 被移入");
+        break;
+    }
+    default:
+    {
+        break;
+    }
     }
 }
 
@@ -347,44 +347,44 @@ inline void wnh_inotify::front_show_watch_event(const string unit, int mask)//�
 {
     switch(mask)
     {
-        case WNH_INOTIFY_IN_ATTRIB:
-        {
-            WNHDEBUG(unit << " 属性被修改");
-            this->wnh_sys_op.show_file_all_info(unit);
-            break;
-        }
-        case WNH_INOTIFY_IN_CREATE:
-        {
-            WNHDEBUG(unit << " 被创建");
-            this->wnh_sys_op.show_file_all_info(unit);
-            break;
-        }
-        case WNH_INOTIFY_IN_DELETE:
-        {
-            WNHDEBUG(unit << " 被删除");
-            break;
-        }
-        case WNH_INOTIFY_IN_MODIFY:
-        {
-            WNHDEBUG(unit << " 内容被修改");
-            this->wnh_sys_op.show_file_all_info(unit);
-            break;
-        }
-        case WNH_INOTIFY_IN_MOVED_FROM:
-        {
-            WNHDEBUG(unit << " 被移除");
-            break;
-        }
-        case WNH_INOTIFY_IN_MOVED_TO:
-        {
-            WNHDEBUG(unit << " 被移入");
-            this->wnh_sys_op.show_file_all_info(unit);
-            break;
-        }
-        default:
-        {
-            break;
-        }
+    case WNH_INOTIFY_IN_ATTRIB:
+    {
+        WNHDEBUG(unit << " 属性被修改");
+        this->wnh_sys_op.show_file_all_info(unit);
+        break;
+    }
+    case WNH_INOTIFY_IN_CREATE:
+    {
+        WNHDEBUG(unit << " 被创建");
+        this->wnh_sys_op.show_file_all_info(unit);
+        break;
+    }
+    case WNH_INOTIFY_IN_DELETE:
+    {
+        WNHDEBUG(unit << " 被删除");
+        break;
+    }
+    case WNH_INOTIFY_IN_MODIFY:
+    {
+        WNHDEBUG(unit << " 内容被修改");
+        this->wnh_sys_op.show_file_all_info(unit);
+        break;
+    }
+    case WNH_INOTIFY_IN_MOVED_FROM:
+    {
+        WNHDEBUG(unit << " 被移除");
+        break;
+    }
+    case WNH_INOTIFY_IN_MOVED_TO:
+    {
+        WNHDEBUG(unit << " 被移入");
+        this->wnh_sys_op.show_file_all_info(unit);
+        break;
+    }
+    default:
+    {
+        break;
+    }
     }
 }
 
@@ -392,82 +392,82 @@ inline void wnh_inotify::back_record_watch_event(const string unit, int mask)//�
 {
     switch(mask)
     {
-        case WNH_INOTIFY_IN_ATTRIB:
+    case WNH_INOTIFY_IN_ATTRIB:
+    {
+        if(event_list.add_head_only(WNH_INOTIFY_IN_ATTRIB, unit))
         {
-            if(event_list.add_head_only(WNH_INOTIFY_IN_ATTRIB, unit))
-            {
-                WNHDEBUG(unit << " 属性被修改,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_ATTRIB, 缓存事件数量 num=" << event_list.num);
-            }
-            else
-            {
-                WNHWARN(unit << " 属性被修改,记录到缓存列表中 失败");
-            }
-            break;
+            WNHDEBUG(unit << " 属性被修改,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_ATTRIB, 缓存事件数量 num=" << event_list.num);
         }
-        case WNH_INOTIFY_IN_CREATE:
+        else
         {
-            if(event_list.add_head_only(WNH_INOTIFY_IN_CREATE, unit))
-            {
-                WNHDEBUG(unit << " 被创建,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_CREATE, 缓存事件数量 num=" << event_list.num);
-            }
-            else
-            {
-                WNHWARN(unit << " 被创建,记录到缓存列表中 失败");
-            }
-            break;
+            WNHWARN(unit << " 属性被修改,记录到缓存列表中 失败");
         }
-        case WNH_INOTIFY_IN_DELETE:
+        break;
+    }
+    case WNH_INOTIFY_IN_CREATE:
+    {
+        if(event_list.add_head_only(WNH_INOTIFY_IN_CREATE, unit))
         {
-            if(event_list.add_head_only(WNH_INOTIFY_IN_DELETE, unit))
-            {
-                WNHDEBUG(unit << " 被删除,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_DELETE, 缓存事件数量 num=" << event_list.num);
-            }
-            else
-            {
-                WNHWARN(unit << " 被删除,记录到缓存列表中 失败");
-            }
-            break;
+            WNHDEBUG(unit << " 被创建,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_CREATE, 缓存事件数量 num=" << event_list.num);
         }
-        case WNH_INOTIFY_IN_MODIFY:
+        else
         {
-            if(event_list.add_head_only(WNH_INOTIFY_IN_MODIFY, unit))
-            {
-                WNHDEBUG(unit << " 内容被修改,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_MODIFY, 缓存事件数量 num=" << event_list.num);
-            }
-            else
-            {
-                WNHWARN(unit << " 内容被修改,记录到缓存列表中 失败");
-            }
-            break;
+            WNHWARN(unit << " 被创建,记录到缓存列表中 失败");
         }
-        case WNH_INOTIFY_IN_MOVED_FROM:
+        break;
+    }
+    case WNH_INOTIFY_IN_DELETE:
+    {
+        if(event_list.add_head_only(WNH_INOTIFY_IN_DELETE, unit))
         {
-            if(event_list.add_head_only(WNH_INOTIFY_IN_MOVED_FROM, unit))
-            {
-                WNHDEBUG(unit << " 被移除,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_MOVED_FROM, 缓存事件数量 num=" << event_list.num);
-            }
-            else
-            {
-                WNHWARN(unit << " 被移除,记录到缓存列表中 失败");
-            }
-            break;
+            WNHDEBUG(unit << " 被删除,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_DELETE, 缓存事件数量 num=" << event_list.num);
         }
-        case WNH_INOTIFY_IN_MOVED_TO:
+        else
         {
-            if(event_list.add_head_only(WNH_INOTIFY_IN_MOVED_TO, unit))
-            {
-                WNHDEBUG(unit << " 被移入,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_MOVED_TO, 缓存事件数量 num=" << event_list.num);
-            }
-            else
-            {
-                WNHWARN(unit << " 被移入,记录到缓存列表中 失败");
-            }
-            break;
+            WNHWARN(unit << " 被删除,记录到缓存列表中 失败");
         }
-        default:
+        break;
+    }
+    case WNH_INOTIFY_IN_MODIFY:
+    {
+        if(event_list.add_head_only(WNH_INOTIFY_IN_MODIFY, unit))
         {
-            break;
+            WNHDEBUG(unit << " 内容被修改,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_MODIFY, 缓存事件数量 num=" << event_list.num);
         }
+        else
+        {
+            WNHWARN(unit << " 内容被修改,记录到缓存列表中 失败");
+        }
+        break;
+    }
+    case WNH_INOTIFY_IN_MOVED_FROM:
+    {
+        if(event_list.add_head_only(WNH_INOTIFY_IN_MOVED_FROM, unit))
+        {
+            WNHDEBUG(unit << " 被移除,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_MOVED_FROM, 缓存事件数量 num=" << event_list.num);
+        }
+        else
+        {
+            WNHWARN(unit << " 被移除,记录到缓存列表中 失败");
+        }
+        break;
+    }
+    case WNH_INOTIFY_IN_MOVED_TO:
+    {
+        if(event_list.add_head_only(WNH_INOTIFY_IN_MOVED_TO, unit))
+        {
+            WNHDEBUG(unit << " 被移入,成功记录到缓存列表中,unit=" << unit << ", mask=WNH_INOTIFY_IN_MOVED_TO, 缓存事件数量 num=" << event_list.num);
+        }
+        else
+        {
+            WNHWARN(unit << " 被移入,记录到缓存列表中 失败");
+        }
+        break;
+    }
+    default:
+    {
+        break;
+    }
     }
 }
 
@@ -475,80 +475,80 @@ inline bool wnh_inotify::auto_update_watch_unit(const string unit, int mask)//�
 {
     switch(mask)
     {
-        case WNH_INOTIFY_IN_CREATE:
+    case WNH_INOTIFY_IN_CREATE:
+    {
+        wnh_system_operation file_open;
+        if(file_open.is_dir(unit))
         {
-            wnh_system_operation file_open;
-            if(file_open.is_dir(unit))
+            int temp = add_watch_dir(unit);
+            if(temp == 0)
             {
-                int temp = add_watch_dir(unit);
-                if(temp == 0)
-                {
-                    WNHDEBUG("检测到监控目录下（创建）了一个目录:" << unit <<" ,且成功的将该目录加入监控列表");
-                }
-                else
-                {
-                    WNHWARN("检测到监控目录下（创建）了一个目录:" << unit <<" ,但是将该目录加入监控列表的过程中有" << temp << "个目录添加失败了");
-                    return false;
-                }
+                WNHDEBUG("检测到监控目录下（创建）了一个目录:" << unit <<" ,且成功的将该目录加入监控列表");
             }
-            break;
-        }
-        case WNH_INOTIFY_IN_MOVED_TO:
-        {
-            wnh_system_operation file_open;
-            if(file_open.is_dir(unit))
+            else
             {
-                int temp = add_watch_dir(unit);
-                if(temp == 0)
-                {
-                    WNHDEBUG("检测到监控目录下（移入）了一个目录:" << unit <<" ,且成功的将该目录加入监控列表");
-                }
-                else
-                {
-                    WNHWARN("检测到监控目录下（移入）了一个目录:" << unit <<" ,但是将该目录加入监控列表的过程中有" << temp << "个目录添加失败了");
-                    return false;
-                }
+                WNHWARN("检测到监控目录下（创建）了一个目录:" << unit <<" ,但是将该目录加入监控列表的过程中有" << temp << "个目录添加失败了");
+                return false;
             }
-            break;
         }
-        case WNH_INOTIFY_IN_DELETE:
+        break;
+    }
+    case WNH_INOTIFY_IN_MOVED_TO:
+    {
+        wnh_system_operation file_open;
+        if(file_open.is_dir(unit))
         {
-            if(watch_list.find_list_exist(unit))
+            int temp = add_watch_dir(unit);
+            if(temp == 0)
             {
-                int temp = del_watch_dir_from_watch_list(unit);
-                if(temp == 0)
-                {
-                    WNHDEBUG("检测到监控目录下（删除）了一个目录:" << unit <<" ,且成功的将该目录从监控列表删除");
-                }
-                else
-                {
-                    WNHWARN("检测到监控目录下（删除）了一个目录:" << unit <<" ,但是将该目录从监控列表删除的过程中有" << temp << "个目录删除失败了");
-                    return false;
-                }
+                WNHDEBUG("检测到监控目录下（移入）了一个目录:" << unit <<" ,且成功的将该目录加入监控列表");
             }
-            break;
-        }
-        case WNH_INOTIFY_IN_MOVED_FROM:
-        {
-            if(watch_list.find_list_exist(unit))
+            else
             {
-                int temp = del_watch_dir_from_watch_list(unit);
-                if(temp == 0)
-                {
-                    WNHDEBUG("检测到监控目录下（移出）了一个目录:" << unit <<" ,且成功的将该目录从监控列表删除");
-                }
-                else
-                {
-                    WNHWARN("检测到监控目录下（移出）了一个目录:" << unit <<" ,但是将该目录从监控列表删除的过程中有" << temp << "个目录删除失败了");
-                    return false;
-                }
+                WNHWARN("检测到监控目录下（移入）了一个目录:" << unit <<" ,但是将该目录加入监控列表的过程中有" << temp << "个目录添加失败了");
+                return false;
             }
-            break;
         }
-        default:
+        break;
+    }
+    case WNH_INOTIFY_IN_DELETE:
+    {
+        if(watch_list.find_list_exist(unit))
         {
-            break;
+            int temp = del_watch_dir_from_watch_list(unit);
+            if(temp == 0)
+            {
+                WNHDEBUG("检测到监控目录下（删除）了一个目录:" << unit <<" ,且成功的将该目录从监控列表删除");
+            }
+            else
+            {
+                WNHWARN("检测到监控目录下（删除）了一个目录:" << unit <<" ,但是将该目录从监控列表删除的过程中有" << temp << "个目录删除失败了");
+                return false;
+            }
         }
+        break;
+    }
+    case WNH_INOTIFY_IN_MOVED_FROM:
+    {
+        if(watch_list.find_list_exist(unit))
+        {
+            int temp = del_watch_dir_from_watch_list(unit);
+            if(temp == 0)
+            {
+                WNHDEBUG("检测到监控目录下（移出）了一个目录:" << unit <<" ,且成功的将该目录从监控列表删除");
+            }
+            else
+            {
+                WNHWARN("检测到监控目录下（移出）了一个目录:" << unit <<" ,但是将该目录从监控列表删除的过程中有" << temp << "个目录删除失败了");
+                return false;
+            }
+        }
+        break;
+    }
+    default:
+    {
+        break;
+    }
     }
     return true;
 }

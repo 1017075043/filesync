@@ -49,7 +49,7 @@ src/include/wnh_system_operation/Makefile
 src/include/wnh_tcp_client/Makefile
 src/include/wnh_tcp_server/Makefile
 src/include/wnh_check_string/Makefile
-src/include/wnh_hash/Makefile
+src/include/wnh_openssl/Makefile
 src/include/wnh_filesync_client/Makefile
 src/include/wnh_filesync_server/Makefile
 src/include/wnh_filesync_control/Makefile

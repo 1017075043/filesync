@@ -11,12 +11,14 @@
 
 wnh_filesync_server::wnh_filesync_server()
 {
+    WNHDEBUG("wnh_filesync_server 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:服务端");
     init();
 }
 
 wnh_filesync_server::wnh_filesync_server(const string &conf_path)
 {
+    WNHDEBUG("wnh_filesync_server 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:服务端");
     this->conf_path = conf_path;
     init();
@@ -24,12 +26,14 @@ wnh_filesync_server::wnh_filesync_server(const string &conf_path)
 
 wnh_filesync_server::wnh_filesync_server(const int argc, const char **argv)
 {
+    WNHDEBUG("wnh_filesync_server 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:服务端");
     init();
 }
 
 wnh_filesync_server::~wnh_filesync_server()
 {
+    WNHDEBUG("~wnh_filesync_server 析构");
     survival_id = false;  //标志位死亡状态
     close(socket_num); //关闭套接字
     delete [] rule;

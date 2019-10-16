@@ -463,7 +463,7 @@ bool wnh_inotify_use_sqlite::query_task_num(const string & client_ip, unsigned l
 bool wnh_inotify_use_sqlite::create_task_list_file(const string & client_ip, const string & task_list_path, const int & max_task_num) //根据客户端IP生产任务列表文件
 {
     wnh_system_operation wnh_sys_op;
-    wnh_hash file_hash;
+    wnh_openssl file_hash;
     string sql;
     string **result;
     int row, column;

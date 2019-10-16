@@ -1,5 +1,14 @@
 #include "wnh_string_rule_one_list.h"
 
+wnh_string_rule_one_list::wnh_string_rule_one_list()
+{
+    WNHDEBUG("wnh_string_rule_one_list 构造");
+}
+wnh_string_rule_one_list::~wnh_string_rule_one_list()
+{
+    WNHDEBUG("~wnh_string_rule_one_list 析构");
+}
+
 void wnh_string_rule_one_list::analyse_rule(string rule, Node *&unit)//分析一个rule,将结果存放在Node中
 {
     if(rule.find("*") == rule.npos)//rule没有*的情况,全路径匹配

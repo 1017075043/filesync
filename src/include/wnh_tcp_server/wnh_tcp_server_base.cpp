@@ -2,6 +2,7 @@
 
 wnh_tcp_server::wnh_tcp_server()
 {
+    WNHDEBUG("wnh_tcp_server 构造");
     survival_id = true; //标志位存活状态
     tcp_listen_conturrent_now_num = 0;
     display_transfer_logs = DIS_TRAN_LOG_2;
@@ -9,7 +10,7 @@ wnh_tcp_server::wnh_tcp_server()
 
 wnh_tcp_server::wnh_tcp_server(bool inherit)
 {
-
+    WNHDEBUG("~wnh_tcp_server 析构");
 }
 
 wnh_tcp_server::~wnh_tcp_server()
@@ -97,16 +98,16 @@ bool wnh_tcp_server::send_info(const int nfp, const string info) //发出一条�
     }
     switch(display_transfer_logs)
     {
-        case DIS_TRAN_LOG_1:
-        {
-            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 1.0, 长度:" << info.length());
-            break;
-        }
-        case DIS_TRAN_LOG_2:
-        {
-            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 1.0, 内容:" << info << ", 长度:" << info.length());
-            break;
-        }
+    case DIS_TRAN_LOG_1:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 1.0, 长度:" << info.length());
+        break;
+    }
+    case DIS_TRAN_LOG_2:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 1.0, 内容:" << info << ", 长度:" << info.length());
+        break;
+    }
     }
     return true;
 }
@@ -127,16 +128,16 @@ bool wnh_tcp_server::send_info(const int nfp,const char info[TCP_INFO_SZIE]) //�
     }
     switch(display_transfer_logs)
     {
-        case DIS_TRAN_LOG_1:
-        {
-            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 长度:" << strlen(info));
-            break;
-        }
-        case DIS_TRAN_LOG_2:
-        {
-            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 2.0, 内容:" << info << ", 长度:" << strlen(info));
-            break;
-        }
+    case DIS_TRAN_LOG_1:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 长度:" << strlen(info));
+        break;
+    }
+    case DIS_TRAN_LOG_2:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 2.0, 内容:" << info << ", 长度:" << strlen(info));
+        break;
+    }
     }
     return true;
 }
@@ -157,23 +158,23 @@ bool wnh_tcp_server::send_info(const int nfp, const string info, const int size)
     }
     switch(display_transfer_logs)
     {
-        case DIS_TRAN_LOG_1:
+    case DIS_TRAN_LOG_1:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 长度:" << size);
+        break;
+    }
+    case DIS_TRAN_LOG_2:
+    {
+        if(size == (int)info.length())
         {
-            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 长度:" << size);
-            break;
+            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 1.0, 内容:" << info << ", 长度:" << size);
         }
-        case DIS_TRAN_LOG_2:
+        else
         {
-            if(size == (int)info.length())
-            {
-                WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 1.0, 内容:" << info << ", 长度:" << size);
-            }
-            else
-            {
-                WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 1.0, 内容:二进制内容-忽略显示, 长度:" << size);
-            }
-            break;
+            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 1.0, 内容:二进制内容-忽略显示, 长度:" << size);
         }
+        break;
+    }
     }
     return true;
 }
@@ -194,23 +195,23 @@ bool wnh_tcp_server::send_info(const int nfp,const char info[TCP_INFO_SZIE], con
     }
     switch(display_transfer_logs)
     {
-        case DIS_TRAN_LOG_1:
+    case DIS_TRAN_LOG_1:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 2.0, 长度:" << size);
+        break;
+    }
+    case DIS_TRAN_LOG_2:
+    {
+        if(size == (int)strlen(info))
         {
-            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 2.0, 长度:" << size);
-            break;
+            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 2.0, 内容:" << info << ", 长度:" << size);
         }
-        case DIS_TRAN_LOG_2:
+        else
         {
-            if(size == (int)strlen(info))
-            {
-                WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 2.0, 内容:" << info << ", 长度:" << size);
-            }
-            else
-            {
-                WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 2.0, 内容:二进制内容-忽略显示, 长度:" << size);
-            }
-            break;
+            WNHDEBUG("nfp:" << nfp << ", 信息发出成功, 2.0, 内容:二进制内容-忽略显示, 长度:" << size);
         }
+        break;
+    }
     }
     return true;
 }
@@ -234,16 +235,16 @@ bool wnh_tcp_server::accept_info(const int nfp, string & info) //接收一条信
     info = buffer;
     switch(display_transfer_logs)
     {
-        case DIS_TRAN_LOG_1:
-        {
-            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 长度:" << recbytes);
-            break;
-        }
-        case DIS_TRAN_LOG_2:
-        {
-            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 内容:" << info << ", 长度:" << recbytes);
-            break;
-        }
+    case DIS_TRAN_LOG_1:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 长度:" << recbytes);
+        break;
+    }
+    case DIS_TRAN_LOG_2:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 内容:" << info << ", 长度:" << recbytes);
+        break;
+    }
     }
     //update_session_last_update_time(nfp);
     return true;
@@ -267,16 +268,16 @@ bool wnh_tcp_server::accept_info(const int nfp, char * & info) //接收一条信
     info[recbytes]='\0';
     switch(display_transfer_logs)
     {
-        case DIS_TRAN_LOG_1:
-        {
-            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 长度:" << recbytes);
-            break;
-        }
-        case DIS_TRAN_LOG_2:
-        {
-            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 内容:" << info << ", 长度:" << recbytes);
-            break;
-        }
+    case DIS_TRAN_LOG_1:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 长度:" << recbytes);
+        break;
+    }
+    case DIS_TRAN_LOG_2:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 内容:" << info << ", 长度:" << recbytes);
+        break;
+    }
     }
     //update_session_last_update_time(nfp);
     return true;
@@ -303,23 +304,23 @@ bool wnh_tcp_server::accept_info(const int nfp, string & info, int & size) //接
     size = recbytes;
     switch(display_transfer_logs)
     {
-        case DIS_TRAN_LOG_1:
+    case DIS_TRAN_LOG_1:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 长度:" << size);
+        break;
+    }
+    case DIS_TRAN_LOG_2:
+    {
+        if(size == (int)info.length())
         {
-            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 长度:" << size);
-            break;
+            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 内容:" << info << ", 长度:" << size);
         }
-        case DIS_TRAN_LOG_2:
+        else
         {
-            if(size == (int)info.length())
-            {
-                WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 内容:" << info << ", 长度:" << size);
-            }
-            else
-            {
-                WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 内容:二进制内容-忽略显示, 长度:" << size);
-            }
-            break;
+            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 1.0, 内容:二进制内容-忽略显示, 长度:" << size);
         }
+        break;
+    }
     }
     //update_session_last_update_time(nfp);
     return true;
@@ -345,23 +346,23 @@ bool wnh_tcp_server::accept_info(const int nfp, char * & info, int & size) //接
     size = recbytes;
     switch(display_transfer_logs)
     {
-        case DIS_TRAN_LOG_1:
+    case DIS_TRAN_LOG_1:
+    {
+        WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 长度:" << size);
+        break;
+    }
+    case DIS_TRAN_LOG_2:
+    {
+        if(size == (int)strlen(info))
         {
-            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 长度:" << size);
-            break;
+            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 内容:" << info << ", 长度:" << size);
         }
-        case DIS_TRAN_LOG_2:
+        else
         {
-            if(size == (int)strlen(info))
-            {
-                WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 内容:" << info << ", 长度:" << size);
-            }
-            else
-            {
-                WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 内容:二进制内容-忽略显示, 长度:" << size);
-            }
-            break;
+            WNHDEBUG("nfp:" << nfp << ", 信息接收成功, 2.0, 内容:二进制内容-忽略显示, 长度:" << size);
         }
+        break;
+    }
     }
     //update_session_last_update_time(nfp);
     return true;

@@ -2,12 +2,12 @@
 
 wnh_base_class::wnh_base_class()
 {
-
+    WNHDEBUG("wnh_base_class 构造");
 }
 
 wnh_base_class::~wnh_base_class()
 {
-
+    WNHDEBUG("~wnh_base_class 析构");
 }
 
 void wnh_base_class::trim(string &s, const string &mark)//删除指定字符

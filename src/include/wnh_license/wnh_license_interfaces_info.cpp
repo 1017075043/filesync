@@ -33,11 +33,11 @@ string wnh_license::get_interfaces_info() //获取网卡信息
                     interfaces_info = interfaces_info + "interface_mac=" + mac + "\n";
                     //printf("HWaddr %s\n", mac);
                 }
-                printf("\n");
+                //printf("\n");
                 i++;
             }
         }
     }
-    WNHINFO("interfaces_info=" << interfaces_info);
+    WNHDEBUG("interfaces_info=" << interfaces_info);
     return interfaces_info;
 }

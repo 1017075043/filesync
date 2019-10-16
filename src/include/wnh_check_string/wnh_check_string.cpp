@@ -2,12 +2,12 @@
 
 wnh_check_string::wnh_check_string()
 {
-
+    WNHDEBUG("wnh_check_string 构造");
 }
 
 wnh_check_string::~wnh_check_string()
 {
-
+    WNHDEBUG("~wnh_base_class 析构");
 }
 
 bool wnh_check_string::is_ip_address(const string & ip_address)

@@ -10,7 +10,7 @@ using namespace std;
 #include "../wnh_config_ini/wnh_config_ini.h"
 #include "../wnh_inotify_use_sqlite/wnh_inotify_use_sqlite.h"
 #include "../wnh_system_operation/wnh_system_operation.h"
-#include "../wnh_hash/wnh_hash.h"
+#include "../wnh_openssl/wnh_openssl.h"
 
 class wnh_filesync_client : public wnh_tcp_client
 {
@@ -20,7 +20,7 @@ private:
     wnh_config_ini task_info;
     wnh_inotify_use_sqlite watch;
     wnh_system_operation sys_oper;
-    wnh_hash file_hash;
+    wnh_openssl file_hash;
     bool singleton_core_thread_flag; //单例核心线程标志
 
 public:

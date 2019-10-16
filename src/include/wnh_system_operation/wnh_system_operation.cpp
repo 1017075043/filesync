@@ -5,11 +5,12 @@
 
 wnh_system_operation::wnh_system_operation()
 {
-
+    WNHDEBUG("wnh_system_operation 构造");
 }
 
 wnh_system_operation::~wnh_system_operation()
 {
+    WNHDEBUG("~wnh_system_operation 析构");
     dir_file_list.delete_list();//清除dir_file_list类中的数据
 }
 

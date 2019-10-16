@@ -2,11 +2,12 @@
 
 wnh_mysql::wnh_mysql()
 {
-
+    WNHDEBUG("wnh_mysql 构造");
 }
 
 wnh_mysql::~wnh_mysql()
 {
+    WNHDEBUG("~wnh_mysql 析构");
     if( mysql != nullptr )  //关闭数据连接
     {
         mysql_close(mysql);

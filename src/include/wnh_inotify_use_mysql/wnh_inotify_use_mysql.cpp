@@ -2,12 +2,12 @@
 
 wnh_inotify_use_mysql::wnh_inotify_use_mysql()
 {
-
+    WNHDEBUG("wnh_inotify_use_mysql 构造");
 }
 
 wnh_inotify_use_mysql::~wnh_inotify_use_mysql()
 {
-
+    WNHDEBUG("~wnh_inotify_use_mysql 析构");
 }
 
 void wnh_inotify_use_mysql::init()

@@ -13,7 +13,7 @@ using namespace std;
 #include "../wnh_string_rule_one_list/wnh_string_rule_one_list.h"
 #include "../wnh_system_operation/wnh_system_operation.h"
 #include "../wnh_sqlite/wnh_sqlite.h"
-#include "../wnh_hash//wnh_hash.h"
+#include "../wnh_openssl//wnh_openssl.h"
 
 
 //inotify监听的事件,代号

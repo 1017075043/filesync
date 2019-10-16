@@ -2,6 +2,7 @@
 
 wnh_string_one_list::wnh_string_one_list()
 {
+    WNHDEBUG("wnh_string_one_list 构造");
     head = nullptr;
     s = nullptr;
     num = 0;
@@ -9,6 +10,7 @@ wnh_string_one_list::wnh_string_one_list()
 
 wnh_string_one_list::~wnh_string_one_list()
 {
+    WNHDEBUG("~wnh_string_one_list 析构");
     this->delete_list();
 }
 

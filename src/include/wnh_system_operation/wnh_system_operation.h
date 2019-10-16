@@ -12,12 +12,12 @@ using namespace std;
 
 #include "../wnh_base_class/wnh_base_class.h"
 #include "../wnh_int_string_one_list/wnh_int_string_one_list.h"
-#include "../wnh_hash/wnh_hash.h"
+#include "../wnh_openssl/wnh_openssl.h"
 
 class wnh_system_operation : public wnh_base_class
 {
 private:
-    wnh_hash md5;
+    wnh_openssl md5;
 
 public:
     struct WNH_FILE_STAT{

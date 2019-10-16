@@ -11,7 +11,7 @@ using namespace std;
 #include "../wnh_tcp_server/wnh_tcp_server.h"
 #include "../wnh_inotify_use_sqlite/wnh_inotify_use_sqlite.h"
 #include "../wnh_system_operation/wnh_system_operation.h"
-#include "../wnh_hash/wnh_hash.h"
+#include "../wnh_openssl/wnh_openssl.h"
 #include "../wnh_jwsmtp/jwsmtp.h"
 
 class wnh_filesync_server : public wnh_tcp_server
@@ -82,7 +82,7 @@ private:
     CLIENT_INFO *client_info; //客户端配置信息
     EMAIL_INFO email_info; //邮件配置信息
     string conf_path; //配置文件路径
-    wnh_hash file_hash; //获取文件hash值
+    wnh_openssl file_hash; //获取文件hash值
 
 public:
     wnh_filesync_server();

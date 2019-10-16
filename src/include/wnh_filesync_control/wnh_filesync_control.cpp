@@ -7,6 +7,7 @@
 
 wnh_filesync_control::wnh_filesync_control()
 {
+    WNHDEBUG("wnh_filesync_control 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:控制端");
     this->ip = IP;
     this->port = PORT;
@@ -16,6 +17,7 @@ wnh_filesync_control::wnh_filesync_control()
 
 wnh_filesync_control::wnh_filesync_control(const string &conf_parameter)
 {
+    WNHDEBUG("wnh_filesync_control 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:控制端");
     string ip_address_and_port = conf_parameter;
     this->ip = ip_address_and_port.substr(0, ip_address_and_port.find(":"));
@@ -26,6 +28,7 @@ wnh_filesync_control::wnh_filesync_control(const string &conf_parameter)
 
 wnh_filesync_control::wnh_filesync_control(const int argc, const char **argv)
 {
+    WNHDEBUG("wnh_filesync_control 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:控制端");
     string ip_address_and_port = argv[2];
     this->ip = ip_address_and_port.substr(0, ip_address_and_port.find(":"));
@@ -36,6 +39,7 @@ wnh_filesync_control::wnh_filesync_control(const int argc, const char **argv)
 
 wnh_filesync_control::wnh_filesync_control(const string &ip, const int &port)
 {
+    WNHDEBUG("wnh_filesync_control 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:控制端");
     this->ip = ip;
     this->port = port;
@@ -45,7 +49,7 @@ wnh_filesync_control::wnh_filesync_control(const string &ip, const int &port)
 
 wnh_filesync_control::~wnh_filesync_control()
 {
-
+    WNHDEBUG("~wnh_filesync_control 析构");
 }
 
 void wnh_filesync_control::create_temp_list_dir()

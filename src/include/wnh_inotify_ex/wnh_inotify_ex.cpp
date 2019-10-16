@@ -2,12 +2,12 @@
 
 wnh_inotify_ex::wnh_inotify_ex()
 {
-
+    WNHDEBUG("wnh_inotify_ex 构造");
 }
 
 wnh_inotify_ex::~wnh_inotify_ex()
 {
-
+    WNHDEBUG("~wnh_inotify_ex 析构");
 }
 
 void wnh_inotify_ex::init()

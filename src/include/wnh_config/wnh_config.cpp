@@ -2,6 +2,7 @@
 
 wnh_config::wnh_config()
 {
+    WNHDEBUG("wnh_config 构造");
     head = nullptr;
     end = nullptr;
     target = nullptr;
@@ -9,6 +10,7 @@ wnh_config::wnh_config()
 
 wnh_config::wnh_config(string config_path)
 {
+    WNHDEBUG("wnh_config 构造");
     head = nullptr;
     end = nullptr;
     target = nullptr;
@@ -17,6 +19,7 @@ wnh_config::wnh_config(string config_path)
 
 wnh_config::~wnh_config()
 {
+    WNHDEBUG("~wnh_config 析构");
     delete_list();
 }
 

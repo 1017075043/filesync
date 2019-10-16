@@ -1,90 +1,7 @@
-#include "wnh_hash.h"
-
-wnh_hash::wnh_hash()
-{
-
-}
-
-wnh_hash::~wnh_hash()
-{
-
-}
-
-string wnh_hash::get_file_md5(const string &file_name) //使用openssl的md5函数生成文件md5
-{
-    string md5_value;
-    ifstream file(file_name.c_str(), ifstream::binary);
-    if (!file)
-    {
-        WNHERROR("打开文件失败, errno=" << errno << ", mesg=" << strerror(errno));
-        return "";
-    }
-
-    MD5_CTX md5Context;
-    MD5_Init(&md5Context);
-
-    char buf[1024 * 16];
-    while (file.good())
-    {
-        file.read(buf, sizeof(buf));
-        MD5_Update(&md5Context, buf, file.gcount());
-    }
-
-    unsigned char result[MD5_DIGEST_LENGTH];
-    MD5_Final(result, &md5Context);
-
-    char hex[35];
-    memset(hex, 0, sizeof(hex));
-    for (int i = 0; i < MD5_DIGEST_LENGTH; ++i)
-    {
-        sprintf(hex + i * 2, "%02x", result[i]);
-    }
-    hex[32] = '\0';
-    md5_value = string(hex);
-
-    WNHDEBUG("获取" << file_name << "文件md5值成功,md5_value:" << md5_value);
-    return md5_value;
-}
-
-bool wnh_hash::get_file_md5(const string &file_name, string &md5_value) //使用openssl的md5函数生成文件md5
-{
-    md5_value.clear();
-
-    ifstream file(file_name.c_str(), ifstream::binary);
-    if (!file)
-    {
-        WNHERROR("打开文件失败, errno=" << errno << ", mesg=" << strerror(errno));
-        return false;
-    }
-
-    MD5_CTX md5Context;
-    MD5_Init(&md5Context);
-
-    char buf[1024 * 16];
-    while (file.good())
-    {
-        file.read(buf, sizeof(buf));
-        MD5_Update(&md5Context, buf, file.gcount());
-    }
-
-    unsigned char result[MD5_DIGEST_LENGTH];
-    MD5_Final(result, &md5Context);
-
-    char hex[35];
-    memset(hex, 0, sizeof(hex));
-    for (int i = 0; i < MD5_DIGEST_LENGTH; ++i)
-    {
-        sprintf(hex + i * 2, "%02x", result[i]);
-    }
-    hex[32] = '\0';
-    md5_value = string(hex);
-
-    WNHDEBUG("获取" << file_name << "文件md5值成功,md5_value:" << md5_value);
-    return true;
-}
+#include "wnh_openssl.h"
 
 #define ngx_hash(key, c) ((u_int) key * 31 + c)
-unsigned int wnh_hash::ngx_hash_key(const string& data)//nginx中使用的simpleHash算法
+unsigned int wnh_openssl::ngx_hash_key(const string& data)//nginx中使用的simpleHash算法
 {
     size_t len = data.size();
     unsigned int  i, key;
@@ -97,7 +14,7 @@ unsigned int wnh_hash::ngx_hash_key(const string& data)//nginx中使用的simple
     return key;
 }
 
-unsigned int wnh_hash::pub_inthash(const char *str) //经典字符串Hash函数
+unsigned int wnh_openssl::pub_inthash(const char *str) //经典字符串Hash函数
 {
     register unsigned int h;
     register unsigned char *p;
@@ -109,7 +26,7 @@ unsigned int wnh_hash::pub_inthash(const char *str) //经典字符串Hash函数
     return h;
 }
 
-unsigned long wnh_hash::php_longhashpjw(const char* str) //PHP中出现的字符串Hash函数
+unsigned long wnh_openssl::php_longhashpjw(const char* str) //PHP中出现的字符串Hash函数
 {
     unsigned long h = 0, g;
     char *p;
@@ -126,7 +43,7 @@ unsigned long wnh_hash::php_longhashpjw(const char* str) //PHP中出现的字符
     return h;
 }
 
-unsigned int wnh_hash::OpenSSL_strhash1(const char *str) //OpenSSL中出现的字符串Hash函数
+unsigned int wnh_openssl::OpenSSL_strhash1(const char *str) //OpenSSL中出现的字符串Hash函数
 {
     int i,l;
     unsigned int ret=0;
@@ -143,7 +60,7 @@ unsigned int wnh_hash::OpenSSL_strhash1(const char *str) //OpenSSL中出现的�
     return ret;
 }
 
-unsigned int wnh_hash::mysql_hashnr1(const char *key,unsigned int length) //MySql中出现的字符串Hash函数
+unsigned int wnh_openssl::mysql_hashnr1(const char *key,unsigned int length) //MySql中出现的字符串Hash函数
 {
     register unsigned int nr=1, nr2=4;
     while (length--)
@@ -155,7 +72,7 @@ unsigned int wnh_hash::mysql_hashnr1(const char *key,unsigned int length) //MySq
     return((unsigned int) nr);
 }
 
-unsigned int wnh_hash::mysql_hashnr_caseup1(const char *key,unsigned int length) //MySql中出现的字符串Hash函数
+unsigned int wnh_openssl::mysql_hashnr_caseup1(const char *key,unsigned int length) //MySql中出现的字符串Hash函数
 {
     register unsigned int nr=1, nr2=4;
     while (length--)
@@ -167,7 +84,7 @@ unsigned int wnh_hash::mysql_hashnr_caseup1(const char *key,unsigned int length)
     return((unsigned int) nr);
 }
 
-unsigned int wnh_hash::mysql_hashnr2(const char *key, unsigned int len) //MySql中出现的字符串Hash函数
+unsigned int wnh_openssl::mysql_hashnr2(const char *key, unsigned int len) //MySql中出现的字符串Hash函数
 {
     const char *end=key+len;
     unsigned int hash;
@@ -180,7 +97,7 @@ unsigned int wnh_hash::mysql_hashnr2(const char *key, unsigned int len) //MySql�
     return hash;
 }
 
-unsigned int wnh_hash::mysql_hashnr_caseup2(const char *key, unsigned int len) //MySql中出现的字符串Hash函数
+unsigned int wnh_openssl::mysql_hashnr_caseup2(const char *key, unsigned int len) //MySql中出现的字符串Hash函数
 {
     const char *end=key+len;
     unsigned int hash;
@@ -193,7 +110,7 @@ unsigned int wnh_hash::mysql_hashnr_caseup2(const char *key, unsigned int len) /
     return hash;
 }
 
-int wnh_hash::additiveHash(const string& key, int prime) //加法hash
+int wnh_openssl::additiveHash(const string& key, int prime) //加法hash
 {
     unsigned int hash, i;
     for (hash = key.size(), i = 0; i < key.size(); i++)
@@ -204,7 +121,7 @@ int wnh_hash::additiveHash(const string& key, int prime) //加法hash
     return (hash % prime);
 }
 
-int wnh_hash::rotatingHash(const string& key, int prime) //旋转hash
+int wnh_openssl::rotatingHash(const string& key, int prime) //旋转hash
 {
     unsigned int hash, i;
     for (hash=key.size(), i=0; i<key.size(); ++i)
@@ -215,7 +132,7 @@ int wnh_hash::rotatingHash(const string& key, int prime) //旋转hash
     return (hash % prime);
 }
 
-int wnh_hash::oneByOneHash(const string& key) //一次一个hash
+int wnh_openssl::oneByOneHash(const string& key) //一次一个hash
 {
     unsigned int hash, i;
     for (hash=0, i=0; i<key.size(); ++i)
@@ -231,7 +148,7 @@ int wnh_hash::oneByOneHash(const string& key) //一次一个hash
     return hash;
 }
 
-int wnh_hash::bernstein(const string& key) //Bernstein's hash
+int wnh_openssl::bernstein(const string& key) //Bernstein's hash
 {
     unsigned int hash = 0;
     unsigned int i;
@@ -243,7 +160,7 @@ int wnh_hash::bernstein(const string& key) //Bernstein's hash
     return hash;
 }
 
-unsigned int wnh_hash::RSHash(const string& str) //RS算法hash
+unsigned int wnh_openssl::RSHash(const string& str) //RS算法hash
 {
     unsigned int b    = 378551;
     unsigned int a    = 63689;
@@ -259,7 +176,7 @@ unsigned int wnh_hash::RSHash(const string& str) //RS算法hash
     return (hash & 0x7FFFFFFF);
 }
 
-int wnh_hash::JSHash(const string& str) //JS算法
+int wnh_openssl::JSHash(const string& str) //JS算法
 {
     int hash = 1315423911;
 
@@ -272,7 +189,7 @@ int wnh_hash::JSHash(const string& str) //JS算法
     return (hash & 0x7FFFFFFF);
 }
 
-int wnh_hash::PJWHash(const string& str) //PJW算法
+int wnh_openssl::PJWHash(const string& str) //PJW算法
 {
     int BitsInUnsignedInt = 32;
     int ThreeQuarters     = (BitsInUnsignedInt * 3) / 4;
@@ -295,7 +212,7 @@ int wnh_hash::PJWHash(const string& str) //PJW算法
     return (hash & 0x7FFFFFFF);
 }
 
-int wnh_hash::ELFHash(const string& str) //ELF算法
+int wnh_openssl::ELFHash(const string& str) //ELF算法
 {
     int hash = 0;
     int x    = 0;
@@ -314,7 +231,7 @@ int wnh_hash::ELFHash(const string& str) //ELF算法
     return (hash & 0x7FFFFFFF);
 }
 
-uint32_t wnh_hash::BKDRHash32(const string& str)
+uint32_t wnh_openssl::BKDRHash32(const string& str)
 {
     uint32_t seed = 131; // 31 131 1313 13131 131313 etc..
     uint32_t hash = 0;
@@ -327,7 +244,7 @@ uint32_t wnh_hash::BKDRHash32(const string& str)
     return (uint32_t)hash;
 }
 
-uint64_t wnh_hash::BKDRHash64(const string& str)
+uint64_t wnh_openssl::BKDRHash64(const string& str)
 {
     uint64_t seed = 131; // 31 131 1313 13131 131313 etc..
     uint64_t hash = 0;
@@ -340,7 +257,7 @@ uint64_t wnh_hash::BKDRHash64(const string& str)
     return (uint64_t)hash;
 }
 
-int wnh_hash::SDBMHash(const string& str) //SDBM算法
+int wnh_openssl::SDBMHash(const string& str) //SDBM算法
 {
     int hash = 0;
 
@@ -353,7 +270,7 @@ int wnh_hash::SDBMHash(const string& str) //SDBM算法
     return (hash & 0x7FFFFFFF);
 }
 
-unsigned int wnh_hash::DJBHash(const string& str) //DJB算法
+unsigned int wnh_openssl::DJBHash(const string& str) //DJB算法
 {
     unsigned int hash = 5381;
 
@@ -366,7 +283,7 @@ unsigned int wnh_hash::DJBHash(const string& str) //DJB算法
     return (hash & 0x7FFFFFFF);
 }
 
-int wnh_hash::DEKHash(const string& str) //DEK算法
+int wnh_openssl::DEKHash(const string& str) //DEK算法
 {
     int hash = str.size();
 
@@ -379,7 +296,7 @@ int wnh_hash::DEKHash(const string& str) //DEK算法
     return (hash & 0x7FFFFFFF);
 }
 
-int wnh_hash::APHash(const string& str) //AP算法
+int wnh_openssl::APHash(const string& str) //AP算法
 {
     int hash = 0;
 
@@ -393,7 +310,7 @@ int wnh_hash::APHash(const string& str) //AP算法
     return hash;
 }
 
-int wnh_hash::java(const string& str) //JAVA自己带的算法
+int wnh_openssl::java(const string& str) //JAVA自己带的算法
 {
     int h = 0;
     int off = 0;

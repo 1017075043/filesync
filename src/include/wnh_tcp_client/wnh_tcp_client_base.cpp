@@ -2,12 +2,13 @@
 
 wnh_tcp_client::wnh_tcp_client()
 {
+    WNHDEBUG("wnh_tcp_client 构造");
     display_transfer_logs = DIS_TRAN_LOG_2;
 }
 
 wnh_tcp_client::~wnh_tcp_client()
 {
-
+    WNHDEBUG("~wnh_tcp_client 析构");
 }
 
 int wnh_tcp_client::set_non_blocking(int fd)

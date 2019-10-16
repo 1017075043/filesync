@@ -2,6 +2,7 @@
 
 wnh_int_double_string_one_list::wnh_int_double_string_one_list()
 {
+    WNHDEBUG("wnh_int_double_string_one_list 构造");
     head = nullptr;
     end = nullptr;
     now = nullptr;
@@ -11,6 +12,7 @@ wnh_int_double_string_one_list::wnh_int_double_string_one_list()
 
 wnh_int_double_string_one_list::~wnh_int_double_string_one_list()
 {
+    WNHDEBUG("~wnh_int_double_string_one_list 析构");
     this->delete_list();
 }
 
