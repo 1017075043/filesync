@@ -13,7 +13,9 @@ int main(int argc, char **argv)
     program.init.INIT(); //初始化
     wnh_license li;
     li.get_interfaces_info();
-    li.get_cpu_id_by_asm();
+    li.get_sysntem_core_info();
+    li.get_uuid();
+    //li.get_cpu_id();
 
     program.startup_mode((const int)argc, (const char**)argv);
     return 0;

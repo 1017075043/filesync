@@ -5,7 +5,7 @@ bin_PROGRAMS = filesync
 
 AM_CXXFLAGS=-g -Wall -std=c++11 -O3
 
-filesync_LDFLAGS = -lcrypto -lsqlite3
+filesync_LDFLAGS = -lcrypto -lsqlite3 -luuid
 
 SUBDIRS = src/include/wnh_base_class \
 src/include/wnh_config \

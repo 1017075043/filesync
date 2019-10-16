@@ -1,6 +1,11 @@
 #ifndef __wnh_license__
 #define __wnh_license__
 
+//  需要先在linux环境下安装libuuid-1.0.3,步骤如下
+//  tar -zxvf libuuid-1.0.3.tar.gz
+//  ./configure && make && make install
+//  在编译连接时需要加上-luuid, 例如$(CC) -o $(EXEC) $(OBJS) $(LIB) -lcrypto -lsqlite3 -luuid
+
 using namespace std;
 
 #include <stdio.h>
@@ -15,6 +20,8 @@ using namespace std;
 #include <cpuid.h>
 #include <map>
 #include <unistd.h>
+#include <sys/utsname.h>
+#include <uuid/uuid.h>
 
 #include "wnh_license_define.h"
 #include "../wnh_base_class/wnh_base_class.h"
@@ -25,7 +32,18 @@ public:
     wnh_license();
     ~wnh_license();
 
+    //wnh_license_interfaces_info
     string get_interfaces_info(); //获取网卡信息
-    string get_cpu_id_by_asm(); //获取cpu信息
+
+    //wnh_license_cpu_info
+    bool get_cpu_id_by_asm(string & cpu_id); //从asm中获取cpu信息
+    void parse_cpu_id(const char * file_name, const char * match_words, string & cpu_id); //解析cpu信息
+    bool get_cpu_id_by_system(string & cpu_id); //从系统中获取cpu信息
+    bool get_cpu_id(string & cpu_id); //获取cpu信息
+    string get_cpu_id(); //获取cpu信息
+
+    string get_sysntem_core_info(); //获取linux操作系统内核信息
+
+    string get_uuid(); //获取uuid
 };
 #endif
