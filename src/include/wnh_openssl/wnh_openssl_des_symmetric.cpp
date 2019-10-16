@@ -2,7 +2,7 @@
 
 string wnh_openssl::des_encrypt(const string &clearText, const string &key) // 加密 ecb模式, des对称加解密
 {
-    WNHINFO("clearText=" << clearText);
+    //WNHINFO("clearText=" << clearText);
     string cipherText; // 密文
 
     DES_cblock keyEncrypt;
@@ -13,7 +13,7 @@ string wnh_openssl::des_encrypt(const string &clearText, const string &key) // �
         memcpy(keyEncrypt, key.c_str(), key.length());
     else
         memcpy(keyEncrypt, key.c_str(), 8);
-    WNHINFO("key=" << key);
+    //WNHINFO("key=" << key);
 
     // 密钥置换
     DES_key_schedule keySchedule;

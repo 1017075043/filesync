@@ -13,7 +13,9 @@ int main(int argc, char **argv)
     program.init.INIT(); //初始化
     program.startup_mode((const int)argc, (const char**)argv);
     wnh_license li;
-    li.get_server_serial_number();
+    string server_serial_number_file = li.get_server_serial_number();
+    //li.create_license_file(server_serial_number_file, 23);
+    li.check_license_file_effectiveness(server_serial_number_file + LICENSE_FILE_SUFFIX);
     return 0;
 }
 
