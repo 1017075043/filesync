@@ -3,7 +3,11 @@
 void wnh_filesync_server::core()
 {
     get_conf(conf_path);
-    show_rule_conf();
+    //show_rule_conf();
+    if(get_license_info() == (unsigned long)0) //许可检查
+    {
+        exit(1);
+    }
     add_client_info();
     rectification_rule_conf();
     show_client_info();
@@ -12,6 +16,6 @@ void wnh_filesync_server::core()
 
     WNHINFO("启动核心服务");
     watch_core_v1();//watch核心服务
-    clean_temp_dir_file();//清理临时目录
+    timer_task();//定时任务
     tcp_core();//tcp核心服务
 }

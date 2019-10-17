@@ -22,6 +22,10 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     getenv(FILESYNC_CONTROL_LOGS_LEVEL) != NULL ? filesync_control_logs_level = getenv(FILESYNC_CONTROL_LOGS_LEVEL) : filesync_control_logs_level = FILESYNC_CONTROL_LOGS_LEVEL_DEFAULT;
     getenv(FILESYNC_CONTROL_ROOT_LIMIT) != NULL ? filesync_control_root_limit = getenv(FILESYNC_CONTROL_ROOT_LIMIT) : filesync_control_root_limit = FILESYNC_CONTROL_ROOT_LIMIT_DEFAULT;
 
+    server_serial_number = "";
+    validity_time = 0;
+    license_use_key = "";
+
     if(argc > 1)
     {
         filesync_start_mode = argv[1];
@@ -97,6 +101,25 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
             filesync_control_logs_level = argv[7];
         }
     }
+    else if(filesync_start_mode == "license" && argc == 5)
+    {
+        if(argc > 2)
+        {
+            license_use_key = argv[2];
+            if(license_use_key != FILESYNC_LICENSE_USER_KEY)
+            {
+                filesync_start_mode = "control";
+            }
+        }
+        if(argc > 3)
+        {
+            server_serial_number = argv[3];
+        }
+        if(argc > 4)
+        {
+            validity_time = stoul(argv[4], 0, 10);
+        }
+    }
     else
     {
         filesync_control_use_parameter = filesync_start_mode;
@@ -107,29 +130,14 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
 
     if(filesync_start_mode == "server")
     {
-        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode);
-        WNHINFO("启动参数, filesync_server_config_path=" << filesync_server_config_path);
-        WNHINFO("启动参数, filesync_server_pid_path=" << filesync_server_pid_path);
-        WNHINFO("启动参数, filesync_server_root_limit=" << filesync_server_root_limit);
-        WNHINFO("启动参数, filesync_server_logs_level=" << filesync_server_logs_level);
+        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_server_config_path=" << filesync_server_config_path << ", filesync_server_pid_path=" << filesync_server_pid_path << ", filesync_server_root_limit=" << filesync_server_root_limit << ", filesync_server_logs_level=" << filesync_server_logs_level);
     }
     else if(filesync_start_mode == "client")
     {
-        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode);
-        WNHINFO("启动参数, filesync_server_ip=" << filesync_server_ip);
-        WNHINFO("启动参数, filesync_server_port=" << filesync_server_port);
-        WNHINFO("启动参数, filesync_client_pid_path=" << filesync_client_pid_path);
-        WNHINFO("启动参数, filesync_client_root_limit=" << filesync_client_root_limit);
-        WNHINFO("启动参数, filesync_client_logs_level=" << filesync_client_logs_level);
+        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_client_pid_path=" << filesync_client_pid_path << ", filesync_client_root_limit=" << filesync_client_root_limit << ", filesync_client_logs_level=" << filesync_client_logs_level);
     }
     else if(filesync_start_mode == "control")
     {
-        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode);
-        WNHINFO("启动参数, filesync_control_use_parameter=" << filesync_control_use_parameter);
-        WNHINFO("启动参数, filesync_server_ip=" << filesync_server_ip);
-        WNHINFO("启动参数, filesync_server_port=" << filesync_server_port);
-        WNHINFO("启动参数, filesync_control_pid_path=" << filesync_control_pid_path);
-        WNHINFO("启动参数, filesync_control_root_limit=" << filesync_control_root_limit);
-        WNHINFO("启动参数, filesync_control_logs_level=" << filesync_control_logs_level);
+        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_control_use_parameter=" << filesync_control_use_parameter << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_control_pid_path=" << filesync_control_pid_path << ", filesync_control_root_limit=" << filesync_control_root_limit << ", filesync_control_logs_level=" << filesync_control_logs_level);
     }
 }

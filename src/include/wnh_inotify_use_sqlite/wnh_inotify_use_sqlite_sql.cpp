@@ -455,6 +455,8 @@ bool wnh_inotify_use_sqlite::query_task_num(const string & client_ip, unsigned l
     if(sqlite_op.sql_query(sql, result))
     {
         task_num = strtoull(result.c_str(), NULL, 10);
+        WNHINFO("sql = " << sql);
+        WNHINFO("task_num = " << task_num);
         return true;
     }
     return false;

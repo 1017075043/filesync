@@ -4,6 +4,7 @@
 #include "filesync_server_mode.cpp"
 #include "filesync_client_mode.cpp"
 #include "filesync_control_mode.cpp"
+#include "filesync_create_license.cpp"
 
 void filesync_deamon_Process(int argc, char **argv);
 
@@ -12,10 +13,6 @@ int main(int argc, char **argv)
     filesync program; //定义一个程序类
     program.init.INIT(); //初始化
     program.startup_mode((const int)argc, (const char**)argv);
-    wnh_license li;
-    string server_serial_number_file = li.get_server_serial_number();
-    //li.create_license_file(server_serial_number_file, 23);
-    li.check_license_file_effectiveness(server_serial_number_file + LICENSE_FILE_SUFFIX);
     return 0;
 }
 
@@ -32,7 +29,11 @@ filesync::~filesync()
 void filesync::startup_mode(const int argc, const char **argv)
 {
     init_parameter(argc, argv); //初始化参数
-    if(filesync_start_mode == "server")
+    if(filesync_start_mode == "control")
+    {
+        control_mode();
+    }
+    else if(filesync_start_mode == "server")
     {
         server_mode();
     }
@@ -40,9 +41,9 @@ void filesync::startup_mode(const int argc, const char **argv)
     {
         client_mode();
     }
-    else if(filesync_start_mode == "control")
+    else if(filesync_start_mode == "license")
     {
-        control_mode();
+        create_license_mode();
     }
 }
 

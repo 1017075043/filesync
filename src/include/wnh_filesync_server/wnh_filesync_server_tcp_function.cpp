@@ -164,7 +164,11 @@ bool wnh_filesync_server::accept_get_task_num(const int & nfp, const string & in
     if(info == WNH_FILESYNC_GET_TASK_NUM_SIGNAL)
     {
         unsigned long task_num;
-        if(!watch.query_task_num(CONNECT_INFO.client_ip, task_num))
+        if(license_remaining_effectiveness_time == (unsigned long)0)
+        {
+            task_num = 0;
+        }
+        else if(!watch.query_task_num(CONNECT_INFO.client_ip, task_num))
         {
             task_num = 0;
         }

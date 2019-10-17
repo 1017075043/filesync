@@ -20,7 +20,7 @@ void filesync::client_mode()
         }
     }
 
-    if(init.check_process_exist(filesync_control_pid_path.c_str()))
+    if(init.check_process_exist(filesync_client_pid_path.c_str()))
     {
         return ;
     }

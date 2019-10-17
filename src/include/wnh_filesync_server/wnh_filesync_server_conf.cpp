@@ -49,6 +49,17 @@ void wnh_filesync_server::get_conf(const string &conf_path)
         WNHERROR("获取到系统配置.是否启动持久化(system_configure.persistence_task)失败,不存在或者存在多个");
         exit(0);
     }
+    value = conf.get_conf("system_configure", "license_file");
+    if(value.size() == 1)
+    {
+        license_file = value[0].c_str();
+        WNHDEBUG("获取到系统配置system_configure.license_file=" << license_file);
+    }
+    else
+    {
+        WNHERROR("获取到系统配置.是否启动持久化(system_configure.license_file)失败,不存在或者存在多个");
+        exit(0);
+    }
     value = conf.get_conf("email", "status");
     if(value.size() == 1)
     {
@@ -293,6 +304,7 @@ void wnh_filesync_server::show_rule_conf()
     WNHINFO("系统配置system_configure.network_timeout=" << network_timeout);
     WNHINFO("系统配置system_configure.auto_restore_fail_task=" << auto_restore_fail_task);
     WNHINFO("系统配置system_configure.persistence_task=" << persistence_task);
+    WNHINFO("系统配置system_configure.license_file=" << license_file);
 
     WNHINFO("邮件配置email.status=" << email_info.status);
     WNHINFO("邮件配置email.sender_email_address=" << email_info.sender_email_address);

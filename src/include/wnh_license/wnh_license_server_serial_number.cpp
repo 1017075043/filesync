@@ -6,7 +6,10 @@ string wnh_license::get_server_serial_number() //获取服务器序列号
     string system_core_info = get_sysntem_core_info();
     string uuid_temp = get_uuid();
     string uuid;
-    uuid = uuid_temp.substr(9, 4) + uuid_temp.substr(14, 4) + uuid_temp.substr(24);
+    uuid = uuid_temp.substr(14, 4) + uuid_temp.substr(24);
+    //WNHINFO("interfase_info:" << interfase_info);
+    //WNHINFO("system_core_info:" << system_core_info);
+    //WNHINFO("uuid:" << uuid);
     ofstream file_open;
     file_open.open(SERVER_SERIAL_NUMBER_TEMP_FILE, ios::out | ios::trunc);
     if(!file_open.is_open())
@@ -24,7 +27,7 @@ string wnh_license::get_server_serial_number() //获取服务器序列号
     {
         WNHWARN("临时文件," << SERVER_SERIAL_NUMBER_TEMP_FILE << ", 删除失败, errno=" << errno << ", mesg=" << strerror(errno));
     }
-    WNHINFO("服务器序列号: " << server_serial_number);
+    WNHDEBUG("产品序列号: " << server_serial_number);
     //string license_file = create_license_file(server_serial_number, 10);
     //check_license_file_effectiveness(server_serial_number + LICENSE_FILE_SUFFIX);
     //string jia_mi_des_encrypt = hash.des_encrypt(server_serial_number, DES_SYMMETRIC_ENCRYPTION_KEY);

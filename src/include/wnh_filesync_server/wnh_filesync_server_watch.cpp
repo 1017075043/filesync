@@ -87,7 +87,7 @@ void wnh_filesync_server::watch_core_v1() //使用wnh_inotify_use_sqlite进行�
 void wnh_filesync_server::event_into_task() //将事件转换成任务
 {
     WNHINFO("事件转换成任务线程启动成功");
-    while(1)
+    while(survival_id)
     {
         sleep(EVENT_TRANSITION_TIME_INTERVAL);
         for(int i = 0; i < sync_rule_num; i++)
@@ -100,7 +100,7 @@ void wnh_filesync_server::event_into_task() //将事件转换成任务
 void wnh_filesync_server::again_created_event() //再次创建事件
 {
     WNHINFO("再次创建事件线程启动成功");
-    while(1)
+    while(survival_id)
     {
         watch.again_created_event();
         sleep(AGAIN_CREATED_EVENT_TIME_INTERVAL);

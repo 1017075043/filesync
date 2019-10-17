@@ -13,6 +13,8 @@
 #define PERSISTENCE_TASK 1
 //同步规则标识头
 #define RULE_IDENTIFICATION "rule::"
+//许可文件
+#define LICENSE_FILE "filesync.license"
 
 //事件转换时间间隔,单位:秒
 #define EVENT_TRANSITION_TIME_INTERVAL 3
@@ -22,7 +24,10 @@
 #define CONNECT_INFO_LOGS "nfp:" << nfp << ", 客户端IP:" << CONNECT_INFO.client_ip << ", "
 
 //临时文件最大保存时间,单位:秒
-#define MAX_STORAGE_TIME_FOR_TEMP_FILES 10
+#define MAX_STORAGE_TIME_FOR_TEMP_FILES 20
+
+//许可检查时间间隔,单位:秒
+#define CLEARANCE_INSPECTION_INTERVAL 20
 
 //单次任务列表最大数量
 #define SINGLE_TASK_LIST_MAX_NUM 10

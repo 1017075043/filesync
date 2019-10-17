@@ -37,21 +37,11 @@ string wnh_license::create_license_file(const string & server_serial_number,cons
 unsigned long wnh_license::check_license_file_effectiveness(const string & license_file) //检查许可的有效性
 {
     wnh_openssl des;
-    //string license_info = server_serial_number + "," + to_string(LOCALTIMENUM + validity_time * 24 * 60 * 60) + ", " + DES_ENCRYPTION_INTERFERENCE_VALUE;
-    //string des_encrypt_info = des.des_encrypt(license_info, DES_SYMMETRIC_ENCRYPTION_KEY);
-    //ofstream file_open;
-    //file_open.open(server_serial_number + LICENSE_FILE_SUFFIX, ios::out | ios::trunc);
-    //if(!file_open.is_open())
-    //{
-    //    WNHERROR("打开文件" << SERVER_SERIAL_NUMBER_TEMP_FILE <<  "失败, errno=" << errno << ", mesg=" << strerror(errno));
-    //    return false;
-    //}
-    //file_open << des_encrypt_info;
-
     ifstream file_read(license_file);
     if(!file_read.is_open())
     {
         WNHWARN(license_file << ", 许可文件不存在");
+        WNHWARN("尊敬的用户, 您好! 若您还没有获取到许可文件, 发送您的产品序列号:" << get_server_serial_number() << "至邮箱" << APPLY_LICENSE_EMAIL << ", 即可获取新的许可");
         return (unsigned long)0;
     }
     stringstream license_info_temp;
@@ -63,23 +53,31 @@ unsigned long wnh_license::check_license_file_effectiveness(const string & licen
     if(get_server_serial_number() != server_serial_number)
     {
         WNHWARN(license_file << "该许可无效");
+        WNHWARN("尊敬的用户, 您好! 您当前的产品许可为无效的许可, 发送您的产品序列号:" << server_serial_number << "至邮箱" << APPLY_LICENSE_EMAIL << ", 即可获取新的许可");
         return (unsigned long)0;
     }
 
     license = license.substr(license.find(",")+1);
-    //WNHINFO("license1=" << license);
     string effectiveness_time = license.substr(0, license.find(","));
     license = license.substr(license.find(",")+1);
-    //WNHINFO("license2=" << license);
     unsigned long remaining_effectiveness_time = stoul(effectiveness_time, 0, 10);
-    //WNHINFO("remaining_effectiveness_time=" << remaining_effectiveness_time);
 
     unsigned long effectiveness_time_temp = stoul(license.substr(0, license.find(",")+1), 0, 10);
-    //WNHINFO("effectiveness_time_temp=" << effectiveness_time_temp);
-    remaining_effectiveness_time - LOCALTIMENUM > 0 ? remaining_effectiveness_time = remaining_effectiveness_time - LOCALTIMENUM : remaining_effectiveness_time = 0;
-    remaining_effectiveness_time > 24 * 60 * 60 ? remaining_effectiveness_time = remaining_effectiveness_time / (24 * 60 * 60) : remaining_effectiveness_time = 1;
-    WNHINFO("从许可中获取序列号:" << server_serial_number);
-    WNHINFO("从许可中获取许可有效期:" << effectiveness_time_temp);
-    WNHINFO("从许可中获取许可有效期剩余时间:" << remaining_effectiveness_time);
+    remaining_effectiveness_time > LOCALTIMENUM ? remaining_effectiveness_time = remaining_effectiveness_time - LOCALTIMENUM : remaining_effectiveness_time = 0;
+
+    remaining_effectiveness_time > 24 * 60 * 60 ? remaining_effectiveness_time = remaining_effectiveness_time / (24 * 60 * 60) + 1 : remaining_effectiveness_time == 0 ? remaining_effectiveness_time = 0 : remaining_effectiveness_time = 1;
+    if(remaining_effectiveness_time == 0)
+    {
+        WNHINFO("许可文件：" << license_file << ", 产品序列号:" << server_serial_number << ", 产品有效期:" << effectiveness_time_temp << "天, 产品剩余有效期:" << remaining_effectiveness_time << "天");
+        WNHWARN("尊敬的用户,您好! 您当前的产品许可已经过期, 发送您的产品序列号:" << server_serial_number << "至邮箱" << APPLY_LICENSE_EMAIL << ", 即可获取新的许可");
+    }
+    else
+    {
+        WNHINFO("许可文件：" << license_file << ", 产品序列号:" << server_serial_number << ", 产品有效期:" << effectiveness_time_temp << "天, 产品剩余有效期:" << remaining_effectiveness_time << "天");
+        if(remaining_effectiveness_time < 7)
+        {
+            WNHWARN("尊敬的用户, 您好! 您当前的产品许可即将过期, 发送您的产品序列号:" << server_serial_number << "至邮箱" << APPLY_LICENSE_EMAIL << ", 即可获取新的许可");
+        }
+    }
     return remaining_effectiveness_time;
 }

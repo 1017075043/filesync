@@ -11,7 +11,6 @@ using namespace std;
 #include "include/wnh_filesync_client/wnh_filesync_client.h"
 #include "include/wnh_filesync_server/wnh_filesync_server.h"
 #include "include/wnh_filesync_control/wnh_filesync_control.h"
-#include "include/wnh_license/wnh_license.h"
 
 #include "filesync_define.h"
 
@@ -38,6 +37,10 @@ private:
     string filesync_control_root_limit;
     string filesync_control_logs_level;
 
+    string  server_serial_number;
+    unsigned long validity_time;
+    string license_use_key;
+
 public:
     filesync();
     ~filesync();
@@ -50,6 +53,7 @@ public:
     void server_mode();
     void client_mode();
     void control_mode();
+    void create_license_mode(); //许可创建模式
 };
 
 #endif

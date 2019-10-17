@@ -13,6 +13,7 @@ using namespace std;
 #include "../wnh_system_operation/wnh_system_operation.h"
 #include "../wnh_openssl/wnh_openssl.h"
 #include "../wnh_jwsmtp/jwsmtp.h"
+#include "../wnh_license/wnh_license.h"
 
 class wnh_filesync_server : public wnh_tcp_server
 {
@@ -64,6 +65,7 @@ private:
         string email_server_password; //邮件服务器登录帐户
     };
 
+
 private:
     int pid; //进程PID
     string start_time; //启动时间
@@ -72,6 +74,8 @@ private:
     int network_timeout; //网络超时时间
     bool auto_restore_fail_task; //是否启动自动恢复失败任务
     bool persistence_task; //是否开启任务持久性
+    string license_file; //许可文件路径
+    unsigned long license_remaining_effectiveness_time; //许可有效期剩余时间
     RULE *rule; //保存原始规则信息
     SYNC_RULE * sync_rule; //保存有效的同步目录规则信息
     int rule_num; //原始规则数量
@@ -83,6 +87,7 @@ private:
     EMAIL_INFO email_info; //邮件配置信息
     string conf_path; //配置文件路径
     wnh_openssl file_hash; //获取文件hash值
+    wnh_license license; //获取许可信息
 
 public:
     wnh_filesync_server();
@@ -146,11 +151,13 @@ public:
     bool email_client_offline_alert_info(const vector<string> & offline_client_ip, const vector<string> & begin_connect_time, const vector<string> & last_connect_time, const vector<string> & complete_task_num, const vector<string> & unfinished_task_num, const vector<string> & fail_task_num); //邮件发送告警信息
     string create_email_client_offline_content_html(const vector<string> & offline_client_ip, const vector<string> & begin_connect_time, const vector<string> & last_connect_time, const vector<string> & complete_task_num, const vector<string> & unfinished_task_num, const vector<string> & fail_task_num); //创建邮件告警信息内容
 
-    void clean_temp_dir_file(); //清理临时目录
-    void clean_temp_dir_file_son(const string & temp_dir_path); //清理临时目录
+    void timer_task(); //定时任务
+    void timer_task_son(const string & temp_dir_path); //定时任务
 
     bool accept_get_sync_rule_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO); //接收获取同步规则信息信息
     bool create_sync_rule_info(const string & client_status_info_file_path); //创建同步规则信息文件
+
+    unsigned long get_license_info(); //获取许可信息
 };
 
 #endif

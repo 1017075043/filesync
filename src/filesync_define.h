@@ -44,6 +44,8 @@
 #define FILESYNC_CONTROL_ROOT_LIMIT             "FILESYNC_CONTROL_ROOT_LIMIT"   //root用户限制,针对控制端的配置
 #define FILESYNC_CONTROL_ROOT_LIMIT_DEFAULT     "no limit root"                 //默认root用户限制,针对控制端的配置
 
+#define FILESYNC_LICENSE_USER_KEY               "admin123!@#QWE"                 //许可生成使用秘钥
+
 //export FILESYNC_START_MODE=control
 //export FILESYNC_SERVER_IP=127.0.0.1
 //export FILESYNC_SERVER_PORT=10086

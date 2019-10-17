@@ -7,7 +7,8 @@
 #include "wnh_filesync_server_client_manage.cpp"
 #include "wnh_filesync_server_tcp_function_control.cpp"
 #include "wnh_filesync_server_email_send.cpp"
-#include "wnh_filesync_server_temp_clean.cpp"
+#include "wnh_filesync_server_timer_task.cpp"
+#include "wnh_filesync_server_license.cpp"
 
 wnh_filesync_server::wnh_filesync_server()
 {
@@ -49,6 +50,8 @@ void wnh_filesync_server::init()
     auto_restore_fail_task = AUTO_RESTORE_FAIL_TASK;
     persistence_task = PERSISTENCE_TASK;
     rule_identification = RULE_IDENTIFICATION;
+    license_file = LICENSE_FILE;
     client_num = 0;
     rule_num = 0;
+    license_remaining_effectiveness_time = 1;
 }

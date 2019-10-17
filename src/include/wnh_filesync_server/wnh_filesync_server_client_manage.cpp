@@ -109,7 +109,7 @@ void wnh_filesync_server::check_client_info_status()//检查更新客户端状�
     vector<string> task_num;
     vector<string> complete_task_num;
     vector<string> fail_task_num;
-    while(1)
+    while(survival_id)
     {
         for(unsigned int i= 0; i < client_num; i ++)
         {
