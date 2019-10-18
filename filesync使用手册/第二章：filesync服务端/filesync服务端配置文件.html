@@ -1,0 +1,177 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>2.4 filesync服务端配置文件</title>
+</head>
+
+<body>
+<h3>2.4 filesync服务端配置文件</h3>
+<hr>
+<p>默认的filesync服务端配置文件路径为:"filesync/filesync.conf", 例如:'<em>/usr/local/filesync/filesync.conf </em>'。</p>
+<p>配置文件内容如下:</p>
+<p style="background:#e5f2ff; padding-left:30px;"<br>
+#规则配置说明: #:注释,配置项=值,“=”左右边不允许存在空格,例如:port = 10086<br>
+<br>
+[system_configure]<br>
+#服务端使用的端口,默认port=10086<br>
+port=10086<br>
+#网络超时时间,用于判断客户端是否已经离线,单位:秒,默认network_timeout=10<br>
+network_timeout=20<br>
+#自动恢复失败任务,1:开启,0:不开启,默认auto_restore_fail_task=1<br>
+auto_restore_fail_task=1<br>
+#任务持久化,1:开启,0:不开启,默认persistence_task=1<br>
+#当服务端重启,若上一次有未完成的任务时,是否继续执行<br>
+persistence_task=1<br>
+#许可文件路径<br>
+license_file=6e65b94b8b8e09c9b141e4f25387085a.license<br>
+<br>
+#支持163/126邮箱,配置后,支持客户端离线报警<br>
+[email]<br>
+#是否启用邮件报警,1:启用,0:不启用<br>
+status=1<br>
+#发件人邮箱地址<br>
+sender_email_address=filesync_license@163.com<br>
+#收件人邮箱地址,有多个就配置多行即可<br>
+recipient_email_address=filesync_license@163.com<br>
+recipient_email_address=xxxxxxx@126.com<br>
+#邮件服务器地址<br>
+email_server_address=smtp.163.com<br>
+#邮件服务器登录帐户<br>
+email_server_user=filesync_license@163.com<br>
+#邮件服务器登录帐户密码<br>
+email_server_password=xxxxxxxxxxxxxxx<br>
+<br>
+#注意:目录路径不要以"/"符号结尾,不同的规则使用不同的同步名称<br>
+#每一个同步规则下只能有一个源目录,允许有多个目标目录,不同的同步规则下源目录可以重复<br>
+#允许每一个同步规则下可以有多个目标服务器,并且不同的同步规则下目标服务器可以重复<br>
+#每一个同步规则下可以有多个忽略同步目录以及忽略同步规则,并且不同的同步规则下忽略同步目录以及忽略同步规则可以重复<br>
+#同步规则,同步规则名称:RULE_1<br>
+[rule::RULE_1]<br>
+#源目录<br>
+src_dir=/tmp/filesync/src1<br>
+#目标目录<br>
+dst_dir=/tmp/filesync/dst1<br>
+dst_dir=/tmp/filesync/dst2<br>
+#目标服务器<br>
+dst_ip=192.168.60.130<br>
+dst_ip=192.168.60.132<br>
+dst_ip=192.168.0.11<br>
+dst_ip=192.168.0.12<br>
+#忽略同步目录<br>
+ignore_dir=/tmp/filesync/src1/ignore_dir<br>
+#忽略同步规则<br>
+ignore_rule=/tmp/filesync/src1/*.swp<br>
+ignore_rule=/tmp/filesync/src1/*.swx<br>
+ignore_rule=/tmp/filesync/src1/*.swpx<br>
+#是否启动该同步规则,1:启用,0:不启用<br>
+rule_status=1<br>
+<br>
+#同步规则,同步规则名称:RULE_2<br>
+[rule::RULE_2]<br>
+#源目录<br>
+src_dir=/tmp/filesync/src1<br>
+#目标目录<br>
+dst_dir=/tmp/filesync/dst3<br>
+#目标服务器<br>
+dst_ip=192.168.0.13<br>
+dst_ip=192.168.0.14<br>
+#忽略同步目录<br>
+ignore_dir=/tmp/filesync/src3/ignore_dir<br>
+#忽略同步规则<br>
+ignore_rule=/tmp/filesync/src3/*.swp<br>
+ignore_rule=/tmp/filesync/src3/*.swx<br>
+ignore_rule=/tmp/filesync/src3/*.swpx<br>
+#是否启动该同步规则,1:启用,0:不启用<br>
+rule_status=0<br>
+<p>字段详细说明见下表(表格2-2):</p>
+<TABLE width="80%" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#000000">
+  <TR> 
+    <TD> <table width="100%" border="0" cellspacing="1" cellpadding="2" class="text">
+        <TBODY>
+          <TR bgcolor="#cccccc"> 
+            <TD colspan="2"><strong>[system_configure]段  </strong></TD>
+          </TR>
+          <TR bgcolor="#ffffff"> 
+            <TD>port</TD>
+			<TD><p>服务端使用的端口,默认port=10086</p></TD>
+          </TR>
+          <TR bgcolor="#ffffcc"> 
+            <TD>network_timeout</TD>
+            <TD>网络超时时间,用于判断客户端是否已经离线,单位:秒,默认network_timeout=10</TD>
+          </TR>
+          <TR bgcolor="#ffffff"> 
+            <TD>auto_restore_fail_task</TD>
+            <TD>自动恢复失败任务,1:开启,0:不开启,默认auto_restore_fail_task=1</TD>
+          </TR>
+          <TR bgcolor="#ffffcc"> 
+            <TD>persistence_task</TD>
+            <TD>任务持久化,1:开启,0:不开启,默认persistence_task=1<br/>当服务端重启,若上一次有未完成的任务时,是否在下一次启动后继续执行</TD>
+          </TR>
+          <TR bgcolor="#ffffff"> 
+            <TD>license_file<br></TD>
+            <TD>许可文件路径,默认license_file=filesync.license</TD>
+          </TR>
+          <TR bgcolor="#cccccc"> 
+            <TD colspan="2"><strong>[email]段</strong></TD>
+          </TR>
+          <TR bgcolor="#ffffff"> 
+            <TD>status<br></TD>
+            <TD>是否启用邮件报警,1:启用,0:不启用</TD>
+          </TR>
+          <TR bgcolor="#ffffcc"> 
+            <TD>sender_email_address</TD>
+            <TD>发件人邮箱地址</TD>
+          </TR>
+          <TR bgcolor="#ffffff"> 
+            <TD>recipient_email_address</TD>
+            <TD>收件人邮箱地址,有多个就配置多行即可</TD>
+          </TR>
+          <TR bgcolor="#ffffcc"> 
+            <TD>email_server_address</TD>
+            <TD>邮件服务器地址</TD>
+          </TR>
+		  <TR bgcolor="#ffffff"> 
+            <TD>email_server_user</TD>
+            <TD>邮件服务器登录帐户</TD>
+          </TR>
+          <TR bgcolor="#ffffcc"> 
+            <TD>email_server_password</TD>
+            <TD>邮件服务器登录帐户密码</TD>
+          </TR>
+          <TR bgcolor="#cccccc"> 
+            <TD colspan="2"><strong>[rule::]段</strong></TD>
+          </TR>
+          <TR bgcolor="#ffffff"> 
+            <TD>src_dir</TD>
+            <TD>源目录,每一个同步规则下只能有一个源目录,不同的同步规则下源目录可以重复<br/>注意:目录路径不要以"/"符号结尾</TD>
+          </TR>
+          <TR bgcolor="#ffffcc"> 
+            <TD>dst_dir</TD>
+            <TD>目标目录,有多个就配置多行即可<br/>每一个同步规则下有多个目标目录,不同的同步规则下目标目录可以重复<br/>注意:目录路径不要以"/"符号结尾</TD>
+          </TR>
+          <TR bgcolor="#ffffff"> 
+            <TD>dst_ip</TD>
+            <TD>目标服务器,有多个就配置多行即可<br/>每一个同步规则下可以有多个目标服务器,不同的同步规则下目标服务器可以重复</TD>
+          </TR>
+          <TR bgcolor="#ffffcc"> 
+            <TD>ignore_dir</TD>
+            <TD>忽略同步目录,将配置的目录从监控列表中移除,对于该目录下的文件系统事件不会监听,有多个就配置多行即可<br/>每一个同步规则下可以有多个忽略同步目录,不同的同步规则下忽略同步目录可以重复<br/>注意:目录路径不要以"/"符号结尾</TD>
+          </TR>
+		  <TR bgcolor="#ffffff"> 
+            <TD>ignore_rule</TD>
+            <TD>忽略同步规则,将监听的事件忽略同步规则进行配置,若符合忽略同步规则,则将该事件忽略,有多个就配置多行即可<br/>每一个同步规则下可以有多个忽略同步规则,并且不同的同步规则下忽略同步规则可以重复<br/>注意:目录路径不要以"/"符号结尾</TD>
+          </TR>
+          <TR bgcolor="#ffffcc"> 
+            <TD>rule_status</TD>
+            <TD>是否启动该同步规则,1:启用,0:不启用</TD>
+          </TR>
+      </TABLE>
+    <td></tr>
+</table>
+<p align="center">表格 2-2 filesync服务端配置文件</p>
+<p class="tip">注意:对filesync服务端配置文件做任何手工修改,都需要重启filesync服务端,才能使修改生效。</p>
+<hr>
+<p align="right">Copyright &copy; 2018-2019 WuNanhui. All rights reserved.</p>
+</body>
+</html>
