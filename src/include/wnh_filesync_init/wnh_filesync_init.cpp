@@ -478,7 +478,7 @@ void wnh_filesync_init::MY_PRAYER() //佛祖保佑,永无BUG
 
 void wnh_filesync_init::version_control_and_copyright_start() //版本控制和版权说明
 {
-    cout << WNH_COLOR_RED << "--------------------WELCOME TO USE " << PROGRAM_NAME << "---------------------" <<  WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_RED << "-----------------------WELCOME TO USE " << PROGRAM_NAME << "-------------------------" <<  WNH_COLOR_WHITE << endl;
     cout << WNH_COLOR_RED << WNH_FILESYNC_USE_HELP <<  WNH_COLOR_WHITE << endl;
     cout << WNH_COLOR_RED << WNH_FILESYNC_COPYRIGHT <<  WNH_COLOR_WHITE << endl;
     //sleep(3);
@@ -486,7 +486,7 @@ void wnh_filesync_init::version_control_and_copyright_start() //版本控制和�
 
 void wnh_filesync_init::version_control_and_copyright_stop() //版本控制和版权说明
 {
-    cout << WNH_COLOR_RED << "-----------------THANK YOU FOR USING " << PROGRAM_NAME << "-------------------" << WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_RED << "--------------------THANK YOU FOR USING " << PROGRAM_NAME << "-----------------------" << WNH_COLOR_WHITE << endl;
     cout << WNH_COLOR_RED << WNH_FILESYNC_USE_HELP <<  WNH_COLOR_WHITE << endl;
     cout << WNH_COLOR_RED << WNH_FILESYNC_COPYRIGHT <<  WNH_COLOR_WHITE << endl;
     //sleep(3);
