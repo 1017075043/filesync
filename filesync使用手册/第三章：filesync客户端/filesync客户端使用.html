@@ -42,7 +42,7 @@
   <li>'cd filesync_x.x.x'目录,并执行'./install.sh'根据提示完成安装。</li>
 </ul>
 <hr align="left" width="50%" size="1" noshade>
-<h4><a name="s2_3_3" id="s2_3_3"></a>2.2.3 启动和停止</h4>
+<h4><a name="s2_3_3" id="s2_3_3"></a>3.2.3 启动和停止</h4>
 <p>假设filesync安装在<em>/usr/local/filesync</em>目录下, filesync服务端的IP为192.168.0.100, 使用端口为:10086:</p>
 <p style="color:red;">1.filesync以客户端模式启动filesync</p>
 <p style="color:red;">前端运行命令,在终端输入: '<u>cd /usr/local/filesync && ./filesync client 192.168.0.100 10086</u>'</p>
@@ -50,7 +50,7 @@
 <p>2.停止filesync客户端模式</p>
 <p style="color:red;">在终端输入:'<u>ps -ef | grep "filesync client" | grep -v grep | awk '{print $2}' | xargs kill -9</u>'</p>
 <hr size="1" noshade>
-<h4><a name="s2_3_4" id="s2_3_4"></a>2.2.4 确定filesync以客户端模式已经启动 </h4>
+<h4><a name="s2_3_4" id="s2_3_4"></a>3.2.4 确定filesync以客户端模式已经启动 </h4>
 <p style="color:red;">在终端输入:'<u>ps -ef | grep "filesync client"</u>',查看是否有filesync服务端进程。</p>
 <hr>
 <p align="right">Copyright &copy; 2018-2019 WuNanhui. All rights reserved.</p>
