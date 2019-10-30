@@ -16,7 +16,6 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     getenv(FILESYNC_CLIENT_LOGS_LEVEL) != NULL ? filesync_client_logs_level = getenv(FILESYNC_CLIENT_LOGS_LEVEL) : filesync_client_logs_level = FILESYNC_CLIENT_LOGS_LEVEL_DEFAULT;
     getenv(FILESYNC_CLIENT_ROOT_LIMIT) != NULL ? filesync_client_root_limit = getenv(FILESYNC_CLIENT_ROOT_LIMIT) : filesync_client_root_limit = FILESYNC_CLIENT_ROOT_LIMIT_DEFAULT;
 
-
     getenv(FILESYNC_CONTROL_USE_PARAMETER) != NULL ? filesync_control_use_parameter = getenv(FILESYNC_CONTROL_USE_PARAMETER) : filesync_control_use_parameter = FILESYNC_CONTROL_USE_PARAMETER_DEFAULT;
     getenv(FILESYNC_CONTROL_PID_PATH) != NULL ? filesync_control_pid_path = getenv(FILESYNC_CONTROL_PID_PATH) : filesync_control_pid_path = FILESYNC_CONTROL_PID_PATH_DEFAULT;
     getenv(FILESYNC_CONTROL_LOGS_LEVEL) != NULL ? filesync_control_logs_level = getenv(FILESYNC_CONTROL_LOGS_LEVEL) : filesync_control_logs_level = FILESYNC_CONTROL_LOGS_LEVEL_DEFAULT;

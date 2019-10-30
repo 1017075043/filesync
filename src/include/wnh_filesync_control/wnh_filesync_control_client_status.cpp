@@ -69,6 +69,7 @@ void wnh_filesync_control::get_client_status_info() //获取客户端状态信�
     }
     show_client_status_info(client_status_info_file_path + CLIENT_STATUS_INFO_FILE_SUFFIX);
     send_end_session_info();
+
     return;
 }
 

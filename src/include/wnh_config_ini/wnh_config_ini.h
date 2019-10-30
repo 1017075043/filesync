@@ -18,8 +18,6 @@ public:
     int unit_num; //节个数
     Unit *unit[];
 
-    bool use_id;
-
     wnh_config_ini();
     ~wnh_config_ini();
 

@@ -3,7 +3,7 @@
 wnh_config_ini::wnh_config_ini()
 {
     WNHDEBUG("wnh_config_ini 构造");
-    use_id = false;
+    unit_num = 0;
 }
 
 wnh_config_ini::~wnh_config_ini()
@@ -14,7 +14,6 @@ wnh_config_ini::~wnh_config_ini()
 
 void wnh_config_ini::read_config_ini(const string & config_ini_path)
 {
-    use_id = true;
     WNHDEBUG(config_ini_path);
     ifstream fin(config_ini_path.c_str());
     if (!fin)
@@ -55,7 +54,6 @@ void wnh_config_ini::read_config_ini(const string & config_ini_path)
 
 void wnh_config_ini::read_config_ini(const string & config_ini_path, const bool & space) //读取配置文件
 {
-    use_id = true;
     WNHDEBUG(config_ini_path);
     ifstream fin(config_ini_path.c_str());
     if (!fin)
@@ -117,7 +115,7 @@ void wnh_config_ini::show_configure_ini()
 
 void wnh_config_ini::clean_configure_ini()
 {
-    if(unit_num == 0 || use_id == false)
+    if(unit_num == 0)
     {
         return;
     }
