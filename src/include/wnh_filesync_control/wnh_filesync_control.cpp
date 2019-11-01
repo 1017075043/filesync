@@ -63,6 +63,7 @@ void wnh_filesync_control::create_temp_list_dir()
             exit(1);
         }
     }
+    sys_oper.chmod_wnh(WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH, "755");
 }
 
 

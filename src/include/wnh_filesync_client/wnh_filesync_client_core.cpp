@@ -117,6 +117,7 @@ void wnh_filesync_client::sync_thread_core_v1() //同步线程核心服务
             exit(1);
         }
     }
+    sys_oper.chmod_wnh(WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH, "755");
     while(live_sign)
     {
         if(!unblock_connect(ip, to_string(port)))

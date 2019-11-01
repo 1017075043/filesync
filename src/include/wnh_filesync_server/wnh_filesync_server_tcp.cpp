@@ -126,6 +126,7 @@ void wnh_filesync_server::tcp_core() //tcp核心服务
             exit(1);
         }
     }
+    sys_oper.chmod_wnh(WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH, "755");
 
     if(create_socket())
     {

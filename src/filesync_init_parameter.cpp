@@ -17,9 +17,7 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     getenv(FILESYNC_CLIENT_ROOT_LIMIT) != NULL ? filesync_client_root_limit = getenv(FILESYNC_CLIENT_ROOT_LIMIT) : filesync_client_root_limit = FILESYNC_CLIENT_ROOT_LIMIT_DEFAULT;
 
     getenv(FILESYNC_CONTROL_USE_PARAMETER) != NULL ? filesync_control_use_parameter = getenv(FILESYNC_CONTROL_USE_PARAMETER) : filesync_control_use_parameter = FILESYNC_CONTROL_USE_PARAMETER_DEFAULT;
-    getenv(FILESYNC_CONTROL_PID_PATH) != NULL ? filesync_control_pid_path = getenv(FILESYNC_CONTROL_PID_PATH) : filesync_control_pid_path = FILESYNC_CONTROL_PID_PATH_DEFAULT;
     getenv(FILESYNC_CONTROL_LOGS_LEVEL) != NULL ? filesync_control_logs_level = getenv(FILESYNC_CONTROL_LOGS_LEVEL) : filesync_control_logs_level = FILESYNC_CONTROL_LOGS_LEVEL_DEFAULT;
-    getenv(FILESYNC_CONTROL_ROOT_LIMIT) != NULL ? filesync_control_root_limit = getenv(FILESYNC_CONTROL_ROOT_LIMIT) : filesync_control_root_limit = FILESYNC_CONTROL_ROOT_LIMIT_DEFAULT;
 
     server_serial_number = "";
     validity_time = 0;
@@ -89,15 +87,7 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
         }
         if(argc > 5)
         {
-            filesync_control_pid_path = argv[5];
-        }
-        if(argc > 6)
-        {
-            filesync_control_root_limit = argv[6];
-        }
-        if(argc > 7)
-        {
-            filesync_control_logs_level = argv[7];
+            filesync_control_logs_level = argv[5];
         }
     }
     else if(filesync_start_mode == "license" && argc == 5)
@@ -137,6 +127,6 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     }
     else if(filesync_start_mode == "control")
     {
-        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_control_use_parameter=" << filesync_control_use_parameter << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_control_pid_path=" << filesync_control_pid_path << ", filesync_control_root_limit=" << filesync_control_root_limit << ", filesync_control_logs_level=" << filesync_control_logs_level);
+        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_control_use_parameter=" << filesync_control_use_parameter << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_control_logs_level=" << filesync_control_logs_level);
     }
 }

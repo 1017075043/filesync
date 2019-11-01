@@ -11,20 +11,6 @@ void filesync::control_mode()
         return;
     }
 
-    if(filesync_control_root_limit == "limit root")
-    {
-        if((int)getuid() != 0)
-        {
-            WNHWARN("当前用户无权限运行程序, 请使用root用户来运行程序!");
-            return ;
-        }
-    }
-
-    if(init.check_process_exist(filesync_control_pid_path.c_str()))
-    {
-        return ;
-    }
-
     if(chk_str.is_logs_level(filesync_control_logs_level))
     {
         init.set_logs_mode(filesync_control_logs_level);
