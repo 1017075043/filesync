@@ -25,7 +25,7 @@ string wnh_openssl::des_encrypt(const string &clearText, const string &key) // å
     std::vector<unsigned char> vecCiphertext;
     unsigned char tmp[8];
 
-    for (int i = 0; i < clearText.length() / 8; i++)
+    for (unsigned int i = 0; i < clearText.length() / 8; i++)
     {
         memcpy(inputText, clearText.c_str() + i * 8, 8);
         DES_ecb_encrypt(&inputText, &outputText, &keySchedule, DES_ENCRYPT);
@@ -75,7 +75,7 @@ string wnh_openssl::des_decrypt(const string &cipherText, const string &key) // 
     std::vector<unsigned char> vecCleartext;
     unsigned char tmp[8];
 
-    for (int i = 0; i < cipherText.length() / 8; i++)
+    for (unsigned int i = 0; i < cipherText.length() / 8; i++)
     {
         memcpy(inputText, cipherText.c_str() + i * 8, 8);
         DES_ecb_encrypt(&inputText, &outputText, &keySchedule, DES_DECRYPT);

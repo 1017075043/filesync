@@ -130,10 +130,13 @@ void wnh_config_ini::clean_configure_ini()
 
 vector<string> wnh_config_ini::get_conf(const string & unit_name, const string & conf_name)
 {
+    WNHDEBUG("unit_num:" << unit_num);
     for(int i = 0; i <= unit_num; i++)
     {
-        if(unit[i]->name == unit_name )
+        WNHDEBUG("查找配置段, 现在的配置段name, unit[" << i << "]->name" << ":" << unit[i]->name << ", 目标配置段:" << unit_name);
+        if(unit[i]->name == unit_name)
         {
+            WNHDEBUG("查找到配置段:unit_name:" << unit_name);
             return unit[i]->conf.get_config(conf_name);
         }
     }

@@ -8,7 +8,7 @@ using namespace std;
 #include "include/wnh_config/wnh_config.h"
 #include "include/wnh_system_operation/wnh_system_operation.h"
 #include "include/wnh_check_string/wnh_check_string.h"
-#include "include/wnh_filesync_client/wnh_filesync_client.h"
+#include "include/wnh_filesync_client_concurrent/wnh_filesync_client_concurrent.h"
 #include "include/wnh_filesync_server/wnh_filesync_server.h"
 #include "include/wnh_filesync_control/wnh_filesync_control.h"
 
@@ -17,7 +17,8 @@ using namespace std;
 class filesync : public wnh_base_class
 {
 private:
-    wnh_config conf;//存储配置信息
+    //wnh_config conf;//存储配置信息
+    enum CLIENT_USE_MODE{ip_mode=1, config_mode=2};
 
     string filesync_start_mode;
     string filesync_server_ip;
@@ -28,6 +29,8 @@ private:
     string filesync_server_root_limit;
     string filesync_server_logs_level;
 
+    CLIENT_USE_MODE filesync_client_mode;
+    string filesync_client_config_path;
     string filesync_client_pid_path;
     string filesync_client_root_limit;
     string filesync_client_logs_level;
@@ -37,9 +40,9 @@ private:
     string filesync_control_root_limit;
     string filesync_control_logs_level;
 
-    string  server_serial_number;
-    unsigned long validity_time;
-    string license_use_key;
+    string  server_serial_number; //服务器序列号
+    unsigned long validity_time; //有效时间
+    string license_use_key; //许可秘钥
 
 public:
     filesync();

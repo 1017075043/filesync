@@ -35,7 +35,6 @@ AC_CHECK_FUNCS([bzero inet_ntoa memset select socket strerror strtoull])
 
 AC_OUTPUT(Makefile
 src/include/wnh_base_class/Makefile
-src/include/wnh_config/Makefile
 src/include/wnh_filesync_init/Makefile
 src/include/wnh_inotify_use_sqlite/Makefile
 src/include/wnh_int_double_string_one_list/Makefile
@@ -50,9 +49,11 @@ src/include/wnh_tcp_client/Makefile
 src/include/wnh_tcp_server/Makefile
 src/include/wnh_check_string/Makefile
 src/include/wnh_openssl/Makefile
+src/include/wnh_filesync_client_concurrent/Makefile
 src/include/wnh_filesync_client/Makefile
 src/include/wnh_filesync_server/Makefile
 src/include/wnh_filesync_control/Makefile
 src/include/wnh_config_ini/Makefile
+src/include/wnh_config/Makefile
 src/include/wnh_jwsmtp/Makefile
 src/include/wnh_license/Makefile)

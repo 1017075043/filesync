@@ -5,10 +5,22 @@ void filesync::client_mode()
     WNHINFO(PROGRAM_NAME << "程序启动,启动方式:客户端");
 
     wnh_check_string chk_str;
-    if(!chk_str.is_ip_address_and_num(filesync_server_ip + ":" + filesync_server_port))
+    if(filesync_client_mode == ip_mode)
     {
-        WNHERROR(filesync_server_ip << ":" << filesync_server_port << ", 不是有效的IP地址和端口");
-        return;
+        if(!chk_str.is_ip_address_and_num(filesync_server_ip + ":" + filesync_server_port))
+        {
+            WNHERROR(filesync_server_ip << ":" << filesync_server_port << ", 不是有效的IP地址和端口");
+            return;
+        }
+    }
+    else if(filesync_client_mode == config_mode)
+    {
+        wnh_system_operation sys_oper;
+        if(!sys_oper.file_is_exist(filesync_client_config_path))
+        {
+            WNHERROR(filesync_client_config_path << ", 该配置文件不存在");
+            return;
+        }
     }
 
     if(filesync_client_root_limit == "limit root")
@@ -35,18 +47,14 @@ void filesync::client_mode()
         return ;
     }
 
-    wnh_filesync_client client_status_core(filesync_server_ip, stoi(filesync_server_port, NULL, 10));
-    client_status_core.status_core();
-
-    wnh_filesync_client client_sync_core(filesync_server_ip, stoi(filesync_server_port, NULL, 10));
-    client_sync_core.sync_core();
-    //检查状态线程和同步线程
-    while(client_sync_core.live_sign && client_status_core.live_sign)
+    if(filesync_client_mode == ip_mode)
     {
-        sleep(1);
+        wnh_filesync_client_concurrent client;
+        client.core(filesync_server_ip, stoi(filesync_server_port, NULL, 10));
     }
-    //当更新状态线程或者同步线程出现异常时,将这两个线程的存活标志设置为false,并使用5秒的时间等待线程结束。
-    client_sync_core.live_sign = false;
-    client_status_core.live_sign = false;
-    sleep(5);
+    else if(filesync_client_mode == config_mode)
+    {
+        wnh_filesync_client_concurrent client;
+        client.core(filesync_client_config_path);
+    }
 }

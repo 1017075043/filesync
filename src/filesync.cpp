@@ -18,7 +18,7 @@ int main(int argc, char **argv)
 
 filesync::filesync()
 {
-
+    filesync_client_mode = ip_mode;
 }
 
 filesync::~filesync()

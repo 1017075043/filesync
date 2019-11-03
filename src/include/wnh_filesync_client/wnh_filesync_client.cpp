@@ -13,12 +13,11 @@ wnh_filesync_client::wnh_filesync_client()
     WNHINFO("服务端IP:" << this->ip << ", 端口:" << this->port);
 }
 
-wnh_filesync_client::wnh_filesync_client(const string &conf_parameter)
+wnh_filesync_client::wnh_filesync_client(const string &ip_address_and_port)
 {
     WNHDEBUG("wnh_filesync_client 构造");
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:客户端");
     init();
-    string ip_address_and_port = conf_parameter;
     this->ip = ip_address_and_port.substr(0, ip_address_and_port.find(":"));
     this->port = atoi(ip_address_and_port.substr(ip_address_and_port.find(":")+1).c_str());
     WNHINFO("服务端IP:" << this->ip << ", 端口:" << this->port);

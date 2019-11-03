@@ -12,6 +12,7 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     getenv(FILESYNC_SERVER_LOGS_LEVEL) != NULL ? filesync_server_logs_level = getenv(FILESYNC_SERVER_LOGS_LEVEL) : filesync_server_logs_level = FILESYNC_SERVER_LOGS_LEVEL_DEFAULT;
     getenv(FILESYNC_SERVER_ROOT_LIMIT) != NULL ? filesync_server_root_limit = getenv(FILESYNC_SERVER_ROOT_LIMIT) : filesync_server_root_limit = FILESYNC_SERVER_ROOT_LIMIT_DEFAULT;
 
+    getenv(FILESYNC_CLIENT_CONFIG_PATH) != NULL ? filesync_client_config_path = getenv(FILESYNC_CLIENT_CONFIG_PATH) : filesync_client_config_path = FILESYNC_CLIENT_CONFIG_PATH_DEFAULT;
     getenv(FILESYNC_CLIENT_PID_PATH) != NULL ? filesync_client_pid_path = getenv(FILESYNC_CLIENT_PID_PATH) : filesync_client_pid_path = FILESYNC_CLIENT_PID_PATH_DEFAULT;
     getenv(FILESYNC_CLIENT_LOGS_LEVEL) != NULL ? filesync_client_logs_level = getenv(FILESYNC_CLIENT_LOGS_LEVEL) : filesync_client_logs_level = FILESYNC_CLIENT_LOGS_LEVEL_DEFAULT;
     getenv(FILESYNC_CLIENT_ROOT_LIMIT) != NULL ? filesync_client_root_limit = getenv(FILESYNC_CLIENT_ROOT_LIMIT) : filesync_client_root_limit = FILESYNC_CLIENT_ROOT_LIMIT_DEFAULT;
@@ -27,6 +28,8 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     {
         filesync_start_mode = argv[1];
     }
+
+    wnh_check_string chk_str;
     //0        1      2             3                   4            5
     //filesync server filesync.conf filesync_server.pid "limit root" WNH_INFO_XS
     if(filesync_start_mode == "server")
@@ -52,23 +55,50 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     {
         if(argc > 2)
         {
-            filesync_server_ip = argv[2];
-        }
-        if(argc > 3)
-        {
-            filesync_server_port = argv[3];
-        }
-        if(argc > 4)
-        {
-            filesync_client_pid_path = argv[4];
-        }
-        if(argc > 5)
-        {
-            filesync_client_root_limit = argv[5];
-        }
-        if(argc > 6)
-        {
-            filesync_client_logs_level = argv[6];
+            if(chk_str.is_ip_address(argv[2]))
+            {
+                filesync_client_mode = ip_mode;
+                if(argc > 2)
+                {
+                    filesync_server_ip = argv[2];
+                }
+                if(argc > 3)
+                {
+                    filesync_server_port = argv[3];
+                }
+                if(argc > 4)
+                {
+                    filesync_client_pid_path = argv[4];
+                }
+                if(argc > 5)
+                {
+                    filesync_client_root_limit = argv[5];
+                }
+                if(argc > 6)
+                {
+                    filesync_client_logs_level = argv[6];
+                }
+            }
+            else
+            {
+                filesync_client_mode = config_mode;
+                if(argc > 2)
+                {
+                    filesync_client_config_path = argv[2];
+                }
+                if(argc > 3)
+                {
+                    filesync_client_pid_path = argv[3];
+                }
+                if(argc > 4)
+                {
+                    filesync_client_root_limit = argv[4];
+                }
+                if(argc > 5)
+                {
+                    filesync_client_logs_level = argv[5];
+                }
+            }
         }
     }
     else if(filesync_start_mode == "control")
@@ -123,7 +153,14 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     }
     else if(filesync_start_mode == "client")
     {
-        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_client_pid_path=" << filesync_client_pid_path << ", filesync_client_root_limit=" << filesync_client_root_limit << ", filesync_client_logs_level=" << filesync_client_logs_level);
+        if(filesync_client_mode == ip_mode)
+        {
+            WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_client_pid_path=" << filesync_client_pid_path << ", filesync_client_root_limit=" << filesync_client_root_limit << ", filesync_client_logs_level=" << filesync_client_logs_level);
+        }
+        else if(filesync_client_mode == config_mode)
+        {
+            WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_client_config_path=" << filesync_client_config_path << ", filesync_client_pid_path=" << filesync_client_pid_path << ", filesync_client_root_limit=" << filesync_client_root_limit << ", filesync_client_logs_level=" << filesync_client_logs_level);
+        }
     }
     else if(filesync_start_mode == "control")
     {

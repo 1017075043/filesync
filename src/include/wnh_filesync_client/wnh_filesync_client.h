@@ -28,7 +28,7 @@ public:
 
 public:
     wnh_filesync_client();
-    wnh_filesync_client(const string & conf_parameter);
+    wnh_filesync_client(const string & ip_address_and_port);
     wnh_filesync_client(const int argc, const char **argv);
     wnh_filesync_client(const string & ip, const int & port);
     ~wnh_filesync_client();
