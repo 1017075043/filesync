@@ -4,7 +4,7 @@
 using namespace std;
 
 //  需要先在linux环境下安装sqlite,步骤如下
-//  tar -zxvf sqlite-autoconf-3280000.tar.gz
+//  tar -zxvf sqlite-autoconf-3300100.tar.gz
 //  ./configure && make && make install
 //  在编译连接时需要加上-lsqlite3, 例如$(CC) -o $(EXEC) $(OBJS) $(LIB) -lcrypto `mysql_config --cflags --libs` -lsqlite3
 

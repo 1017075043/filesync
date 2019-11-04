@@ -1,6 +1,8 @@
 #ifndef __filesync__
 #define __filesync__
 
+//程序依赖sqlite/uuid,需要提前编译安装
+
 using namespace std;
 
 #include "include/wnh_base_class/wnh_base_class.h"
