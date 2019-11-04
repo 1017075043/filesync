@@ -32,6 +32,8 @@ src/include/wnh_config \
 src/include/wnh_jwsmtp \
 src/include/wnh_license
 
+filesync_CPPFLAGS=-DSOMPLE_LOGS
+
 filesync_SOURCES = src/filesync.cpp
 
 filesynct_CPPFLAGS = -DCONFIG_DIR=\"$(sysconfdir)\" -DLIBRARY_DIR=\"$(pkglibdir)\"
