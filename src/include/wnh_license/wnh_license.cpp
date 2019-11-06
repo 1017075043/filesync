@@ -51,7 +51,7 @@ unsigned long wnh_license::check_license_file_effectiveness(const string & licen
     string license_info(license_info_temp.str());
     string license = des.des_decrypt(license_info, DES_SYMMETRIC_ENCRYPTION_KEY);
     string server_serial_number = license.substr(0, license.find(","));
-    if(get_server_serial_number() != server_serial_number)
+    if(license_num != server_serial_number)
     {
         WNHWARN(license_file << "该许可无效");
         WNHWARN("尊敬的用户, 您好! 您当前的产品许可为无效的许可, 发送您的产品序列号:" << license_num << "至邮箱" << APPLY_LICENSE_EMAIL << ", 即可获取新的许可");
