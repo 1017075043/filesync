@@ -2,7 +2,6 @@
 
 bool wnh_license::get_cpu_id_by_asm(string & cpu_id) //从asm中获取cpu信息
 {
-    WNHINFO("2");
     cpu_id.clear();
 
     unsigned int s1 = 0;

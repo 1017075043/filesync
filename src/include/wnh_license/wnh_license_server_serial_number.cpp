@@ -4,9 +4,9 @@ string wnh_license::get_server_serial_number() //获取服务器序列号
 {
     string interfase_info = get_interfaces_info();
     string system_core_info = get_sysntem_core_info();
-    string uuid_temp = get_uuid();
-    string uuid;
-    uuid = uuid_temp.substr(14, 4) + uuid_temp.substr(24);
+    //string uuid_temp = get_uuid();
+    //string uuid;
+    //uuid = uuid_temp.substr(14, 4) + uuid_temp.substr(24);
     //WNHINFO("interfase_info:" << interfase_info);
     //WNHINFO("system_core_info:" << system_core_info);
     //WNHINFO("uuid:" << uuid);
@@ -19,7 +19,7 @@ string wnh_license::get_server_serial_number() //获取服务器序列号
     }
     file_open << interfase_info << endl;
     file_open << system_core_info << endl;
-    file_open << uuid << endl;
+    //file_open << uuid << endl;
     file_open.close();
     wnh_openssl hash;
     string server_serial_number = hash.get_file_md5(SERVER_SERIAL_NUMBER_TEMP_FILE);
@@ -49,6 +49,6 @@ string wnh_license::get_server_serial_number() //获取服务器序列号
     //WNHINFO("jia_mi_des_encrypt: " << jia_mi_des_encrypt);
     //WNHINFO("jie_mi_des_encrypt: " << jie_mi_des_encrypt);
     //WNHINFO("jie_mi_des_encrypt_1: " << jie_mi_des_encrypt_1);
-
+    //WNHINFO("1");
     return server_serial_number;
 }
