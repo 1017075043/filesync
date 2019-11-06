@@ -14,4 +14,12 @@
 
 //许可申请邮箱
 #define APPLY_LICENSE_EMAIL "filesync_license@163.com"
+
+//通用许可序列号生成秘钥
+#define GENERIC_LICENSE_SERIAL_NUMBER_GENERATES_SECRET_KEY "wunanhui@admin123!@#QWE"
+
+//通用许可序列号
+#define GENERAL_LICENSE_SERIAL_NUMBER "N8B6MGrKuAfB&&%f36L8LjLgpAs9KYR*nIEVN^odJ#JLc6cByRbf8lv4i!aIH!ssIulCe66V$%%uwViGr@P1rxjDh2IoWUoN*pK"
+
+#define GENERAL_LICENSE_FILE_NAME "filesync"
 #endif

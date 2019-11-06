@@ -5,7 +5,7 @@ wnh_tcp_server::wnh_tcp_server()
     WNHDEBUG("wnh_tcp_server 构造");
     survival_id = true; //标志位存活状态
     tcp_listen_conturrent_now_num = 0;
-    display_transfer_logs = DIS_TRAN_LOG_2;
+    display_transfer_logs = DIS_TRAN_LOG_0;
 }
 
 wnh_tcp_server::wnh_tcp_server(bool inherit)
