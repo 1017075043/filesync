@@ -4,6 +4,7 @@
 #include "wnh_filesync_control_server_and_client_status.cpp"
 #include "wnh_filesync_control_use_instructions.cpp"
 #include "wnh_filesync_control_sync_rule.cpp"
+#include "wnh_filesync_control_license.cpp"
 
 wnh_filesync_control::wnh_filesync_control()
 {

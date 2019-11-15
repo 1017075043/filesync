@@ -62,6 +62,10 @@ void filesync::control_mode()
     {
         control.show_system_var();
     }
+    else if(filesync_control_use_parameter == "10" || filesync_control_use_parameter == "show license")
+    {
+        control.show_license();
+    }
     else
     {
         control.ues_instructions();
