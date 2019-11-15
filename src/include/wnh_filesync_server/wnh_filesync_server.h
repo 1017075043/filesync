@@ -65,6 +65,15 @@ private:
         string email_server_password; //邮件服务器登录帐户
     };
 
+    struct LICENSE_INFO //许可信息
+    {
+        string file_path; //许可文件路径
+        string begin_time; //开始时间
+        string end_time; //结束时间
+        unsigned long all_time; //有效期
+        unsigned long remaining_time; //剩余有效期
+    };
+
 
 private:
     int pid; //进程PID
@@ -74,7 +83,7 @@ private:
     int network_timeout; //网络超时时间
     bool auto_restore_fail_task; //是否启动自动恢复失败任务
     bool persistence_task; //是否开启任务持久性
-    string license_file; //许可文件路径
+    //string license_file; //许可文件路径
     unsigned long license_remaining_effectiveness_time; //许可有效期剩余时间
     RULE *rule; //保存原始规则信息
     SYNC_RULE * sync_rule; //保存有效的同步目录规则信息
@@ -88,6 +97,7 @@ private:
     string conf_path; //配置文件路径
     wnh_openssl file_hash; //获取文件hash值
     wnh_license license; //获取许可信息
+    LICENSE_INFO lic; //许可信息
 
 public:
     wnh_filesync_server();

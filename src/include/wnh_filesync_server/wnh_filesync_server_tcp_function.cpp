@@ -164,12 +164,13 @@ bool wnh_filesync_server::accept_get_task_num(const int & nfp, const string & in
     if(info == WNH_FILESYNC_GET_TASK_NUM_SIGNAL)
     {
         unsigned long task_num;
-        if(license_remaining_effectiveness_time == (unsigned long)0)
+        if(!watch.query_task_num(CONNECT_INFO.client_ip, task_num))
         {
             task_num = 0;
         }
-        else if(!watch.query_task_num(CONNECT_INFO.client_ip, task_num))
+        if(lic.remaining_time == (unsigned long)0)
         {
+            WNHWARN(CONNECT_INFO_LOGS << "许可限制, 停止同步文件, 强制 返回任务数:0, 实际当前任务数: " << task_num);
             task_num = 0;
         }
         if(send_info(nfp, WNH_FILESYNC_GET_TASK_NUM_SIGNAL + to_string(task_num)))

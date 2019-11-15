@@ -52,8 +52,8 @@ void wnh_filesync_server::get_conf(const string &conf_path)
     value = conf.get_conf("system_configure", "license_file");
     if(value.size() == 1)
     {
-        license_file = value[0].c_str();
-        WNHDEBUG("获取到系统配置system_configure.license_file=" << license_file);
+        lic.file_path = value[0].c_str();
+        WNHDEBUG("获取到系统配置system_configure.license_file=" << lic.file_path);
     }
     else
     {
@@ -304,7 +304,7 @@ void wnh_filesync_server::show_rule_conf()
     WNHINFO("系统配置system_configure.network_timeout=" << network_timeout);
     WNHINFO("系统配置system_configure.auto_restore_fail_task=" << auto_restore_fail_task);
     WNHINFO("系统配置system_configure.persistence_task=" << persistence_task);
-    WNHINFO("系统配置system_configure.license_file=" << license_file);
+    WNHINFO("系统配置system_configure.license_file=" << lic.file_path);
 
     WNHINFO("邮件配置email.status=" << email_info.status);
     WNHINFO("邮件配置email.sender_email_address=" << email_info.sender_email_address);

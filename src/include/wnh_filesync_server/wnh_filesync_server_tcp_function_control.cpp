@@ -256,7 +256,7 @@ bool wnh_filesync_server::accept_get_sync_rule_info(const int & nfp, const strin
         }
         if(send_info(nfp, WNH_FILESYNC_GET_SYNC_RULE_INFO + sync_rule_info_file_path))
         {
-            WNHINFO(CONNECT_INFO_LOGS << "接收获取同步规则信息同步规则信息信息, 同步规则信息文件路径:" << sync_rule_info_file_path);
+            WNHINFO(CONNECT_INFO_LOGS << "接收获取同步规则信息, 同步规则信息文件路径:" << sync_rule_info_file_path);
             return true;
         }
         WNHERROR(CONNECT_INFO_LOGS << "回复接收获取同步规则信息时失败了, 同步规则信息文件路径:" << sync_rule_info_file_path);

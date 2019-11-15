@@ -178,7 +178,7 @@ bool wnh_system_operation::chmod_wnh(const string & file_name, const int & power
         WNHERROR("修改" << file_name << "的权限失败, errno=" << errno << ", mesg=" << strerror(errno));
         return false;
     }
-    WNHINFO("修改" << file_name << "的权限成功");
+    WNHDEBUG("修改" << file_name << "的权限成功");
     return true;
 }
 

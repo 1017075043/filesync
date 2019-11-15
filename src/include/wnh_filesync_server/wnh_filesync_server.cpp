@@ -50,7 +50,7 @@ void wnh_filesync_server::init()
     auto_restore_fail_task = AUTO_RESTORE_FAIL_TASK;
     persistence_task = PERSISTENCE_TASK;
     rule_identification = RULE_IDENTIFICATION;
-    license_file = LICENSE_FILE;
+    lic.file_path = LICENSE_FILE;
     client_num = 0;
     rule_num = 0;
     license_remaining_effectiveness_time = 1;

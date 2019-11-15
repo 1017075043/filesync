@@ -45,6 +45,7 @@ private:
     string  server_serial_number; //服务器序列号
     unsigned long validity_time; //有效时间
     string license_use_key; //许可秘钥
+    string license_file; //许可文件
 
 public:
     filesync();
@@ -58,7 +59,7 @@ public:
     void server_mode();
     void client_mode();
     void control_mode();
-    void create_license_mode(); //许可创建模式
+    void license_mode(); //许可创建模式
 };
 
 #endif

@@ -18,7 +18,7 @@
 #define FILESYNC_SERVER_PID_PATH_DEFAULT        "/var/run/filesync_server.pid"  //默认PID文件路径,针对服务端的配置
 //export FILESYNC_SERVER_LOGS_LEVEL=WNH_INFO_XS
 #define FILESYNC_SERVER_LOGS_LEVEL              "FILESYNC_SERVER_LOGS_LEVEL"    //日志等级,针对服务端的配置
-#define FILESYNC_SERVER_LOGS_LEVEL_DEFAULT      "WNH_INFO_XS"                   //默认日志等级,针对服务端的配置
+#define FILESYNC_SERVER_LOGS_LEVEL_DEFAULT      "WNH_INFO_S"                    //默认日志等级,针对服务端的配置
 //export FILESYNC_CLIENT_CONFIG_PATH=filesync.conf
 #define FILESYNC_CLIENT_CONFIG_PATH             "FILESYNC_CLIENT_CONFIG_PATH"   //配置文件路径,针对客户端的配置
 #define FILESYNC_CLIENT_CONFIG_PATH_DEFAULT     "filesync.conf"                 //默认配置文件路径,针对客户端的配置
@@ -30,7 +30,7 @@
 #define FILESYNC_CLIENT_PID_PATH_DEFAULT        "/var/run/filesync_client.pid"  //默认PID文件路径,针对客户端的配置
 //export FILESYNC_CLIENT_LOGS_LEVEL=WNH_INFO_XS
 #define FILESYNC_CLIENT_LOGS_LEVEL              "FILESYNC_CLIENT_LOGS_LEVEL"    //日志等级,针对客户端的配置
-#define FILESYNC_CLIENT_LOGS_LEVEL_DEFAULT      "WNH_INFO_XS"                   //默认日志等级,针对客户端的配置
+#define FILESYNC_CLIENT_LOGS_LEVEL_DEFAULT      "WNH_INFO_S"                    //默认日志等级,针对客户端的配置
 //export FILESYNC_CLIENT_ROOT_LIMIT="limit root"
 #define FILESYNC_CLIENT_ROOT_LIMIT              "FILESYNC_CLIENT_ROOT_LIMIT"    //root用户限制,针对客户端的配置
 #define FILESYNC_CLIENT_ROOT_LIMIT_DEFAULT      "limit root"                    //默认root用户限制,针对客户端的配置
@@ -42,7 +42,7 @@
 #define FILESYNC_CONTROL_PID_PATH_DEFAULT       "/var/run/filesync_control.pid" //默认PID文件路径,针对控制端的配置
 //export FILESYNC_COMTROL_LOGS_LEVEL=WNH_INFO_XS
 #define FILESYNC_CONTROL_LOGS_LEVEL             "FILESYNC_COMTROL_LOGS_LEVEL"   //日志等级,针对控制端的配置
-#define FILESYNC_CONTROL_LOGS_LEVEL_DEFAULT     "WNH_INFO_XS"                   //默认日志等级,针对控制端的配置
+#define FILESYNC_CONTROL_LOGS_LEVEL_DEFAULT     "WNH_INFO_S"                    //默认日志等级,针对控制端的配置
 //export FILESYNC_CONTROL_ROOT_LIMIT="no limit root"
 #define FILESYNC_CONTROL_ROOT_LIMIT             "FILESYNC_CONTROL_ROOT_LIMIT"   //root用户限制,针对控制端的配置
 #define FILESYNC_CONTROL_ROOT_LIMIT_DEFAULT     "no limit root"                 //默认root用户限制,针对控制端的配置

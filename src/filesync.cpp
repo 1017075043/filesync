@@ -4,7 +4,7 @@
 #include "filesync_server_mode.cpp"
 #include "filesync_client_mode.cpp"
 #include "filesync_control_mode.cpp"
-#include "filesync_create_license.cpp"
+#include "filesync_license_mode.cpp"
 
 void filesync_deamon_Process(int argc, char **argv);
 
@@ -43,7 +43,7 @@ void filesync::startup_mode(const int argc, const char **argv)
     }
     else if(filesync_start_mode == "license")
     {
-        create_license_mode();
+        license_mode();
     }
 }
 

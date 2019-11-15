@@ -23,6 +23,7 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     server_serial_number = "";
     validity_time = 0;
     license_use_key = "";
+    license_file = "";
 
     if(argc > 1)
     {
@@ -120,22 +121,24 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
             filesync_control_logs_level = argv[5];
         }
     }
-    else if(filesync_start_mode == "license" && argc == 5)
+
+    //argc == 5 许可文件生成
+    //argc == 3 查看许可文件中的许可信息
+
+    else if(filesync_start_mode == "license" && (argc == 5 || argc == 3))
     {
-        if(argc > 2)
+        if(argc == 3)
+        {
+            license_file = argv[2];
+        }
+        else if(argc == 5)
         {
             license_use_key = argv[2];
             if(license_use_key != FILESYNC_LICENSE_USER_KEY)
             {
                 filesync_start_mode = "control";
             }
-        }
-        if(argc > 3)
-        {
             server_serial_number = argv[3];
-        }
-        if(argc > 4)
-        {
             validity_time = stoul(argv[4], 0, 10);
         }
     }

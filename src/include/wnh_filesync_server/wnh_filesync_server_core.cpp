@@ -3,8 +3,7 @@
 void wnh_filesync_server::core()
 {
     get_conf(conf_path);
-    //show_rule_conf();
-    if(get_license_info() == (unsigned long)0) //许可检查
+    if(license.check_license_file_effectiveness(lic.file_path) == (unsigned long)0) //许可检查
     {
         exit(1);
     }
