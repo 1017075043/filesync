@@ -8,7 +8,21 @@ bool wnh_filesync_server::email_client_offline_alert_info(const vector<string> &
         WNHINFO("离线客户端端IP:" << offline_client_ip[i] << ", 启动时间:" << begin_connect_time[i] << ", 离线时间:" << last_connect_time[i] << ", 已完成任务数:" << complete_task_num[i] << ", 未完成任务数" << unfinished_task_num[i] << ", 失败任务数" << fail_task_num[i]);
     }
     string subject; // 主题
-    subject = subject + "client offline alert from " + PROGRAM_NAME + " " + LOCALTIME;
+    subject = subject + "[" + PROGRAM_NAME + " alter] [client offline:";
+    for(unsigned int i = 0; i < offline_client_ip.size() && i < 6; i++)
+    {
+        subject = subject + offline_client_ip[i] + ",";
+    }
+    if(offline_client_ip.size() >= 6)
+    {
+        subject = subject + "...";
+    }
+    else
+    {
+        subject = subject.substr(0, subject.length()-1);
+    }
+    subject = subject + "]";
+
     jwsmtp::mailer email(""/*接收者*/, email_info.sender_email_address.c_str()/*发送者*/, subject.c_str()/*主题*/,
                          ""/*内容*/, email_info.email_server_address.c_str()/*邮件服务器地址*/,
                          jwsmtp::mailer::SMTP_PORT, false);
@@ -25,7 +39,7 @@ bool wnh_filesync_server::email_client_offline_alert_info(const vector<string> &
     string html_file = create_email_client_offline_content_html(offline_client_ip, begin_connect_time, last_connect_time, complete_task_num, unfinished_task_num, fail_task_num);
     email.setmessageHTML(html_file);
     // 添加多个附件
-    //m.attach("config.log");
+    email.attach(conf_path);
     //m.attach("autoscan.log");
 
     //经过测试，163/126支持的auth认证是PLAIN模式
@@ -64,7 +78,7 @@ bool wnh_filesync_server::email_client_offline_alert_info(const vector<string> &
 
 string wnh_filesync_server::create_email_client_offline_content_html(const vector<string> & offline_client_ip, const vector<string> & begin_connect_time, const vector<string> & last_connect_time, const vector<string> & complete_task_num, const vector<string> & unfinished_task_num, const vector<string> & fail_task_num) //创建邮件告警信息内容
 {
-#define CONTENT(...) email_client_offline_content = email_client_offline_content + __VA_ARGS__
+#define CONTENT(...) email_client_offline_content = email_client_offline_content + __VA_ARGS__ + "\n";
     char timestring[20] = "";
     time_t t = 0;
     string email_client_offline_content = "";
@@ -85,7 +99,7 @@ string wnh_filesync_server::create_email_client_offline_content_html(const vecto
     CONTENT("</head>");
     CONTENT("<body>");
     //CONTENT("<p>Dear user, hello</p>");
-    CONTENT("<table width=\"90%\" class=\"table\">");
+    CONTENT("<table width=\"90%\">");
     CONTENT("<caption>");
     CONTENT("<h2>offline client info</h2>");
     CONTENT("</caption>");
@@ -117,18 +131,15 @@ string wnh_filesync_server::create_email_client_offline_content_html(const vecto
         CONTENT("</tr>");
     }
     CONTENT("</table>");
-    CONTENT("<br>");
-    CONTENT("<br>");
-    CONTENT("<br>");
-    CONTENT("<br>");
-    CONTENT("<br>");
-    CONTENT("<table width=\"90%\" class=\"table\">");
-    CONTENT("<tr>");
-    CONTENT("<td><p style=\"color:red;\">" + WNH_FILESYNC_USE_HELP + "</p></td>");
-    CONTENT("</tr>");
-    CONTENT("<tr>");
-    CONTENT("<td><p style=\"color:red;\">" + WNH_FILESYNC_COPYRIGHT + "</p></td>");
-    CONTENT("</tr>");
+    //CONTENT("<br>");
+    //CONTENT("<br>");
+    //CONTENT("<br>");
+    //CONTENT("<br>");
+    //CONTENT("<br>");
+    //CONTENT("<p width=\"90%\" style=\"color:red;text-align=center;\">" + WNH_FILESYNC_USE_HELP + "</p>");
+    //CONTENT("<p width=\"90%\" style=\"color:red;text-align=center;\">" + WNH_FILESYNC_COPYRIGHT + "</p>");
+
+    CONTENT("</table>");
     CONTENT("</body>");
     CONTENT("</html>");
     return email_client_offline_content;

@@ -1,3 +1,10 @@
+2019年11月18日
+升级版本为filesync-v1.0.6
+更新内容
+1.添加使用license模式,支持使用 filesync license filesync.license 命令查看许可文件信息
+2.添加control模式下查看服务器许可功能, filesync control 10
+3.优化客户端离线邮件告警内容
+
 2019年11月06日
 升级版本为filesync-v1.0.5
 更新内容

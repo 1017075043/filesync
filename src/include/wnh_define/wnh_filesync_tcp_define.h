@@ -60,4 +60,7 @@
 //同步规则标签名
 #define WNH_FILESYNC_GET_SYNC_RULE_ID "sync_rule"
 
+//控制端向服务器发送请求获取许可信息
+#define WNH_FILESYNC_GET_LICENSE_INFO "WNH_FILESYNC_GET_LICENSE_INFO:"
+
 #endif

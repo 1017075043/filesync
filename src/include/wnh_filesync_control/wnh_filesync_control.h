@@ -57,7 +57,10 @@ public:
     void get_synv_rule_info(); //获取客户端状态信息
     bool send_get_sync_rule_info(string & sync_rule_info_file_path); //向服务器发送获取同步规则信息信号, 且获取同步规则信息文件路径
     bool show_sync_info_info(const string & sync_info_info_file_path); //显示同步规则信息
-    void show_license();//显示许可信息
+    void show_server_license();//显示许可信息
+
+    bool send_get_server_license_info(string & license_info); //向服务器发送获许可信息信号, 且获取许可
+    bool show_server_license_info(const string & license_info); //显示许可信息
 };
 
 #endif

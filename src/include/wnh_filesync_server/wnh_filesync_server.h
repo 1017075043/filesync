@@ -72,6 +72,7 @@ private:
         string end_time; //结束时间
         unsigned long all_time; //有效期
         unsigned long remaining_time; //剩余有效期
+        string serial_number; //序列号
     };
 
 
@@ -168,6 +169,7 @@ public:
     bool create_sync_rule_info(const string & client_status_info_file_path); //创建同步规则信息文件
 
     unsigned long get_license_info(); //获取许可信息
+    bool accept_get_license_info(const int & nfp, const string & info, const CONNECT_INFO & CONNECT_INFO); //接收获取许可信息
 };
 
 #endif

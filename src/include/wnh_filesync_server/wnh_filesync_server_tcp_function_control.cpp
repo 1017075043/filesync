@@ -297,4 +297,25 @@ bool wnh_filesync_server::create_sync_rule_info(const string & sync_rule_info_fi
     return true;
 }
 
-
+bool wnh_filesync_server::accept_get_license_info(const int & nfp, const string & info, const CONNECT_INFO & CONNECT_INFO) //接收获取许可信息
+{
+    if(info.substr(0, strlen(WNH_FILESYNC_GET_LICENSE_INFO)) == WNH_FILESYNC_GET_LICENSE_INFO)
+    {
+        get_license_info();
+        string license_info_temp;
+        //lic.file_path; //许可文件路径
+        //lic.begin_time; //开始时间
+        //lic.end_time; //结束时间
+        //lic.all_time; //有效期
+        //lic.remaining_time; //剩余有效期
+        license_info_temp = license_info_temp + lic.file_path + "," + lic.begin_time + "," + lic.end_time + "," + to_string(lic.all_time) + "," + to_string(lic.remaining_time) + "," + lic.serial_number;
+        if(send_info(nfp, WNH_FILESYNC_GET_LICENSE_INFO + license_info_temp))
+        {
+            WNHINFO(CONNECT_INFO_LOGS << "接收获取许可信息, 许可信息:" << license_info_temp);
+            return true;
+        }
+        WNHERROR(CONNECT_INFO_LOGS << "回复接收获取许可信息时失败了, 许可信息:" << license_info_temp);
+        return true;
+    }
+    return false;
+}

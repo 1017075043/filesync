@@ -50,5 +50,6 @@ public:
     string create_license_file(const string & server_serial_number,const unsigned long & validity_time); //创建许可文件
     unsigned long check_license_file_effectiveness(const string & license_file); //检查许可的有效性,返回许可的有效期时间
     bool get_license_file_effectiveness(const string & license_file, string & begin_time, string & end_time, unsigned long & all_time, unsigned long & remaining_time); //获取许可的信息
+    bool get_license_file_effectiveness(const string & license_file, string & begin_time, string & end_time, unsigned long & all_time, unsigned long & remaining_time, string & serial_number); //获取许可的信息
 };
 #endif
