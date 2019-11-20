@@ -1,3 +1,12 @@
+2019年11月20日
+升级版本为filesync-v1.0.7
+更新内容
+1.添加使用命令行参数传参启动方式
+例如:
+filesync server --conf=filesync.conf --pid=filesync_server.pid --limit="limit root" --log=WNH_INFO_XS
+filesync client --ip=127.0.0.1 --port=10086 --pid=filesync_server.pid --limit="limit root" --log=WNH_INFO_XS
+filesync control 1 --ip=127.0.0.1 --port=10086 --log=WNH_INFO_XS
+
 2019年11月18日
 升级版本为filesync-v1.0.6
 更新内容

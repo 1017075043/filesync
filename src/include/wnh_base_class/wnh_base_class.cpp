@@ -168,6 +168,19 @@ unsigned long wnh_base_class::get_chinese_num(const string & str) //获取中文
     return num / 3;
 }
 
+string wnh_base_class::to_upper_string(const string & strs) //将str中的字母转为大写字母
+{
+    string str = strs;
+    transform(str.begin(), str.end(), str.begin(), (int (*)(int))toupper);
+    return str;
+}
+string wnh_base_class::to_lower_string(const string & strs) //将str中的字母转为小写字母
+{
+    string str = strs;
+    transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);
+    return str;
+}
+
 
 //template <typename T> string wnh_base_class::to_binary(T value)//将任意进制的值转换为二进制
 //{

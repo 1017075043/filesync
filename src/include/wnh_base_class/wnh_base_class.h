@@ -4,14 +4,17 @@
 using namespace std;
 
 #include <vector>
+#include <cctype>
+#include <string>
+#include <algorithm>
 
 #include "../wnh_define/wnh_base_define.h"
 #include "../wnh_define/wnh_base_define_function.h"
 #include "../wnh_define/wnh_tips_define.h"
 
-#define LEFTSTRIP 0
-#define RIGHTSTRIP 1
-#define BOTHSTRIP 2
+#define LEFTSTRIP 0 //左填充
+#define RIGHTSTRIP 1 //右填充
+#define BOTHSTRIP 2 //左右填充
 
 class wnh_base_class
 {
@@ -35,6 +38,8 @@ public:
     unsigned long get_lower_letters_num(const string & str); //获取小写字母的数量
     unsigned long get_digital_num(const string & str); //获取数字的数量
     unsigned long get_chinese_num(const string & str); //获取中文的数量
+    string to_upper_string(const string & strs); //将str中的字母转为大写字母
+    string to_lower_string(const string & strs); //将str中的字母转为小写字母
 
     //template <typename T> string to_binary(T value);//将任意进制的值转换为二进制
 

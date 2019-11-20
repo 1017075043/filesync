@@ -21,6 +21,7 @@ class filesync : public wnh_base_class
 private:
     //wnh_config conf;//存储配置信息
     enum CLIENT_USE_MODE{ip_mode=1, config_mode=2};
+    enum GET_VALUES_MODE{sequential_mode=1, parameter_mode=2};
 
     string filesync_start_mode;
     string filesync_server_ip;
@@ -55,11 +56,15 @@ public:
 
     void startup_mode(const int argc,const char **argv); //程序启动方式
     void init_parameter(const int argc,const char **argv); //初始化配置
+    void select_start_command_mode(const int argc,const char **argv, GET_VALUES_MODE & start_command_mode); //选择启动方式
+    void sequential_mode_get_values(const int argc,const char **argv); //顺序方式取值
+    void parameter_mode_get_values(const int argc,const char **argv); //参数传参方式取值
 
     void server_mode();
     void client_mode();
     void control_mode();
     void license_mode(); //许可创建模式
+
 };
 
 #endif
