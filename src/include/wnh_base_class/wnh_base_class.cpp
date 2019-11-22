@@ -64,6 +64,23 @@ string & wnh_base_class::replace_all_distinct(string & str, const string & old_v
     return str;
 }
 
+string wnh_base_class::format_string_left_fill(const string & str, const unsigned int & length, const char & chr) //使用指定字符将字符串左填充到指定长度
+{
+    string str_temp = str;
+    string chr_temp = "";
+    chr_temp = chr_temp + chr;
+    unsigned long num = get_chinese_num(str);
+    if(length > str.length() - num)
+    {
+        unsigned int str_length = str.length() - num;
+        for(unsigned int i =0; i <= length - str_length; i ++)
+        {
+            str_temp = chr_temp + str_temp;
+        }
+    }
+    return str_temp;
+}
+
 string wnh_base_class::format_string_right_fill(const string & str, const unsigned int & length, const char & chr) //使用指定字符将字符串右填充到指定长度
 {
     string str_temp = str;
@@ -79,7 +96,7 @@ string wnh_base_class::format_string_right_fill(const string & str, const unsign
     return str_temp;
 }
 
-string wnh_base_class::format_string_centre_fill(const string & str, const unsigned int & length, const char & chr) //使用指定字符将字符串左右填充到指定长度
+string wnh_base_class::format_string_centro_fill(const string & str, const unsigned int & length, const char & chr) //使用指定字符将字符串左右填充到指定长度
 {
     string str_temp = str;
     unsigned long num = get_chinese_num(str);

@@ -12,9 +12,9 @@ using namespace std;
 #include "../wnh_define/wnh_base_define_function.h"
 #include "../wnh_define/wnh_tips_define.h"
 
-#define LEFTSTRIP 0 //左填充
-#define RIGHTSTRIP 1 //右填充
-#define BOTHSTRIP 2 //左右填充
+//#define LEFTSTRIP 0 //左填充
+//#define RIGHTSTRIP 1 //右填充
+//#define BOTHSTRIP 2 //左右填充
 
 class wnh_base_class
 {
@@ -26,14 +26,22 @@ public:
 
     string & replace_all(string & str, const string & old_value, const string & new_value); //字符串替换(循环)
     string & replace_all_distinct(string & str, const string & old_value, const string & new_value); //字符串替换
+
+    string format_string_left_fill(const string & str, const unsigned int & length, const string & chr); //使用指定字符将字符串左填充到指定长度
+    void format_string_left_fill_v1(string & str, const unsigned int & length, const string & chr); //使用指定字符将字符串左填充到指定长度
+    string format_string_left_fill(const string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串左填充到指定长度
+    void format_string_left_fill_v1(string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串左填充到指定长度
+
     string format_string_right_fill(const string & str, const unsigned int & length, const string & chr); //使用指定字符将字符串右填充到指定长度
     void format_string_right_fill_v1(string & str, const unsigned int & length, const string & chr); //使用指定字符将字符串右填充到指定长度
     string format_string_right_fill(const string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串右填充到指定长度
     void format_string_right_fill_v1(string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串右填充到指定长度
-    string format_string_centre_fill(const string & str, const unsigned int & length, const string & chr); //使用指定字符将字符串左右填充到指定长度
-    void format_string_right_centre_v1(string & str, const unsigned int & length, const string & chr); //使用指定字符将字符串左右填充到指定长度
-    string format_string_centre_fill(const string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串左右填充到指定长度
-    void format_string_right_centre_v1(string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串左右填充到指定长度
+
+    string format_string_centro_fill(const string & str, const unsigned int & length, const string & chr); //使用指定字符将字符串左右填充到指定长度
+    void format_string_right_centro_v1(string & str, const unsigned int & length, const string & chr); //使用指定字符将字符串左右填充到指定长度
+    string format_string_centro_fill(const string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串左右填充到指定长度
+    void format_string_right_centro_v1(string & str, const unsigned int & length, const char & chr); //使用指定字符将字符串左右填充到指定长度
+
     unsigned long get_capital_letters_num(const string & str); //获取大写字母的数量
     unsigned long get_lower_letters_num(const string & str); //获取小写字母的数量
     unsigned long get_digital_num(const string & str); //获取数字的数量

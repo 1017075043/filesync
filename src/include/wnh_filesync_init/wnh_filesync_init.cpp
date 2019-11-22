@@ -11,7 +11,7 @@ mutex LOGS_MUTEX_LOCK;
 //WNH_DEBUG_S, WNH_INFO_S, WNH_WARN_S, WNH_ERROR_S, WNH_DEBUG_XS, WNH_INFO_XS, WNH_WARN_XS, WNH_ERROR_XS
 //WNH_DEBUG_W, WNH_INFO_W, WNH_WARN_W, WNH_ERROR_W, WNH_DEBUG_XW, WNH_INFO_XW, WNH_WARN_XW, WNH_ERROR_XW
 //WNH_DEBUG_SW, WNH_INFO_SW, WNH_WARN_SW, WNH_ERROR_SW, WNH_DEBUG_XSW, WNH_INFO_XSW, WNH_WARN_XSW, WNH_ERROR_XSW
-int LOGLEVEL = WNH_INFO_XS;
+int LOGLEVEL = WNH_INFO_S;
 
 
 wnh_filesync_init::wnh_filesync_init()
@@ -478,17 +478,19 @@ void wnh_filesync_init::MY_PRAYER() //佛祖保佑,永无BUG
 
 void wnh_filesync_init::version_control_and_copyright_start() //版本控制和版权说明
 {
-    cout << WNH_COLOR_RED << "-----------------------WELCOME TO USE " << PROGRAM_NAME << "-------------------------" <<  WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_RED << WNH_FILESYNC_USE_HELP <<  WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_RED << WNH_FILESYNC_COPYRIGHT <<  WNH_COLOR_WHITE << endl;
+    //cout << WNH_COLOR_RED << "-----------------------WELCOME TO USE " << PROGRAM_NAME << "-------------------------" <<  WNH_COLOR_WHITE << endl;
+    //cout << WNH_COLOR_RED << WNH_FILESYNC_USE_HELP <<  WNH_COLOR_WHITE << endl;
+    //cout << WNH_COLOR_RED << WNH_FILESYNC_COPYRIGHT <<  WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_GREEN << "WELCOME TO USE " << PROGRAM_NAME ". " << WNH_FILESYNC_USE_HELP <<  WNH_COLOR_WHITE << endl;
     //sleep(3);
 }
 
 void wnh_filesync_init::version_control_and_copyright_stop() //版本控制和版权说明
 {
-    cout << WNH_COLOR_RED << "--------------------THANK YOU FOR USING " << PROGRAM_NAME << "-----------------------" << WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_RED << WNH_FILESYNC_USE_HELP <<  WNH_COLOR_WHITE << endl;
-    cout << WNH_COLOR_RED << WNH_FILESYNC_COPYRIGHT <<  WNH_COLOR_WHITE << endl;
+    //cout << WNH_COLOR_RED << "--------------------THANK YOU FOR USING " << PROGRAM_NAME << "-----------------------" << WNH_COLOR_WHITE << endl;
+    //cout << WNH_COLOR_RED << WNH_FILESYNC_USE_HELP <<  WNH_COLOR_WHITE << endl;
+    //cout << WNH_COLOR_RED << WNH_FILESYNC_COPYRIGHT <<  WNH_COLOR_WHITE << endl;
+    cout << WNH_COLOR_GREEN << "THANK YOU FOR USING " << PROGRAM_NAME ". " << WNH_FILESYNC_USE_HELP <<  WNH_COLOR_WHITE << endl;
     //sleep(3);
 }
 

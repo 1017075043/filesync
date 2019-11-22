@@ -30,7 +30,8 @@ src/include/wnh_string_string_one_list \
 src/include/wnh_config_ini \
 src/include/wnh_config \
 src/include/wnh_jwsmtp \
-src/include/wnh_license
+src/include/wnh_license \
+src/include/wnh_shell_tables
 
 filesync_CPPFLAGS=-DSOMPLE_LOGS
 
@@ -62,4 +63,5 @@ src/include/wnh_string_string_one_list/lib_wnh_string_string_one_list.la \
 src/include/wnh_config_ini/lib_wnh_config_ini.la \
 src/include/wnh_config/lib_wnh_config.la \
 src/include/wnh_jwsmtp/lib_wnh_jwsmtp.la \
-src/include/wnh_license/lib_wnh_license.la
+src/include/wnh_license/lib_wnh_license.la \
+src/include/wnh_shell_tables/lib_wnh_shell_tables.la

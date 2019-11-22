@@ -46,62 +46,66 @@
 //去除不在前端显示日志输出,直接将日志写入日志文件模式,精简代码量
 //去除在前端显示日志输出,并将日志写入日志文件模式,精简代码量
 //以调试级别输出日志
-#if defined(SOMPLE_LOGS)
-    #define WNHDEBUG(...) \
-    { \
-        switch(LOGLEVELSWITCH[0]) \
-        { \
-            case WNH_LOGS_MODE_S: \
-                LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                LOGS_MUTEX_LOCK.unlock(); \
-                break; \
-            case WNH_LOGS_MODE_XS: \
-                LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                LOGS_MUTEX_LOCK.unlock(); \
-                break; \
-        } \
-    }
+#if defined(DEBUG_MODE_LOGS)
+	#if defined(SOMPLE_LOGS)
+		#define WNHDEBUG(...) \
+		{ \
+			switch(LOGLEVELSWITCH[0]) \
+			{ \
+				case WNH_LOGS_MODE_S: \
+					LOGS_MUTEX_LOCK.lock(); \
+					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					LOGS_MUTEX_LOCK.unlock(); \
+					break; \
+				case WNH_LOGS_MODE_XS: \
+					LOGS_MUTEX_LOCK.lock(); \
+					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					LOGS_MUTEX_LOCK.unlock(); \
+					break; \
+			} \
+		}
+	#else
+		#define WNHDEBUG(...) \
+		{ \
+			switch(LOGLEVELSWITCH[0]) \
+			{ \
+				case WNH_LOGS_MODE_S: \
+					LOGS_MUTEX_LOCK.lock(); \
+					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					LOGS_MUTEX_LOCK.unlock(); \
+					break; \
+				case WNH_LOGS_MODE_XS: \
+					LOGS_MUTEX_LOCK.lock(); \
+					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					LOGS_MUTEX_LOCK.unlock(); \
+					break; \
+				case WNH_LOGS_MODE_W: \
+					LOGS_MUTEX_LOCK.lock(); \
+					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					LOGS_MUTEX_LOCK.unlock(); \
+					break; \
+				case WNH_LOGS_MODE_XW: \
+					LOGS_MUTEX_LOCK.lock(); \
+					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					LOGS_MUTEX_LOCK.unlock(); \
+					break; \
+				case WNH_LOGS_MODE_SW: \
+					LOGS_MUTEX_LOCK.lock(); \
+					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					LOGS_MUTEX_LOCK.unlock(); \
+					break; \
+				case WNH_LOGS_MODE_XSW: \
+					LOGS_MUTEX_LOCK.lock(); \
+					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					LOGS_MUTEX_LOCK.unlock(); \
+				break; \
+			} \
+		}
+	#endif
 #else
-    #define WNHDEBUG(...) \
-    { \
-        switch(LOGLEVELSWITCH[0]) \
-        { \
-            case WNH_LOGS_MODE_S: \
-                LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                LOGS_MUTEX_LOCK.unlock(); \
-                break; \
-            case WNH_LOGS_MODE_XS: \
-                LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                LOGS_MUTEX_LOCK.unlock(); \
-                break; \
-            case WNH_LOGS_MODE_W: \
-                LOGS_MUTEX_LOCK.lock(); \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                LOGS_MUTEX_LOCK.unlock(); \
-                break; \
-            case WNH_LOGS_MODE_XW: \
-                LOGS_MUTEX_LOCK.lock(); \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                LOGS_MUTEX_LOCK.unlock(); \
-                break; \
-            case WNH_LOGS_MODE_SW: \
-                LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                LOGS_MUTEX_LOCK.unlock(); \
-                break; \
-            case WNH_LOGS_MODE_XSW: \
-                LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                LOGS_MUTEX_LOCK.unlock(); \
-            break; \
-        } \
-    }
+	#define WNHDEBUG(...) //WNHDEBUG(...)
 #endif
 //以信息级别输出日志
 #if defined(SOMPLE_LOGS)

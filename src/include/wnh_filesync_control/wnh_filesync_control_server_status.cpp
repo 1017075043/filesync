@@ -383,16 +383,16 @@ int wnh_filesync_control::show_server_status_info_v1(const string & server_statu
 
 bool wnh_filesync_control::show_server_status_info_son(string & pid, string & start_time, string & client_num, string & online_client_num, string & offline_client_num, string & task_num, string & complete_task_num, string & unfinished_task_num, string & fail_task_num, string & event_num) //显示服务端状态
 {
-    pid = format_string_centre_fill(pid, 8, ' ');
-    start_time = format_string_centre_fill(start_time, 19, ' ');
-    client_num = format_string_centre_fill(client_num, 7, ' ');
-    online_client_num = format_string_centre_fill(online_client_num, 12, ' ');
-    offline_client_num = format_string_centre_fill(offline_client_num, 12, ' ');
-    task_num = format_string_centre_fill(task_num, 10, ' ');
-    complete_task_num = format_string_centre_fill(complete_task_num, 12, ' ');
-    unfinished_task_num = format_string_centre_fill(unfinished_task_num, 12, ' ');
-    fail_task_num = format_string_centre_fill(fail_task_num, 10, ' ');
-    event_num = format_string_centre_fill(event_num, 12, ' ');
+    pid = format_string_centro_fill(pid, 8, ' ');
+    start_time = format_string_centro_fill(start_time, 19, ' ');
+    client_num = format_string_centro_fill(client_num, 7, ' ');
+    online_client_num = format_string_centro_fill(online_client_num, 12, ' ');
+    offline_client_num = format_string_centro_fill(offline_client_num, 12, ' ');
+    task_num = format_string_centro_fill(task_num, 10, ' ');
+    complete_task_num = format_string_centro_fill(complete_task_num, 12, ' ');
+    unfinished_task_num = format_string_centro_fill(unfinished_task_num, 12, ' ');
+    fail_task_num = format_string_centro_fill(fail_task_num, 10, ' ');
+    event_num = format_string_centro_fill(event_num, 12, ' ');
     WNH_DISPLAY_STYLE_HIDE_CURSOR();
     cout << WNH_COLOR_BOLDWHITE << "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐" << WNH_COLOR_RESET << endl;
     cout << WNH_COLOR_BOLDWHITE << "│                                                  " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 服务端状态信息显示" << WNH_COLOR_BOLDWHITE << "                                                │" << WNH_COLOR_RESET << endl;

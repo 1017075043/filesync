@@ -66,4 +66,5 @@ src/include/wnh_filesync_control/Makefile
 src/include/wnh_config_ini/Makefile
 src/include/wnh_config/Makefile
 src/include/wnh_jwsmtp/Makefile
-src/include/wnh_license/Makefile)
+src/include/wnh_license/Makefile
+src/include/wnh_shell_tables/Makefile)

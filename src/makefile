@@ -6,7 +6,7 @@ CC_FLAG= -g -Wall -std=c++11 -O3
 INC=-lstdc+ -lcrypto
 LIB=-pthread -lcrypto -lsqlite3 -luuid
 
-CFLAGS=-DSOMPLE_LOGS
+CFLAGS=-DSOMPLE_LOGS -DDEBUG_MODE_LOGS
 
 SRCS=include/wnh_base_class/wnh_base_class.cpp \
 include/wnh_filesync_init/wnh_filesync_init.cpp \
@@ -34,6 +34,7 @@ include/wnh_jwsmtp/mailer.cpp \
 include/wnh_jwsmtp/compat.cpp \
 include/wnh_jwsmtp/base64.cpp \
 include/wnh_license/wnh_license.cpp \
+include/wnh_shell_tables/wnh_shell_tables.cpp \
 filesync.cpp
 
 OBJS=$(SRCS:.cpp=.o)

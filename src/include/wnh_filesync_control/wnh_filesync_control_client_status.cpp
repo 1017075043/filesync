@@ -142,14 +142,14 @@ bool wnh_filesync_control::show_client_status_info(const string & client_status_
             last_connect_time = timestring;
             begin_connect_time == "1970/01/01 08:00:00" ? begin_connect_time = "0000/00/00 00:00:00" : begin_connect_time;
             last_connect_time == "1970/01/01 08:00:00" ? last_connect_time = "0000/00/00 00:00:00" : last_connect_time;
-            client_ip = format_string_centre_fill(client_ip, 25, ' ');
-            status = format_string_centre_fill(status, 10, ' ');
-            begin_connect_time = format_string_centre_fill(begin_connect_time, 19, ' ');
-            last_connect_time = format_string_centre_fill(last_connect_time, 19, ' ');
-            task_num = format_string_centre_fill(task_num, 11, ' ');
-            complete_task_num = format_string_centre_fill(complete_task_num, 13, ' ');
-            unfinished_task_num = format_string_centre_fill(unfinished_task_num, 12, ' ');
-            fail_task_num = format_string_centre_fill(fail_task_num, 10, ' ');
+            client_ip = format_string_centro_fill(client_ip, 25, ' ');
+            status = format_string_centro_fill(status, 10, ' ');
+            begin_connect_time = format_string_centro_fill(begin_connect_time, 19, ' ');
+            last_connect_time = format_string_centro_fill(last_connect_time, 19, ' ');
+            task_num = format_string_centro_fill(task_num, 11, ' ');
+            complete_task_num = format_string_centro_fill(complete_task_num, 13, ' ');
+            unfinished_task_num = format_string_centro_fill(unfinished_task_num, 12, ' ');
+            fail_task_num = format_string_centro_fill(fail_task_num, 10, ' ');
             //WNHINFO("客户端IP:" << client_ip << ", 状态:" << status << ", 启动时间:" << begin_connect_time << ", 最后活动时间:" << last_connect_time << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数:" << fail_task_num );
             cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┼───────────┼───────────────────┼───────────────────┼────────────┼──────────────┼─────────────┼───────────┤" << WNH_COLOR_RESET << endl;
             if(status_temp == true)
@@ -215,14 +215,14 @@ int wnh_filesync_control::show_client_status_info(const string & client_status_i
             last_connect_time = timestring;
             begin_connect_time == "1970/01/01 08:00:00" ? begin_connect_time = "0000/00/00 00:00:00" : begin_connect_time;
             last_connect_time == "1970/01/01 08:00:00" ? last_connect_time = "0000/00/00 00:00:00" : last_connect_time;
-            client_ip = format_string_centre_fill(client_ip, 25, ' ');
-            status = format_string_centre_fill(status, 10, ' ');
-            begin_connect_time = format_string_centre_fill(begin_connect_time, 19, ' ');
-            last_connect_time = format_string_centre_fill(last_connect_time, 19, ' ');
-            task_num = format_string_centre_fill(task_num, 11, ' ');
-            complete_task_num = format_string_centre_fill(complete_task_num, 13, ' ');
-            unfinished_task_num = format_string_centre_fill(unfinished_task_num, 12, ' ');
-            fail_task_num = format_string_centre_fill(fail_task_num, 10, ' ');
+            client_ip = format_string_centro_fill(client_ip, 25, ' ');
+            status = format_string_centro_fill(status, 10, ' ');
+            begin_connect_time = format_string_centro_fill(begin_connect_time, 19, ' ');
+            last_connect_time = format_string_centro_fill(last_connect_time, 19, ' ');
+            task_num = format_string_centro_fill(task_num, 11, ' ');
+            complete_task_num = format_string_centro_fill(complete_task_num, 13, ' ');
+            unfinished_task_num = format_string_centro_fill(unfinished_task_num, 12, ' ');
+            fail_task_num = format_string_centro_fill(fail_task_num, 10, ' ');
             //WNHINFO("客户端IP:" << client_ip << ", 状态:" << status << ", 启动时间:" << begin_connect_time << ", 最后活动时间:" << last_connect_time << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数:" << fail_task_num );
             cout << WNH_COLOR_BOLDWHITE << "├──────────────────────────┼───────────┼───────────────────┼───────────────────┼────────────┼──────────────┼─────────────┼───────────┤" << WNH_COLOR_RESET << endl;
             if(status_temp == true)
