@@ -9,12 +9,19 @@ using namespace std;
 #include "../wnh_tcp_client/wnh_tcp_client.h"
 #include "../wnh_config_ini/wnh_config_ini.h"
 #include "../wnh_system_operation/wnh_system_operation.h"
+#include "../wnh_shell_tables/wnh_shell_tables.h"
 
 class wnh_filesync_control : public wnh_tcp_client
 {
 private:
     string ip; //服务端IP
     int port; //服务端使用的端口
+
+    template <typename Type_v, typename Type>
+    void set_vector_values(Type_v & values, const Type & arg); //设置vector变量值
+
+    template <typename Type_v, typename Type, typename ... Types>
+    void set_vector_values(Type_v & values, const Type & arg,const Types & ... args); //设置vector变量值
 
 public:
     wnh_filesync_control();
@@ -25,6 +32,8 @@ public:
 
     wnh_config_ini status_info;
     wnh_config_ini sync_rule_info;
+
+    wnh_shell_tables shell_tables;
 
     void create_temp_list_dir();
     void get_server_status_info(); //获取服务端状态信息

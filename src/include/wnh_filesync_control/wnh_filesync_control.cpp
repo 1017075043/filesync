@@ -67,4 +67,18 @@ void wnh_filesync_control::create_temp_list_dir()
     sys_oper.chmod_wnh(WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH, "755");
 }
 
+template <typename Type_v, typename Type>
+void wnh_filesync_control::set_vector_values(Type_v & values, const Type & arg) //设置vector变量值
+{
+    //WNHINFO("argc=" << arg);
+    values.push_back(arg);
+}
+
+template <typename Type_v, typename Type, typename ... Types>
+void wnh_filesync_control::set_vector_values(Type_v & values, const Type & arg,const Types & ... args) //设置vector变量值
+{
+    //WNHINFO("argc=" << arg);
+    values.push_back(arg);
+    set_vector_values(values, args...);
+}
 

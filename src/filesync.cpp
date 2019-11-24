@@ -12,32 +12,7 @@ int main(int argc, char **argv)
 {
     filesync program; //定义一个程序类
     program.init.INIT(); //初始化
-    //program.startup_mode((const int)argc, (const char**)argv);
-    wnh_shell_tables shell_tables;
-    vector<string> value;
-    vector<string> color;
-    vector<string> align;
-    value.push_back("12sdds3");
-    value.push_back("4s56");
-    value.push_back("呜呜呜呜呜呜呜呜无无无无无");
-    color.push_back(WNH_COLOR_RED);
-    color.push_back(WNH_COLOR_BLUE);
-    color.push_back(WNH_COLOR_GREEN);
-    align.push_back("left");
-    align.push_back("right");
-    align.push_back("centro");
-    shell_tables.add_unit(value, color, align);
-    value.clear();
-    value.push_back("d2f");
-    value.push_back("4sfff56");
-    value.push_back("sfsdg");
-    shell_tables.add_unit(value, color, align);
-    value.clear();
-    value.push_back("12sddsfdgdgf3");
-    value.push_back("4s56");
-    value.push_back("fdfdggggggggggg");
-    shell_tables.add_unit(value, color, align);
-    shell_tables.show_tables();
+    program.startup_mode((const int)argc, (const char**)argv);
 
     return 0;
 }

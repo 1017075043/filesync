@@ -49,6 +49,18 @@ public:
     string to_upper_string(const string & strs); //将str中的字母转为大写字母
     string to_lower_string(const string & strs); //将str中的字母转为小写字母
 
+    //template <typename Type_v, typename Type>
+    //void set_vector_values(Type_v & values, const Type & arg); //设置vector变量值
+
+    //template <typename Type_v, typename Type, typename ... Types>
+    //void set_vector_values(Type_v & values, const Type & arg,const Types & ... args); //设置vector变量值
+
+    //template <typename Type>
+    //void print(const Type & arg);
+
+    //template <typename Type, typename ... Types>
+    //void print(const Type & arg,const Types & ... args);
+
     //template <typename T> string to_binary(T value);//将任意进制的值转换为二进制
 
 };

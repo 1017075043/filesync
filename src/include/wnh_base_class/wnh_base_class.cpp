@@ -198,27 +198,30 @@ string wnh_base_class::to_lower_string(const string & strs) //将str中的字母
     return str;
 }
 
-
-//template <typename T> string wnh_base_class::to_binary(T value)//将任意进制的值转换为二进制
+//template <typename Type_v, typename Type>
+//void wnh_base_class::set_vector_values(Type_v & values, const Type & arg) //设置vector变量值
 //{
-//    //switch(type)
-//    //{
-//    //    case 10://如果是十进制转二进制
-//    //    {
-//    //        WNHDEBUG("如果是十进制转二进制");
-//    //    }
-//    //    case 2://如果是二进制转二进制
-//    //    {
-//    //        WNHDEBUG("如果是二进制转二进制");
-//    //    }
-//    //    case 8://如果是八进制转二进制
-//    //    {
-//    //        WNHDEBUG("如果是八进制转二进制");
-//    //    }
-//    //    case 16://如果是十六进制转二进制
-//    //    {
-//    //        WNHDEBUG("如果是十六进制转二进制");
-//    //    }
-//    //}
-//    return "";
+//    WNHINFO("argc=" << arg);
+//    values.push_back(arg);
+//}
+
+//template <typename Type_v, typename Type, typename ... Types>
+//void wnh_base_class::set_vector_values(Type_v & values, const Type & arg,const Types & ... args) //设置vector变量值
+//{
+//    WNHINFO("argc=" << arg);
+//    values.push_back(arg);
+//    set_vector_values(values, args...);
+//}
+
+//template <typename Type>
+//void wnh_base_class::print(const Type & arg)
+//{
+//    WNHINFO("argc=" << arg);
+//}
+
+//template <typename Type, typename ... Types>
+//void wnh_base_class::print(const Type & arg,const Types & ... args)
+//{
+//     WNHINFO("argc=" << arg);
+//     print(args...);
 //}
