@@ -153,6 +153,7 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsig
     for(int i = 0; i < tables_unit[line_num].num; i ++)
     {
         now_line_width = now_line_width + tables_unit[line_num].value_width[i] + 1;
+        tables_unit[line_num].separator_format.push_back(true);
         //tables_unit[line_num].value_width.push_back(tables_unit[line_num].value[i].length() - get_chinese_num(tables_unit[line_num].value[i]));
         //now_line_width = now_line_width + (tables_unit[line_num].value[i].length() - get_chinese_num(tables_unit[line_num].value[i])) + 1;
     }

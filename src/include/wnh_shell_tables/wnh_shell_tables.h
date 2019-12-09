@@ -56,6 +56,7 @@ private:
         vector<WNH_SHELL_TABLES_ALIGN_MODE> align; //每个成员对齐方式
         vector<unsigned int> value_width; //每个成员使用的宽度
         WNH_SHELL_TABLES_SPLIT_LINE_FORMAT split_line_format;//分割线模式
+        vector<bool> separator_format; //每个成员分隔符模式
     };
 
 public:
@@ -91,6 +92,12 @@ public:
 
     bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
     bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+
+    bool set_unit(const int & num, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color); //设置成员渲染颜色
+    bool set_unit(const int & num, const vector<WNH_SHELL_TABLES_ALIGN_MODE> align); //设置成员对齐方式
+    bool set_unit(const int & num, const vector<unsigned int> value_width); //设置成员使用的宽度
+    bool set_unit(const int & num, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT split_line_format); //设置分割线模式
+    bool set_unit(const int & num, const vector<bool> separator_format); //设置成员分隔符模式
 
     void show_unit(); //显示成员
     string color_transform(WNH_SHELL_TABLES_FONT_COLOR color, bool mode); //颜色转换

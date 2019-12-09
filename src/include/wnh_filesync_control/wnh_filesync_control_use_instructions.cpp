@@ -3,47 +3,287 @@
 
 void wnh_filesync_control::ues_instructions() //使用说明
 {
-    cout << WNH_COLOR_BOLDWHITE << "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│                                                    " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 服务端使用说明" << WNH_COLOR_BOLDWHITE << "                                                  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "      启动参数      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << " filesync server --conf=配置文件路径 --pid=PID文件路径 --limit=是否root限定 --log=日志等级                     " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 1 (缺省方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync server filesync.conf " << WNH_COLOR_RESET << "                                                                                " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync server --conf=filesync.conf " << WNH_COLOR_RESET << "                                                                         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 2 (完整方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync server filesync.conf filesync_server.pid \"limit root\" WNH_INFO_XS                                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync server --conf=filesync.conf --pid=filesync_server.pid --limit=\"limit root\" --log=WNH_INFO_XS         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│                                                    " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 客户端使用说明" << WNH_COLOR_BOLDWHITE << "                                                  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "      启动参数      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << " filesync client --ip=服务端IP --port=服务端PORT --pid=PID文件路径 --limit=是否root限定 --log=日志等级         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 1 (缺省方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync client 127.0.0.1 10086                                                             " << WNH_COLOR_RESET << "(只连接单个服务端)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync client --ip=127.0.0.1 --port=10086" << WNH_COLOR_RESET << "                                                                   " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 2 (完整方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync client 127.0.0.1 10086 filesync_client.pid \"limit root\" WNH_INFO_XS                " << WNH_COLOR_RESET << "(只连接单个服务端)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync client --ip=127.0.0.1 --port=10086 --pid=filesync_client.pid --limit=\"limit root\" --log=WNH_INFO_XS" << WNH_COLOR_RESET << "  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 3 (缺省方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync client filesync.conf                                                               " << WNH_COLOR_RESET << "(可连接多个服务端)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync client --conf=filesync.conf" << WNH_COLOR_RESET << "                                                                          " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 4 (完整方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync client filesync.conf \"limit root\" WNH_INFO_XS                                      " << WNH_COLOR_RESET << "(可连接多个服务端)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync client --conf=filesync.conf --limit=\"limit root\" --log=WNH_INFO_XS" << WNH_COLOR_RESET << "                                   " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│                                                    " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 控制端使用说明" << WNH_COLOR_BOLDWHITE << "                                                  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "      启动参数      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << " filesync control 使用参数 --ip=服务端IP --port=服务端PORT --log=日志等级                                      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────┬───────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 1 (缺省方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync" << "                                " << WNH_COLOR_RESET << "(显示使用帮助)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync 1" << "                        " << WNH_COLOR_RESET << "(显示控制端使用列表)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────┴───────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 2 (完整方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync control \"show list\" 127.0.0.1 10086 WNH_INFO_XS                                                      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync control \"show list\" --ip=127.0.0.1 --port=10086 --log=WNH_INFO_XS                                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├────────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << "  说明: 如果系统参数配置足够完整的话, 可以缺省至直接执行 " << WNH_COLOR_BOLDRED << "filesync" << WNH_COLOR_BOLDGREEN << " 就能以你期望的模式运行程序.                                       " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << "        缺省的参数从系统变量中获取,若系统变量也不存在将使用程序默认值,使用命令 " << WNH_COLOR_BOLDRED << "filesync 9" << WNH_COLOR_BOLDGREEN << " 查看系统变量配置方式                      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "└────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘" << WNH_COLOR_RESET << endl;
+    vector<string> values;
+    vector<WNH_SHELL_TABLES_FONT_COLOR> color;
+    vector<WNH_SHELL_TABLES_ALIGN_MODE> align;
+    vector<unsigned int> values_width;
+    vector<bool> separator_format;
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    separator_format.clear();
+
+    string str_temp;
+    str_temp = str_temp + PROGRAM_NAME + " 服务端使用说明";
+    set_vector_values(values, str_temp);
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDMAGENTA);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro);
+    set_vector_values(values_width, 132);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "启动参数", " filesync server --conf=配置文件路径 --pid=PID文件路径 --limit=是否root限定 --log=日志等级");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(values_width, 19, 112);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    set_vector_values(values, "范例 1 (缺省方式)", " filesync server filesync.conf");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::EMPTY);
+
+    values.clear();
+    color.clear();
+    set_vector_values(values, "", " filesync server --conf=filesync.conf");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    set_vector_values(values, "范例 2 (完整方式)", " filesync server filesync.conf filesync_server.pid \"limit root\" WNH_INFO_XS");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::EMPTY);
+
+    values.clear();
+    color.clear();
+    set_vector_values(values, "", " filesync server --conf=filesync.conf --pid=filesync_server.pid --limit=\"limit root\" --log=WNH_INFO_XS");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::REPEAT);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    str_temp = "";
+    str_temp = str_temp + PROGRAM_NAME + " 控制端使用说明";
+    set_vector_values(values, str_temp);
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDMAGENTA);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro);
+    set_vector_values(values_width, 132);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "启动参数", " filesync client --ip=服务端IP --port=服务端PORT --pid=PID文件路径 --limit=是否root限定 --log=日志等级");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(values_width, 19, 112);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "范例 1 (缺省方式)", " filesync client 127.0.0.1 10086", "(只连接单个服务端)");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::RESET);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::right);
+    set_vector_values(values_width, 19, 93, 18);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::EMPTY);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "", " filesync client --ip=127.0.0.1 --port=10086");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(values_width, 19, 112);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "范例 2 (完整方式)", " filesync client 127.0.0.1 10086 filesync_client.pid \"limit root\" WNH_INFO_XS", "(只连接单个服务端)");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::RESET);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::right);
+    set_vector_values(values_width, 19, 93, 18);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::EMPTY);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "", " filesync client --ip=127.0.0.1 --port=10086 --pid=filesync_client.pid --limit=\"limit root\" --log=WNH_INFO_XS");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(values_width, 19, 112);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "范例 3 (缺省方式)", " filesync client filesync.conf", "(可连接多个服务端)");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::RESET);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::right);
+    set_vector_values(values_width, 19, 93, 18);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::EMPTY);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "", " filesync client --conf=filesync.conf");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(values_width, 19, 112);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "范例 4 (完整方式)", " filesync client filesync.conf \"limit root\" WNH_INFO_XS", "(可连接多个服务端)");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::RESET);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::right);
+    set_vector_values(values_width, 19, 93, 18);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::EMPTY);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "", " filesync client --conf=filesync.conf --limit=\"limit root\" --log=WNH_INFO_XS");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(values_width, 19, 112);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::REPEAT);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    str_temp = "";
+    str_temp = str_temp + PROGRAM_NAME + " 客户端使用说明";
+    set_vector_values(values, str_temp);
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDMAGENTA);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro);
+    set_vector_values(values_width, 132);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "启动参数", " filesync control 使用参数 --ip=服务端IP --port=服务端PORT --log=日志等级");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(values_width, 19, 112);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "范例 1 (缺省方式)", " filesync", "(只连接单个服务端)", " filesync 1", "(显示控制端使用列表)");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::RESET, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::RESET);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::right, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::right);
+    set_vector_values(values_width, 19, 35, 18, 36, 20);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, "范例 2 (完整方式)", " filesync control \"show list\" 127.0.0.1 10086 WNH_INFO_XS");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(values_width, 19, 112);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::EMPTY);
+
+    values.clear();
+    color.clear();
+    set_vector_values(values, "", " filesync control \"show list\" --ip=127.0.0.1 --port=10086 --log=WNH_INFO_XS");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    values.clear();
+    color.clear();
+    align.clear();
+    values_width.clear();
+    set_vector_values(values, " 说明: 如果系统参数配置足够完整的话, 可以缺省至直接执行", "filesync", "就能以你期望的模式运行程序.");
+    set_vector_values(color, WNH_SHELL_TABLES_FONT_COLOR::BOLDGREEN, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDGREEN);
+    set_vector_values(align, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(values_width, 55, 8, 67);
+    shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::EMPTY);
+
+    values.clear();
+    values_width.clear();
+    set_vector_values(values, "       缺省的参数从系统变量中获取,若系统变量也不存在将使用程序默认值,使用命令", "filesync 9", "查看系统变量配置方式.");
+    set_vector_values(values_width, 77, 10, 43);
+    shell_tables.add_unit(values, color, align, values_width);
+
+    separator_format.clear();
+    set_vector_values(separator_format, true, false, true);
+    shell_tables.set_unit(8, separator_format);
+    shell_tables.set_unit(10, separator_format);
+    shell_tables.set_unit(12, separator_format);
+    shell_tables.set_unit(14, separator_format);
+
+    separator_format.clear();
+    set_vector_values(separator_format, true, false, true, false, true);
+    shell_tables.set_unit(18, separator_format);
+
+    separator_format.clear();
+    set_vector_values(separator_format, false, false, true);
+    shell_tables.set_unit(21, separator_format);
+    shell_tables.set_unit(22, separator_format);
+
+
+    shell_tables.show_tables();
+
+
+    //cout << WNH_COLOR_BOLDWHITE << "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│                                                    " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 服务端使用说明" << WNH_COLOR_BOLDWHITE << "                                                  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "      启动参数      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << " filesync server --conf=配置文件路径 --pid=PID文件路径 --limit=是否root限定 --log=日志等级                     " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 1 (缺省方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync server filesync.conf " << WNH_COLOR_RESET << "                                                                                " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync server --conf=filesync.conf " << WNH_COLOR_RESET << "                                                                         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 2 (完整方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync server filesync.conf filesync_server.pid \"limit root\" WNH_INFO_XS                                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync server --conf=filesync.conf --pid=filesync_server.pid --limit=\"limit root\" --log=WNH_INFO_XS         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│                                                    " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 客户端使用说明" << WNH_COLOR_BOLDWHITE << "                                                  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "      启动参数      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << " filesync client --ip=服务端IP --port=服务端PORT --pid=PID文件路径 --limit=是否root限定 --log=日志等级         " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 1 (缺省方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync client 127.0.0.1 10086                                                             " << WNH_COLOR_RESET << "(只连接单个服务端)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync client --ip=127.0.0.1 --port=10086" << WNH_COLOR_RESET << "                                                                   " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 2 (完整方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync client 127.0.0.1 10086 filesync_client.pid \"limit root\" WNH_INFO_XS                " << WNH_COLOR_RESET << "(只连接单个服务端)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync client --ip=127.0.0.1 --port=10086 --pid=filesync_client.pid --limit=\"limit root\" --log=WNH_INFO_XS" << WNH_COLOR_RESET << "  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 3 (缺省方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync client filesync.conf                                                               " << WNH_COLOR_RESET << "(可连接多个服务端)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync client --conf=filesync.conf" << WNH_COLOR_RESET << "                                                                          " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 4 (完整方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync client filesync.conf \"limit root\" WNH_INFO_XS                                      " << WNH_COLOR_RESET << "(可连接多个服务端)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync client --conf=filesync.conf --limit=\"limit root\" --log=WNH_INFO_XS" << WNH_COLOR_RESET << "                                   " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┼┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┬┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┴┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│                                                    " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 控制端使用说明" << WNH_COLOR_BOLDWHITE << "                                                  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┬───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "      启动参数      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << " filesync control 使用参数 --ip=服务端IP --port=服务端PORT --log=日志等级                                      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────┬───────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 1 (缺省方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync" << "                                " << WNH_COLOR_RESET << "(显示使用帮助)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync 1" << "                        " << WNH_COLOR_RESET << "(显示控制端使用列表)" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┼───────────────────────────────────────────────────────┴───────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "  范例 2 (完整方式) " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED << " filesync control \"show list\" 127.0.0.1 10086 WNH_INFO_XS                                                      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << " filesync control \"show list\" --ip=127.0.0.1 --port=10086 --log=WNH_INFO_XS                                    " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "├────────────────────┴───────────────────────────────────────────────────────────────────────────────────────────────────────────────┤" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << "  说明: 如果系统参数配置足够完整的话, 可以缺省至直接执行 " << WNH_COLOR_BOLDRED << "filesync" << WNH_COLOR_BOLDGREEN << " 就能以你期望的模式运行程序.                                       " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDGREEN << "        缺省的参数从系统变量中获取,若系统变量也不存在将使用程序默认值,使用命令 " << WNH_COLOR_BOLDRED << "filesync 9" << WNH_COLOR_BOLDGREEN << " 查看系统变量配置方式                      " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
+    //cout << WNH_COLOR_BOLDWHITE << "└────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┘" << WNH_COLOR_RESET << endl;
 }
 
 void wnh_filesync_control::control_use_instructions() //控制端使用说明

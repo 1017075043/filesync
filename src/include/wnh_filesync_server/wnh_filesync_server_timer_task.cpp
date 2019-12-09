@@ -11,6 +11,10 @@ void wnh_filesync_server::timer_task_son(const string & temp_dir_path) //定时�
 {
     wnh_system_operation sys_op;
     unsigned long long time = 0;
+
+    sys_op.rm_level_about_time_before(temp_dir_path, LOCALTIMENUM - MAX_STORAGE_TIME_FOR_TEMP_FILES); //清理临时目录
+    get_license_info(); //检查许可
+
     while(survival_id)
     {
         time ++ ;

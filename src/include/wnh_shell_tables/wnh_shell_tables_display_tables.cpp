@@ -98,7 +98,14 @@ void wnh_shell_tables::show_tables() //显示表格
         }
         if(j != tables_unit[0].num - 1)
         {
-            cout << WNH_TABLES_CONTRO_UNDER;
+            if(tables_unit[0].separator_format[j])
+            {
+                cout << WNH_TABLES_CONTRO_UNDER;
+            }
+            else
+            {
+                cout << WNH_TABLES_CROSS;
+            }
         }
     }
     cout << WNH_TABLES_RIGHT_UNDER << endl;
@@ -110,19 +117,41 @@ void wnh_shell_tables::show_tables() //显示表格
         {
             if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::right)
             {
-                cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
+                {
+                    cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                }
+                else
+                {
+                    cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << " ";
+                }
             }
             else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::centro)
             {
-                cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
+                {
+                    cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                }
+                else
+                {
+                    cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << " ";
+                }
             }
             else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::left)
             {
-                cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
+                {
+                    cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                }
+                else
+                {
+                    cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << " ";
+                }
             }
         }
         cout << endl;
         //中间分隔行
+        //根据重复次数来打印中间分隔行的行数
         for(int r = 0 ; r < get_repeat_num(tables_unit[i].split_line_format); r ++)
         {
             int temp_s = 0;
@@ -131,11 +160,13 @@ void wnh_shell_tables::show_tables() //显示表格
                 cout << WNH_TABLES_FELT_CONTRO;
                 for(int j = 0; j < max_line_width; j++)
                 {
+                    //计算出当前分隔行中列分隔符的模式
+                    //temp_s: 0 = WNH_TABLES_CROSS, 1 = WNH_TABLES_CONTRO_ON, 2 = WNH_TABLES_CONTRO_UNDER, 3 = WNH_TABLES_CONTRO_CONTRO
                     int temp_b = -1;
                     for(int k = 0; k < tables_unit[i].num - 1; k ++)
                     {
                         temp_b = temp_b + tables_unit[i].value_width[k] + 1;
-                        if(j == temp_b)
+                        if(j == temp_b && tables_unit[i].separator_format[k])
                         {
                             temp_s = temp_s + 1;
                             break;
@@ -145,7 +176,7 @@ void wnh_shell_tables::show_tables() //显示表格
                     for(int k = 0; k < tables_unit[i + 1].num - 1; k ++)
                     {
                         temp_b = temp_b + tables_unit[i + 1].value_width[k] + 1;
-                        if(j == temp_b)
+                        if(j == temp_b && tables_unit[i + 1].separator_format[k])
                         {
                             temp_s = temp_s + 2;
                             break;
@@ -213,7 +244,14 @@ void wnh_shell_tables::show_tables() //显示表格
         }
         if(j != tables_unit[line_num-1].num - 1)
         {
-            cout << WNH_TABLES_CONTRO_ON;
+            if(tables_unit[line_num-1].separator_format[j])
+            {
+                cout << WNH_TABLES_CONTRO_ON;
+            }
+            else
+            {
+                cout << WNH_TABLES_CROSS;
+            }
         }
     }
     cout << WNH_TABLES_RIGHT_ON << endl;

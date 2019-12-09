@@ -2,6 +2,7 @@
 #include "wnh_shell_tables_add_unit.cpp"
 #include "wnh_shell_tables_display_tables.cpp"
 #include "wnh_shell_tables_transform.cpp"
+#include "wnh_shell_tables_set_unit.cpp"
 
 wnh_shell_tables::wnh_shell_tables()
 {
