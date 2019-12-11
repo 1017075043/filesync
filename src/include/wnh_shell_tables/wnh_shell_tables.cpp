@@ -3,6 +3,7 @@
 #include "wnh_shell_tables_display_tables.cpp"
 #include "wnh_shell_tables_transform.cpp"
 #include "wnh_shell_tables_set_unit.cpp"
+#include "wnh_shell_tables_add_son_unit.cpp"
 
 wnh_shell_tables::wnh_shell_tables()
 {
@@ -12,6 +13,7 @@ wnh_shell_tables::wnh_shell_tables()
     max_row_num = 0;
     max_line_num = 0;
     is_use_smart_line_width = false;
+    local_son_line_num = 0;
 }
 
 wnh_shell_tables::~wnh_shell_tables()

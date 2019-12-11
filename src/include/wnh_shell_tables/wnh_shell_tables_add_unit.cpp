@@ -135,7 +135,7 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsig
     //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align)");
     if(value.size() != value_width.size() || value.size() != color.size() || value.size() != align.size())
     {
-        WNHWARN("数据残缺, 成员值数量=" << value.size() << ", 颜色数量=" << color.size() << ", 对齐数量=" << align.size());
+        WNHWARN("数据残缺, 成员值数量=" << value.size() << ", 宽度数量=" << value_width.size() << ", 颜色数量=" << color.size() << ", 对齐数量=" << align.size());
         return false;
     }
     tables_unit[line_num].value = value;
@@ -145,9 +145,23 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsig
     tables_unit[line_num].num = value.size();
     tables_unit[line_num].split_line_format = split_line_format;
 
+
     if(max_row_num < tables_unit[line_num].num)
     {
         max_row_num = tables_unit[line_num].num;
+    }
+    //判断是否需要子行
+    unsigned int values_display_width = 0;
+    for(int i = 0; i < tables_unit[line_num].num; i ++)
+    {
+        //WNHINFO(tables_unit[line_num].value[i] << ", 长度:" << tables_unit[line_num].value[i].size() << ", 中文个数:" << get_chinese_num(tables_unit[line_num].value[i]) << ", 非中文个数:" << tables_unit[line_num].value[i].size() - get_chinese_num(tables_unit[line_num].value[i]) * 3 << ", 在shell显示占用的宽度：" << tables_unit[line_num].value[i].size() - get_chinese_num(tables_unit[line_num].value[i]));
+        values_display_width = tables_unit[line_num].value[i].size() - get_chinese_num(tables_unit[line_num].value[i]);
+        if(values_display_width > tables_unit[line_num].value_width[i])
+        {
+            WNHWARN("当前显示的值将要使用的行宽大于设置的行宽, 配置的行宽:" << tables_unit[line_num].value_width[i] << ", 需要的行宽: " << values_display_width << ", 进行自动换行");
+            add_son_unit(line_num);
+            break;
+        }
     }
     int now_line_width = 0;
     for(int i = 0; i < tables_unit[line_num].num; i ++)

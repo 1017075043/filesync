@@ -57,15 +57,18 @@ private:
         vector<unsigned int> value_width; //每个成员使用的宽度
         WNH_SHELL_TABLES_SPLIT_LINE_FORMAT split_line_format;//分割线模式
         vector<bool> separator_format; //每个成员分隔符模式
+        vector<unsigned int> son_line_num; //子行行号
     };
 
 public:
     TABLES_LINE tables_unit[WNH_TABLES_MAX_LINE_NUM]; //成员数据保存
+    vector<string> tables_unit_son[WNH_TABLES_MAX_LINE_NUM]; //子成员数据保存
+    int local_son_line_num; //当前子行的数量
     int line_num; //行数
     int max_row_num;  //最大列数
     int max_line_width; //最大行宽度
     int max_line_num; //最大行数
-    bool is_use_smart_line_width;
+    bool is_use_smart_line_width; //是否使用智能行宽
     wnh_shell_tables();
     ~wnh_shell_tables();
 
@@ -106,6 +109,9 @@ public:
     void show_tables(); //显示表格
     void smart_line_width(); //智能列宽
     int get_repeat_num(WNH_SHELL_TABLES_SPLIT_LINE_FORMAT split_line_format); //获取重复次数
+
+    bool add_son_unit(const int & num); //添加子行
+    bool add_son_unit(const int & num, const int & son_num); //添加子行
 };
 
 #endif

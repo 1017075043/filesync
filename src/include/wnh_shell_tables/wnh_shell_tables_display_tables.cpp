@@ -117,12 +117,15 @@ void wnh_shell_tables::show_tables() //显示表格
         {
             if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::right)
             {
+                //WNHDEBUG("0");
                 if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                 {
+                    //WNHDEBUG("1");
                     cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
                 }
                 else
                 {
+                    //WNHDEBUG("2");
                     cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << " ";
                 }
             }
@@ -130,10 +133,13 @@ void wnh_shell_tables::show_tables() //显示表格
             {
                 if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                 {
+                    //WNHDEBUG("3");
                     cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                    //WNHDEBUG("4");
                 }
                 else
                 {
+                    //WNHDEBUG("4");
                     cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << " ";
                 }
             }
@@ -141,15 +147,59 @@ void wnh_shell_tables::show_tables() //显示表格
             {
                 if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                 {
+                    //WNHDEBUG("5");
                     cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
                 }
                 else
                 {
+                    //WNHDEBUG("6");
                     cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit[i].value[j], tables_unit[i].value_width[j] - 1, ' ') << " ";
                 }
             }
         }
         cout << endl;
+        //判断是否存在子行
+        for(int k = 0; k < tables_unit[i].son_line_num.size(); k++)
+        {
+            cout << WNH_TABLES_VERTICAL;
+            for(int j = 0; j < tables_unit[i].num; j++)
+            {
+                if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::right)
+                {
+                    if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
+                    {
+                        cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                    }
+                    else
+                    {
+                        cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j] - 1, ' ') << " ";
+                    }
+                }
+                else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::centro)
+                {
+                    if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
+                    {
+                        cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                    }
+                    else
+                    {
+                        cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j] - 1, ' ') << " ";
+                    }
+                }
+                else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::left)
+                {
+                    if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
+                    {
+                        cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j] - 1, ' ') << WNH_TABLES_VERTICAL;
+                    }
+                    else
+                    {
+                        cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j] - 1, ' ') << " ";
+                    }
+                }
+            }
+            cout << endl;
+        }
         //中间分隔行
         //根据重复次数来打印中间分隔行的行数
         for(int r = 0 ; r < get_repeat_num(tables_unit[i].split_line_format); r ++)

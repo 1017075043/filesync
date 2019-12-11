@@ -70,11 +70,12 @@ string wnh_base_class::format_string_left_fill(const string & str, const unsigne
     string chr_temp = "";
     chr_temp = chr_temp + chr;
     unsigned long num = get_chinese_num(str);
-    if(length > str.length() - num)
+    if(length >= str.length() - num)
     {
         unsigned int str_length = str.length() - num;
         for(unsigned int i =0; i <= length - str_length; i ++)
         {
+            //WNHINFO("i:" << i);
             str_temp = chr_temp + str_temp;
         }
     }
@@ -85,11 +86,12 @@ string wnh_base_class::format_string_right_fill(const string & str, const unsign
 {
     string str_temp = str;
     unsigned long num = get_chinese_num(str);
-    if(length > str.length() - num)
+    if(length >= str.length() - num)
     {
         unsigned int str_length = str.length() - num;
         for(unsigned int i =0; i <= length - str_length; i ++)
         {
+           // WNHINFO("i:" << i);
             str_temp = str_temp + chr;
         }
     }
@@ -100,26 +102,30 @@ string wnh_base_class::format_string_centro_fill(const string & str, const unsig
 {
     string str_temp = str;
     unsigned long num = get_chinese_num(str);
-    if(length > str_temp.length() - num)
+    if(length >= str_temp.length() - num)
     {
         unsigned int str_length = str_temp.length() - num;
         if((length - str_length) % 2 != 0)
         {
             for(unsigned int i =0; i <= (length - str_length)/2; i ++)
             {
+                //WNHINFO("i:" << i);
                 str_temp = chr + str_temp;
             }
         }
         else
         {
-            for(unsigned int i =0; i <= (length - str_length)/2-1; i ++)
+
+            for(unsigned int i =0; i <= (length - str_length)/2 - 1 && length != str_length; i ++)
             {
+                //WNHINFO("i:" << i << ", (length - str_length)/2 - 1:" << (length - str_length)/2 - 1 << ", length:" << length << ", str_length:" << str_length);
                 str_temp = chr + str_temp;
             }
         }
         str_length = str_temp.length() - num;
         for(unsigned int i =0; i <= length - str_length; i ++)
         {
+            //WNHINFO("i:" << i);
             str_temp = str_temp + chr;
         }
     }
@@ -196,6 +202,49 @@ string wnh_base_class::to_lower_string(const string & strs) //将str中的字母
     string str = strs;
     transform(str.begin(), str.end(), str.begin(), (int (*)(int))tolower);
     return str;
+}
+
+int wnh_base_class::transform_display_width(const string & str, const int & display_width) //转换显示宽度为字符串长度
+{
+    //WNHDEBUG("开始 int wnh_shell_tables::transform_display_width(const string & str, const int & display_width) //转换显示宽度为字符串长度");
+    int str_size = 0;
+    int i = 0;
+    for(i = 0; i < (int)str.size(); i++)
+    {
+        //WNHDEBUG("i:" << i << ", display_width:" << display_width << ", str.size():" << str.size() << ", str_size:" << str_size);
+        if(str_size >= display_width)
+        {
+            break;
+        }
+        if(str[i] & 0x80)
+        {
+            i = i + 2;
+            str_size = str_size + 1;
+        }
+        str_size ++;
+    }
+    //WNHDEBUG("结束 int wnh_shell_tables::transform_display_width(const string & str, const int & display_width) //转换显示宽度为字符串长度");
+    return i;
+}
+
+string wnh_base_class::safe_str_substr_left(string & str, const int & num) //安全的字符串切割(从左到右),处理切割到临界点是中文会乱码的问题
+{
+    int temp_chinese = 0;
+    //WNHDEBUG("切割的临界点字符是中文");
+    for(int i = 0; i < num; i++)
+    {
+        if(str[i] & 0x80)
+        {
+            temp_chinese ++;
+        }
+    }
+    //WNHWARN("temp_chinese:" << temp_chinese << ", 多余中文字符:" << temp_chinese % 3);
+
+    string str_temp = str.substr(num - temp_chinese % 3);
+    str = str.substr(0, num - temp_chinese % 3);
+
+    //WNHDEBUG("str_temp:" << str_temp << ", str:" << str);
+    return str_temp;
 }
 
 //template <typename Type_v, typename Type>
