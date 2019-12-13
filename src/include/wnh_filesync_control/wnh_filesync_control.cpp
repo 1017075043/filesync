@@ -12,7 +12,7 @@ wnh_filesync_control::wnh_filesync_control()
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:控制端");
     this->ip = IP;
     this->port = PORT;
-    WNHINFO("服务端IP:" << this->ip << ", 端口:" << this->port);
+    WNHDEBUG("服务端IP:" << this->ip << ", 端口:" << this->port);
     create_temp_list_dir();
 }
 
@@ -23,7 +23,7 @@ wnh_filesync_control::wnh_filesync_control(const string &conf_parameter)
     string ip_address_and_port = conf_parameter;
     this->ip = ip_address_and_port.substr(0, ip_address_and_port.find(":"));
     this->port = atoi(ip_address_and_port.substr(ip_address_and_port.find(":")+1).c_str());
-    WNHINFO("服务端IP:" << this->ip << ", 端口:" << this->port);
+    WNHDEBUG("服务端IP:" << this->ip << ", 端口:" << this->port);
     create_temp_list_dir();
 }
 
@@ -34,7 +34,7 @@ wnh_filesync_control::wnh_filesync_control(const int argc, const char **argv)
     string ip_address_and_port = argv[2];
     this->ip = ip_address_and_port.substr(0, ip_address_and_port.find(":"));
     this->port = atoi(ip_address_and_port.substr(ip_address_and_port.find(":")+1).c_str());
-    WNHINFO("服务端IP:" << this->ip << ", 端口:" << this->port);
+    WNHDEBUG("服务端IP:" << this->ip << ", 端口:" << this->port);
     create_temp_list_dir();
 }
 
@@ -44,12 +44,14 @@ wnh_filesync_control::wnh_filesync_control(const string &ip, const int &port)
     //WNHINFO(PROGRAM_NAME << "程序启动,启动方式:控制端");
     this->ip = ip;
     this->port = port;
-    WNHINFO("服务端IP:" << this->ip << ", 端口:" << this->port);
+    WNHDEBUG("服务端IP:" << this->ip << ", 端口:" << this->port);
     create_temp_list_dir();
 }
 
 wnh_filesync_control::~wnh_filesync_control()
 {
+    sync_rule_info.clean_configure_ini();
+    status_info.clean_configure_ini();
     WNHDEBUG("~wnh_filesync_control 析构");
 }
 
@@ -68,6 +70,29 @@ void wnh_filesync_control::create_temp_list_dir()
 }
 
 template <typename Type_v, typename Type>
+void wnh_filesync_control::set_vector_values(const bool & status, Type_v & values, const Type & arg) //设置vector变量值
+{
+    //WNHINFO("argc=" << arg);
+    if(status == true)
+    {
+        values.clear();
+    }
+    values.push_back(arg);
+}
+
+template <typename Type_v, typename Type, typename ... Types>
+void wnh_filesync_control::set_vector_values(const bool & status, Type_v & values, const Type & arg,const Types & ... args) //设置vector变量值
+{
+    //WNHINFO("argc=" << arg);
+    if(status == true)
+    {
+        values.clear();
+    }
+    values.push_back(arg);
+    set_vector_values(false, values, args...);
+}
+
+template <typename Type_v, typename Type>
 void wnh_filesync_control::set_vector_values(Type_v & values, const Type & arg) //设置vector变量值
 {
     //WNHINFO("argc=" << arg);
@@ -79,6 +104,5 @@ void wnh_filesync_control::set_vector_values(Type_v & values, const Type & arg,c
 {
     //WNHINFO("argc=" << arg);
     values.push_back(arg);
-    set_vector_values(values, args...);
+    set_vector_values(false, values, args...);
 }
-

@@ -378,30 +378,37 @@ int wnh_filesync_control::show_server_status_info_v1(const string & server_statu
 
     WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
     show_server_status_info_son(pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
+
     return 8;
 }
 
 bool wnh_filesync_control::show_server_status_info_son(string & pid, string & start_time, string & client_num, string & online_client_num, string & offline_client_num, string & task_num, string & complete_task_num, string & unfinished_task_num, string & fail_task_num, string & event_num) //显示服务端状态
 {
-    pid = format_string_centro_fill(pid, 8, ' ');
-    start_time = format_string_centro_fill(start_time, 19, ' ');
-    client_num = format_string_centro_fill(client_num, 7, ' ');
-    online_client_num = format_string_centro_fill(online_client_num, 12, ' ');
-    offline_client_num = format_string_centro_fill(offline_client_num, 12, ' ');
-    task_num = format_string_centro_fill(task_num, 10, ' ');
-    complete_task_num = format_string_centro_fill(complete_task_num, 12, ' ');
-    unfinished_task_num = format_string_centro_fill(unfinished_task_num, 12, ' ');
-    fail_task_num = format_string_centro_fill(fail_task_num, 10, ' ');
-    event_num = format_string_centro_fill(event_num, 12, ' ');
+    vector<string> values;
+    vector<WNH_SHELL_TABLES_FONT_COLOR> color;
+    vector<unsigned int> values_width;
+
+    string str_temp;
+    str_temp = str_temp + PROGRAM_NAME + " 服务端状态信息显示";
+    set_vector_values(true, values, str_temp);
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDMAGENTA);
+    set_vector_values(true, values_width, 132);
+    shell_tables.add_unit(values, color, values_width);
+
+    set_vector_values(true, values, "服务端PID", "服务端启动时间", "客户端数" ,"在线客户端数" ,"离线客户端数" ,"全部任务数" ,"已完成任务数" ,"未完成任务数" ,"失败任务数" ,"未转化事件数");
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN);
+    set_vector_values(true, values_width, 9, 19, 8, 12, 12, 15, 14, 12, 10, 12);
+    shell_tables.add_unit(values, color, values_width);
+
+    set_vector_values(true, values, pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW);
+    shell_tables.add_unit(values, color, values_width);
+
     WNH_DISPLAY_STYLE_HIDE_CURSOR();
-    cout << WNH_COLOR_BOLDWHITE << "┌────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│                                                  " << WNH_COLOR_BOLDMAGENTA << PROGRAM_NAME << " 服务端状态信息显示" << WNH_COLOR_BOLDWHITE << "                                                │" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├─────────┬───────────────────┬────────┬─────────────┬─────────────┬───────────┬─────────────┬─────────────┬───────────┬─────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "服务端PID" << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "   服务端启动时间  " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "客户端数"   << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "在线客户端数 "     << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "离线客户端数 "       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "全部任务数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN  << "已完成任务数 "      << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "未完成任务数 "       << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN << "失败任务数 "   << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDCYAN   << "未转化事件数 " << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "├─────────┼───────────────────┼────────┼─────────────┼─────────────┼───────────┼─────────────┼─────────────┼───────────┼─────────────┤" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << pid        << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << start_time         << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << client_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << online_client_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED  << offline_client_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << task_num    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDBLUE << complete_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << unfinished_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDRED  << fail_task_num << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_BOLDYELLOW << event_num    << WNH_COLOR_BOLDWHITE << "│" << WNH_COLOR_RESET << endl;
-    cout << WNH_COLOR_BOLDWHITE << "└─────────┴───────────────────┴────────┴─────────────┴─────────────┴───────────┴─────────────┴─────────────┴───────────┴─────────────┘" << WNH_COLOR_RESET << endl;
+    shell_tables.show_tables();
     WNH_DISPLAY_STYLE_SHOW_CURSOR_S();
+    shell_tables.clear();
+
     return true;
 }
 

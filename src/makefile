@@ -6,7 +6,8 @@ CC_FLAG= -g -Wall -std=c++11 -O3
 INC=-lstdc+ -lcrypto
 LIB=-pthread -lcrypto -lsqlite3 -luuid
 
-CFLAGS=-DSOMPLE_LOGS -DDEBUG_MODE_LOGS
+#CFLAGS=-DSOMPLE_LOGS -DDEBUG_MODE_LOGS
+CFLAGS=-DDEBUG_MODE_LOGS
 
 SRCS=include/wnh_base_class/wnh_base_class.cpp \
 include/wnh_filesync_init/wnh_filesync_init.cpp \

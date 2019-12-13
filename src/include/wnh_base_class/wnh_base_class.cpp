@@ -67,17 +67,10 @@ string & wnh_base_class::replace_all_distinct(string & str, const string & old_v
 string wnh_base_class::format_string_left_fill(const string & str, const unsigned int & length, const char & chr) //使用指定字符将字符串左填充到指定长度
 {
     string str_temp = str;
-    string chr_temp = "";
-    chr_temp = chr_temp + chr;
     unsigned long num = get_chinese_num(str);
-    if(length >= str.length() - num)
+    while(length > (str_temp.size() - num))
     {
-        unsigned int str_length = str.length() - num;
-        for(unsigned int i =0; i <= length - str_length; i ++)
-        {
-            //WNHINFO("i:" << i);
-            str_temp = chr_temp + str_temp;
-        }
+        str_temp = chr + str_temp;
     }
     return str_temp;
 }
@@ -86,14 +79,9 @@ string wnh_base_class::format_string_right_fill(const string & str, const unsign
 {
     string str_temp = str;
     unsigned long num = get_chinese_num(str);
-    if(length >= str.length() - num)
+    while(length > (str_temp.size() - num))
     {
-        unsigned int str_length = str.length() - num;
-        for(unsigned int i =0; i <= length - str_length; i ++)
-        {
-           // WNHINFO("i:" << i);
-            str_temp = str_temp + chr;
-        }
+        str_temp = str_temp + chr;
     }
     return str_temp;
 }
@@ -102,31 +90,19 @@ string wnh_base_class::format_string_centro_fill(const string & str, const unsig
 {
     string str_temp = str;
     unsigned long num = get_chinese_num(str);
-    if(length >= str_temp.length() - num)
+    //WNHINFO("str:" << str << ", length:" << length << ", str_temp.size():" << str_temp.size() << ", num:" << num);
+    bool status_temp = true;
+    while(length > (str_temp.size() - num))
     {
-        unsigned int str_length = str_temp.length() - num;
-        if((length - str_length) % 2 != 0)
+        if(status_temp == true)
         {
-            for(unsigned int i =0; i <= (length - str_length)/2; i ++)
-            {
-                //WNHINFO("i:" << i);
-                str_temp = chr + str_temp;
-            }
+            str_temp = str_temp + chr;
+            status_temp = false;
         }
         else
         {
-
-            for(unsigned int i =0; i <= (length - str_length)/2 - 1 && length != str_length; i ++)
-            {
-                //WNHINFO("i:" << i << ", (length - str_length)/2 - 1:" << (length - str_length)/2 - 1 << ", length:" << length << ", str_length:" << str_length);
-                str_temp = chr + str_temp;
-            }
-        }
-        str_length = str_temp.length() - num;
-        for(unsigned int i =0; i <= length - str_length; i ++)
-        {
-            //WNHINFO("i:" << i);
-            str_temp = str_temp + chr;
+            str_temp = chr + str_temp;
+            status_temp = true;
         }
     }
     return str_temp;
@@ -246,6 +222,16 @@ string wnh_base_class::safe_str_substr_left(string & str, const int & num) //安
     //WNHDEBUG("str_temp:" << str_temp << ", str:" << str);
     return str_temp;
 }
+
+//template <typename Type>
+//bool wnh_base_class::copy_vector_values(Type & vector_1, const Type & vector_2)
+//{
+//    for(unsigned int i = 0; i < vector_2.size(); i++)
+//    {
+//        vector_1.push_back(vector_2[i]);
+//    }
+//    return true;
+//}
 
 //template <typename Type_v, typename Type>
 //void wnh_base_class::set_vector_values(Type_v & values, const Type & arg) //设置vector变量值

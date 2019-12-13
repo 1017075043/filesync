@@ -13,6 +13,7 @@ private:
         string name;
         wnh_config conf; //配置存储
     };
+    bool use_temp;
 
 public:
     int unit_num; //节个数

@@ -52,6 +52,9 @@ public:
     string safe_str_substr_left(string & str, const int & num); //安全的字符串切割(从左到右),处理切割到临界点是中文会乱码的问题
     int transform_display_width(const string & str, const int & display_width); //转换显示宽度为字符串长度
 
+    //template <typename Type>
+    //bool copy_vector_values(Type & vector_1, const Type & vector_2);
+
     //template <typename Type_v, typename Type>
     //void set_vector_values(Type_v & values, const Type & arg); //设置vector变量值
 

@@ -4,6 +4,7 @@ wnh_config_ini::wnh_config_ini()
 {
     WNHDEBUG("wnh_config_ini 构造");
     unit_num = 0;
+    use_temp = false;
 }
 
 wnh_config_ini::~wnh_config_ini()
@@ -15,6 +16,7 @@ wnh_config_ini::~wnh_config_ini()
 void wnh_config_ini::read_config_ini(const string & config_ini_path)
 {
     WNHDEBUG(config_ini_path);
+    use_temp = true;
     ifstream fin(config_ini_path.c_str());
     if (!fin)
     {
@@ -55,6 +57,7 @@ void wnh_config_ini::read_config_ini(const string & config_ini_path)
 void wnh_config_ini::read_config_ini(const string & config_ini_path, const bool & space) //读取配置文件
 {
     WNHDEBUG(config_ini_path);
+    use_temp = true;
     ifstream fin(config_ini_path.c_str());
     if (!fin)
     {
@@ -115,8 +118,11 @@ void wnh_config_ini::show_configure_ini()
 
 void wnh_config_ini::clean_configure_ini()
 {
-    if(unit_num == 0)
+    if(unit_num == 0 && use_temp == false)
     {
+        //unit[0]->conf.delete_list();
+        //delete unit[0];
+        //unit[0] = nullptr;
         return;
     }
     for(int i = 0; i <= unit_num; i++)
@@ -126,6 +132,7 @@ void wnh_config_ini::clean_configure_ini()
         unit[i] = nullptr;
     }
     unit_num = 0;
+    use_temp = false;
 }
 
 vector<string> wnh_config_ini::get_conf(const string & unit_name, const string & conf_name)

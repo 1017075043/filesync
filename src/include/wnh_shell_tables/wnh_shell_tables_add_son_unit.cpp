@@ -35,15 +35,15 @@ bool wnh_shell_tables::add_son_unit(const int & num) //添加子行
     else
     {
         WNHDEBUG("一次添加子行就可以了");
-        return true;
     }
+    return true;
 }
 
 
 bool wnh_shell_tables::add_son_unit(const int & num, const int & son_num) //添加子行
 {
     bool is_repeat = false;
-    for(int i = 0; i < tables_unit_son[son_num].size(); i ++)
+    for(int i = 0; i < (int)tables_unit_son[son_num].size(); i ++)
     {
         unsigned int values_display_width = tables_unit_son[son_num][i].size() - get_chinese_num(tables_unit_son[son_num][i]);
         if(values_display_width > tables_unit[num].value_width[i])
@@ -75,6 +75,6 @@ bool wnh_shell_tables::add_son_unit(const int & num, const int & son_num) //添�
     else
     {
         WNHDEBUG("一次添加子行就可以了");
-        return true;
     }
+    return true;
 }

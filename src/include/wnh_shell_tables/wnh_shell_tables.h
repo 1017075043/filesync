@@ -112,6 +112,11 @@ public:
 
     bool add_son_unit(const int & num); //添加子行
     bool add_son_unit(const int & num, const int & son_num); //添加子行
+
+    template <typename Type, typename Types>
+    bool copy_vector_values(Type & vec_1, Types & vec_2);
+
+    void clear(); //清理数据
 };
 
 #endif

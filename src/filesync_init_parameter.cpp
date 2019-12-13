@@ -51,22 +51,22 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
     if(filesync_start_mode == "server")
     {
 
-        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_server_config_path=" << filesync_server_config_path << ", filesync_server_pid_path=" << filesync_server_pid_path << ", filesync_server_root_limit=" << filesync_server_root_limit << ", filesync_server_logs_level=" << filesync_server_logs_level);
+        WNHDEBUG("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_server_config_path=" << filesync_server_config_path << ", filesync_server_pid_path=" << filesync_server_pid_path << ", filesync_server_root_limit=" << filesync_server_root_limit << ", filesync_server_logs_level=" << filesync_server_logs_level);
     }
     else if(filesync_start_mode == "client")
     {
         if(filesync_client_mode == ip_mode)
         {
-            WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_client_pid_path=" << filesync_client_pid_path << ", filesync_client_root_limit=" << filesync_client_root_limit << ", filesync_client_logs_level=" << filesync_client_logs_level);
+            WNHDEBUG("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_client_pid_path=" << filesync_client_pid_path << ", filesync_client_root_limit=" << filesync_client_root_limit << ", filesync_client_logs_level=" << filesync_client_logs_level);
         }
         else if(filesync_client_mode == config_mode)
         {
-            WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_client_config_path=" << filesync_client_config_path << ", filesync_client_pid_path=" << filesync_client_pid_path << ", filesync_client_root_limit=" << filesync_client_root_limit << ", filesync_client_logs_level=" << filesync_client_logs_level);
+            WNHDEBUG("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_client_config_path=" << filesync_client_config_path << ", filesync_client_pid_path=" << filesync_client_pid_path << ", filesync_client_root_limit=" << filesync_client_root_limit << ", filesync_client_logs_level=" << filesync_client_logs_level);
         }
     }
     else if(filesync_start_mode == "control")
     {
-        WNHINFO("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_control_use_parameter=" << filesync_control_use_parameter << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_control_logs_level=" << filesync_control_logs_level);
+        WNHDEBUG("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_control_use_parameter=" << filesync_control_use_parameter << ", filesync_server_ip=" << filesync_server_ip << ", filesync_server_port=" << filesync_server_port << ", filesync_control_logs_level=" << filesync_control_logs_level);
     }
 }
 

@@ -16,12 +16,17 @@ class wnh_filesync_control : public wnh_tcp_client
 private:
     string ip; //服务端IP
     int port; //服务端使用的端口
-
     template <typename Type_v, typename Type>
     void set_vector_values(Type_v & values, const Type & arg); //设置vector变量值
 
     template <typename Type_v, typename Type, typename ... Types>
     void set_vector_values(Type_v & values, const Type & arg,const Types & ... args); //设置vector变量值
+
+    template <typename Type_v, typename Type>
+    void set_vector_values(const bool & status, Type_v & values, const Type & arg); //设置vector变量值
+
+    template <typename Type_v, typename Type, typename ... Types>
+    void set_vector_values(const bool & status, Type_v & values, const Type & arg,const Types & ... args); //设置vector变量值
 
 public:
     wnh_filesync_control();
@@ -55,6 +60,8 @@ public:
     bool send_get_client_status_info(string & client_status_info_file_path); //向服务器发送获取客户端状态信息信号, 且获取客户端状态信息文件路径
     bool show_client_status_info(const string & client_status_info_file_path); //显示客户端状态
     int show_client_status_info(const string & client_status_info_file_path, const int & offset); //显示客户端状态
+    vector<string> get_client_status_info(const string & client_status_info_file_path); //获取客户端状态信息
+    bool show_client_status_info_son(const vector<string> & values_ss_temp);  //显示客户端状态
 
     void get_server_and_client_status_info(); //获取服务端和客户端状态信息
     void get_server_and_client_status_info_while(); //获取服务端和客户端状态信息(循环)
@@ -66,6 +73,8 @@ public:
     void get_synv_rule_info(); //获取客户端状态信息
     bool send_get_sync_rule_info(string & sync_rule_info_file_path); //向服务器发送获取同步规则信息信号, 且获取同步规则信息文件路径
     bool show_sync_info_info(const string & sync_info_info_file_path); //显示同步规则信息
+    vector<string> get_sync_info_info(const string & sync_info_info_file_path); //获取同步规则信息
+
     void show_server_license();//显示许可信息
 
     bool send_get_server_license_info(string & license_info); //向服务器发送获许可信息信号, 且获取许可
