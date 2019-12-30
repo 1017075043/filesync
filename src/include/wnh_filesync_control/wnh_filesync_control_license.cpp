@@ -80,19 +80,19 @@ bool wnh_filesync_control::show_server_license_info(const string & license_info)
     //WNHINFO("file_path:" << file_path << ", begin_time:" << begin_time << ", end_time:" << end_time << ", all_time" << all_time << ", remaining_time:" << remaining_time << ", serial_number:" << serial_number);
 
     vector<string> values;
-    vector<WNH_SHELL_TABLES_FONT_COLOR> color;
+    vector<WNH_SHELL_TABLES_FONT_STYLE> color;
     vector<unsigned int> values_width;;
 
     string str_temp;
     str_temp = str_temp + PROGRAM_NAME + " 服务端许可信息显示";
     set_vector_values(true, values, str_temp);
-    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDMAGENTA);
-    set_vector_values(true, values_width, 132);
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDMAGENTA);
+    set_vector_values(true, values_width, 139);
     shell_tables.add_unit(values, color, values_width);
 
     set_vector_values(true, values, "产品序列号", "许可生成时间", "许可到期时间", "许可有效期", "许可剩余有效期", "许可文件路径");
-    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE);
-    set_vector_values(true, values_width, 32, 19, 19, 10, 14, 33);
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE);
+    set_vector_values(true, values_width, 32, 19, 19, 10, 14, 40);
     shell_tables.add_unit(values, color, values_width);
 
     set_vector_values(true, values, serial_number, begin_time, end_time, all_time + "天", remaining_time + "天", file_path);

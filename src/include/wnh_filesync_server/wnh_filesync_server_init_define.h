@@ -39,5 +39,11 @@
 #define DEFAULT_client_STATUS_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "client_status-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
 //默认同步规则信息路径格式
 #define DEFAULT_SYNC_RULE_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_rule-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+//默认同步传输过程信息路径格式
+#define DEFAULT_SYNC_TRANSFER_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_transfer-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+//同步传输过程数据最久时间，单位：秒
+#define SYNC_TRANSFER_MAXIMUM_TIME 600
+//单次同步传输过程数据最大数量
+#define SYNC_TRANSFER_MAXIMUM_LINE_NUM 20
 
 #endif

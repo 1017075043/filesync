@@ -170,6 +170,9 @@ public:
 
     unsigned long get_license_info(); //获取许可信息
     bool accept_get_license_info(const int & nfp, const string & info, const CONNECT_INFO & CONNECT_INFO); //接收获取许可信息
+
+    bool accept_get_sync_transfer_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO); //接收获取同步传输过程信息
+    bool create_sync_transfer_info(const string & sync_transfer_file_path); //创建同步传输过程文件
 };
 
 #endif

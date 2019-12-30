@@ -1,6 +1,6 @@
 #include "wnh_shell_tables.h"
 
-bool wnh_shell_tables::set_unit(const int & num, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color) //设置成员渲染颜色
+bool wnh_shell_tables::set_unit(const int & num, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color) //设置成员渲染颜色
 {
     if(num < line_num)
     {

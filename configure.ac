@@ -64,6 +64,7 @@ src/include/wnh_filesync_client/Makefile
 src/include/wnh_filesync_server/Makefile
 src/include/wnh_filesync_control/Makefile
 src/include/wnh_config_ini/Makefile
+src/include/wnh_config_ini_ex/Makefile
 src/include/wnh_config/Makefile
 src/include/wnh_jwsmtp/Makefile
 src/include/wnh_license/Makefile

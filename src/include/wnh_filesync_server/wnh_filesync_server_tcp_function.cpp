@@ -84,7 +84,7 @@ bool wnh_filesync_server::accept_task_complete_v1(const int & nfp, const string 
                 if(info_temp.substr(0, strlen(WNH_FILESYNC_TASK_COMPLETE_SIGNAL)) == WNH_FILESYNC_TASK_COMPLETE_SIGNAL)
                 {
                     string dst_path = info_temp.substr(strlen(WNH_FILESYNC_TASK_COMPLETE_SIGNAL));
-                    if(!watch.delete_one_task(CONNECT_INFO.client_ip, event_id, src_path, dst_path))
+                    if(!watch.add_complete_task_info(CONNECT_INFO.client_ip, event_id, src_path, dst_path))
                     {
                         WNHERROR(CONNECT_INFO_LOGS << "完成一个任务,但是将任务从数据库从删除时失败了, 动作:"<< watch.event_transform(event_id) << ", 源文件:" << src_path << ", 目标文件:" << dst_path);
                     }
@@ -123,7 +123,7 @@ bool wnh_filesync_server::accept_task_complete(const int & nfp, const string & i
         string event_id = event_temp.substr(0, 1);
         string src_path = event_temp.substr(1);
         add_task_num_for_client_info(nfp, CONNECT_INFO);
-        if(!watch.delete_one_task(CONNECT_INFO.client_ip, event_id, src_path))
+        if(!watch.add_complete_task_info(CONNECT_INFO.client_ip, event_id, src_path))
         {
             WNHERROR(CONNECT_INFO_LOGS << "完成一个任务,但是将任务从数据库从删除时失败了, 动作:"<< watch.event_transform(event_id) << ", 源文件:" << src_path);
         }

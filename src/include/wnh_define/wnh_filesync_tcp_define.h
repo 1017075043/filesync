@@ -63,4 +63,12 @@
 //控制端向服务器发送请求获取许可信息
 #define WNH_FILESYNC_GET_LICENSE_INFO "WNH_FILESYNC_GET_LICENSE_INFO:"
 
+//客户端向服务端发送请求获取同步传输信息
+#define WNH_FILESYNC_SYNC_TRANSFER_INFO "WNH_FILESYNC_SYNC_TRANSFER_INFO:"
+//服务端向客户端回复请求获取同步传输信息:查询不到最新的数据时
+#define WNH_FILESYNC_NOT_OR_FAIL_SYNC_TRANSFER_INFO "WNH_FILESYNC_NOT_OR_FAIL_SYNC_TRANSFER_INFO"
+//同步传输过程标识头
+#define WNH_FILESYNC_RULE_TRANSFER_ID "sync_transfer"
+
+
 #endif

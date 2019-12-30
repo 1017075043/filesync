@@ -14,6 +14,7 @@ using namespace std;
 #include "include/wnh_filesync_server/wnh_filesync_server.h"
 #include "include/wnh_filesync_control/wnh_filesync_control.h"
 #include "include/wnh_shell_tables/wnh_shell_tables.h"
+#include "include/wnh_config_ini_ex/wnh_config_ini_ex.h"
 
 #include "filesync_define.h"
 

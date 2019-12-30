@@ -226,7 +226,7 @@ void wnh_config::show_config()//显示配置
         t->value.set_now_to_head();
         while(t->value.get_now(temp))
         {
-            WNHDEBUG("显示配置列表内容,配置项 name=" << t->name << ", 配置值 value=" << temp);
+            WNHINFO("显示配置列表内容,配置项 name=" << t->name << ", 配置值 value=" << temp);
         }
         if(t->next != nullptr)
         {

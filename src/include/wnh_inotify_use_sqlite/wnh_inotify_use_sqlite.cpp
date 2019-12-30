@@ -19,7 +19,7 @@ void wnh_inotify_use_sqlite::init()
     repeated_event_neglect = true;
     fd = -1;
     this->set_max_user_watches();
-    if(!watch_list_create_db() || !watch_list_drop_table() || !watch_list_create_table() || !event_list_drop_table() || !event_list_create_table() || !task_list_create_table() || !fail_task_list_create_table())
+    if(!watch_list_create_db() || !watch_list_drop_table() || !watch_list_create_table() || !event_list_drop_table() || !event_list_create_table() || !task_list_create_table() || !fail_task_list_create_table() || !complete_task_list_create_table())
     {
         WNHERROR("数据表创建失败");
         exit(1);

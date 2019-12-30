@@ -1,3 +1,10 @@
+2019年12月30日
+升级版本为filesync-v1.0.9
+更新内容
+1.添加wnh_config_ini_ex类,优化配置文件的读取方式,将读取结果直接存放于vector<vector <string> >中
+2.wnh_base添加get_uuid方法.生成32位的uuid
+3.优化wnu_tables类,丰富字体显示格式
+
 2019年12月13日
 升级版本为filesync-v1.0.8
 更新内容

@@ -3,10 +3,10 @@
 bool wnh_shell_tables::add_unit(const vector<string> & value, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
     //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value)");
-    vector<WNH_SHELL_TABLES_FONT_COLOR> color;
+    vector<WNH_SHELL_TABLES_FONT_STYLE> color;
     for(unsigned int i = 0; i < value.size(); i ++)
     {
-        color.push_back(WNH_SHELL_TABLES_FONT_COLOR::RESET);
+        color.push_back(WNH_SHELL_TABLES_FONT_STYLE::RESET);
     }
     return add_unit(value, color, split_line_format);
 }
@@ -14,10 +14,10 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const WNH_SHELL_TA
 bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
     //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align)");
-    vector<WNH_SHELL_TABLES_FONT_COLOR> color;
+    vector<WNH_SHELL_TABLES_FONT_STYLE> color;
     for(unsigned int i = 0; i < value.size(); i ++)
     {
-        color.push_back(WNH_SHELL_TABLES_FONT_COLOR::RESET);
+        color.push_back(WNH_SHELL_TABLES_FONT_STYLE::RESET);
     }
     return add_unit(value, color, align, split_line_format);
 }
@@ -33,9 +33,9 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsig
     return add_unit(value, value_width, align, split_line_format);
 }
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color)");
     vector<WNH_SHELL_TABLES_ALIGN_MODE> align;
     for(unsigned int i = 0; i < value.size(); i ++)
     {
@@ -45,15 +45,15 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_S
 }
 
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color)");
     return add_unit(value, color, align, split_line_format);
 }
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align)");
     vector<unsigned int> value_width;
     for(unsigned int i = 0; i < value.size(); i ++)
     {
@@ -73,24 +73,24 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_S
 bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
     //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align)");
-    vector<WNH_SHELL_TABLES_FONT_COLOR> color;
+    vector<WNH_SHELL_TABLES_FONT_STYLE> color;
     for(unsigned int i = 0; i < value.size(); i ++)
     {
-        color.push_back(WNH_SHELL_TABLES_FONT_COLOR::RESET);
+        color.push_back(WNH_SHELL_TABLES_FONT_STYLE::RESET);
     }
     return add_unit(value, value_width, color, align, split_line_format);
 }
 
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<unsigned int> & value_width)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<unsigned int> & value_width)");
     return add_unit(value, value_width, color, split_line_format);
 }
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color)");
     vector<WNH_SHELL_TABLES_ALIGN_MODE> align;
     for(unsigned int i = 0; i < value.size(); i ++)
     {
@@ -100,39 +100,39 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsig
 }
 
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color)");
     return add_unit(value, value_width, color, align, split_line_format);
 }
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align)");
     return add_unit(value, value_width, color, align, split_line_format);
 }
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width)");
     return add_unit(value, value_width, color, align, split_line_format);
 }
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<unsigned int> & value_width)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<unsigned int> & value_width)");
     return add_unit(value, value_width, color, align, split_line_format);
 }
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color)");
     return add_unit(value, value_width, color, align, split_line_format);
 }
 
-bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
+bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format) //添加成员数据
 {
-    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align)");
+    //WNHINFO("bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align)");
     if(value.size() != value_width.size() || value.size() != color.size() || value.size() != align.size())
     {
         WNHWARN("数据残缺, 成员值数量=" << value.size() << ", 宽度数量=" << value_width.size() << ", 颜色数量=" << color.size() << ", 对齐数量=" << align.size());

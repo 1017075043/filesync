@@ -1,5 +1,62 @@
 #include "wnh_filesync_server.h"
 
+bool wnh_filesync_server::accept_get_sync_transfer_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO) //接收获取同步传输过程信息
+{
+    if(info.substr(0, strlen(WNH_FILESYNC_SYNC_TRANSFER_INFO)) == WNH_FILESYNC_SYNC_TRANSFER_INFO)
+    {
+        string sync_transfer_file_path;
+        sync_transfer_file_path = sync_transfer_file_path + DEFAULT_SYNC_TRANSFER_PATH_FORMAT;
+        if(!create_sync_transfer_info(sync_transfer_file_path))
+        {
+            sync_transfer_file_path.clear();
+            sync_transfer_file_path = sync_transfer_file_path + WNH_FILESYNC_NOT_OR_FAIL_SYNC_TRANSFER_INFO;
+        }
+        if(send_info(nfp, WNH_FILESYNC_SYNC_TRANSFER_INFO + sync_transfer_file_path))
+        {
+            WNHINFO(CONNECT_INFO_LOGS << "接收获取同步传输过程信息, 同步传输过程信息文件路径:" << sync_transfer_file_path);
+            return true;
+        }
+        WNHERROR(CONNECT_INFO_LOGS << "回复接收获取同步传输过程信息时失败了, 同步传输过程信息文件路径:" << sync_transfer_file_path);
+        return true;
+    }
+    return false;
+}
+
+bool wnh_filesync_server::create_sync_transfer_info(const string & sync_transfer_file_path) //创建同步传输过程文件
+{
+    vector<vector<string> > result_data = watch.get_real_time_complete_task_list(SYNC_TRANSFER_MAXIMUM_TIME, SYNC_TRANSFER_MAXIMUM_LINE_NUM);
+    //for(int i = 0; i < (int)result_data.size(); i++)
+    //{
+    //    WNHWARN("client_ip: " << result_data[i][0] << ", event_id: " << result_data[i][1] << ", src_path: " << result_data[i][2] << ", dst_path: " << result_data[i][3] << ", update_date: " << result_data[i][4] << ", complete_date: " << result_data[i][5] << ", read_id:" << result_data[i][6]);
+    //}
+
+    ofstream file_open;
+    file_open.open(sync_transfer_file_path, ios::out | ios::trunc);
+    if(!file_open.is_open())
+    {
+        WNHERROR("打开文件" << sync_transfer_file_path <<  "失败, errno=" << errno << ", mesg=" << strerror(errno));
+        return false;
+    }
+    for(int i = 0; i < (int)result_data.size(); i++)
+    {
+        file_open << "[" << WNH_FILESYNC_RULE_TRANSFER_ID << "_" << i << "]" << endl;
+        file_open << "client_ip=" << result_data[i][0] << endl;
+        file_open << "event_id=" << watch.event_transform(result_data[i][1]) << endl;
+        //file_open << "src_path=" << result_data[i][2] << endl;
+        file_open << "dst_path=" << result_data[i][3] << endl;
+        //file_open << "update_date=" << result_data[i][4] << endl;
+        file_open << "complete_date=" << result_data[i][5] << endl;
+        WNHDEBUG("client_ip: " << result_data[i][0] << ", event_id: " << result_data[i][1] << ", src_path: " << result_data[i][2] << ", dst_path: " << result_data[i][3] << ", update_date: " << result_data[i][4] << ", complete_date: " << result_data[i][5] << ", read_id:" << result_data[i][6]);
+    }
+    if((int)result_data.size() == 0)
+    {
+        WNHDEBUG("查询到当前不存在实时同步传输过程数据");
+        return false;
+    }
+    file_open.close();
+    return true;
+}
+
 bool wnh_filesync_server::accept_get_server_status_info_v1(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO) //接收获取服务端状态信息
 {
     static int temp_client_nfp = 0;

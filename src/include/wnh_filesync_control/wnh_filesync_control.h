@@ -7,7 +7,8 @@ using namespace std;
 #include "wnh_filesync_control_define.h"
 #include "../wnh_define/wnh_filesync_tcp_define.h"
 #include "../wnh_tcp_client/wnh_tcp_client.h"
-#include "../wnh_config_ini/wnh_config_ini.h"
+//#include "../wnh_config_ini/wnh_config_ini.h"
+#include "../wnh_config_ini_ex/wnh_config_ini_ex.h"
 #include "../wnh_system_operation/wnh_system_operation.h"
 #include "../wnh_shell_tables/wnh_shell_tables.h"
 
@@ -35,8 +36,9 @@ public:
     wnh_filesync_control(const string &ip, const int &port);
     ~wnh_filesync_control();
 
-    wnh_config_ini status_info;
-    wnh_config_ini sync_rule_info;
+    wnh_config_ini_ex status_info;
+    wnh_config_ini_ex sync_rule_info;
+    wnh_config_ini_ex sync_transfer_info;
 
     wnh_shell_tables shell_tables;
 
@@ -79,6 +81,11 @@ public:
 
     bool send_get_server_license_info(string & license_info); //向服务器发送获许可信息信号, 且获取许可
     bool show_server_license_info(const string & license_info); //显示许可信息
+
+    void get_sync_transfer_info(); //获取同步传输过程信息
+    bool send_get_sync_transfer_info(string & sync_transfer_file_path); //向服务器发送获取同步传输过程信息信号, 且获取同步传输过程信息文件路径
+    vector<string> get_sync_transfer_data_info(const string & sync_transfer_file_path); //获取同步传输过程数据信息
+    bool show_sync_transfer_info(const string & sync_transfer_file_path); //显示同步传输过程数据信息
 };
 
 #endif

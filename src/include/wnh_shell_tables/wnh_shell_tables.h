@@ -5,35 +5,25 @@ using namespace std;
 
 enum WNH_SHELL_TABLES_ALIGN_MODE
 {
-    left=1,
-    right=2,
-    centro=3
+    left,right,centro
 };
-enum WNH_SHELL_TABLES_FONT_COLOR
+enum WNH_SHELL_TABLES_FONT_STYLE
 {
-    RESET=1,
-    BLACK=2,
-    RED=3,
-    GREEN=4,
-    YELLOW=5,
-    BLUE=6,
-    MAGENTA=7,
-    CYAN=8,
-    WHITE=9,
-    BOLDBLACK=10,
-    BOLDRED=11,
-    BOLDGREEN=12,
-    BOLDYELLOW=13,
-    BOLDBLUE=14,
-    BOLDMAGENTA=15,
-    BOLDCYAN=16,
-    BOLDWHITE=17
+    RESET,
+                         BLACK,                      RED,                      GREEN,                      YELLOW,                      BLUE,                      MAGENTA,                      CYAN,                      WHITE,
+                     BOLDBLACK,                  BOLDRED,                  BOLDGREEN,                  BOLDYELLOW,                  BOLDBLUE,                  BOLDMAGENTA,                  BOLDCYAN,                  BOLDWHITE,
+                 FLASHINGBLACK,              FLASHINGRED,              FLASHINGGREEN,              FLASHINGYELLOW,              FLASHINGBLUE,              FLASHINGMAGENTA,              FLASHINGCYAN,              FLASHINGWHITE,
+                UNDERLINEBLACK,             UNDERLINERED,             UNDERLINEGREEN,             UNDERLINEYELLOW,             UNDERLINEBLUE,             UNDERLINEMAGENTA,             UNDERLINECYAN,             UNDERLINEWHITE,
+             FLASHINGBOLDBLACK,          FLASHINGBOLDRED,          FLASHINGBOLDGREEN,          FLASHINGBOLDYELLOW,          FLASHINGBOLDBLUE,          FLASHINGBOLDMAGENTA,          FLASHINGBOLDCYAN,          FLASHINGBOLDWHITE,
+            UNDERLINEBOLDBLACK,         UNDERLINEBOLDRED,         UNDERLINEBOLDGREEN,         UNDERLINEBOLDYELLOW,         UNDERLINEBOLDBLUE,         UNDERLINEBOLDMAGENTA,         UNDERLINEBOLDCYAN,         UNDERLINEBOLDWHITE,
+        UNDERLINEFLASHINGBLACK,     UNDERLINEFLASHINGRED,     UNDERLINEFLASHINGGREEN,     UNDERLINEFLASHINGYELLOW,     UNDERLINEFLASHINGBLUE,     UNDERLINEFLASHINGMAGENTA,     UNDERLINEFLASHINGCYAN,     UNDERLINEFLASHINGWHITE,
+    UNDERLINEFLASHINGBOLDBLACK, UNDERLINEFLASHINGBOLDRED, UNDERLINEFLASHINGBOLDGREEN, UNDERLINEFLASHINGBOLDYELLOW, UNDERLINEFLASHINGBOLDBLUE, UNDERLINEFLASHINGBOLDMAGENTA, UNDERLINEFLASHINGBOLDCYAN, UNDERLINEFLASHINGBOLDWHITE
+
+
 };
 enum WNH_SHELL_TABLES_SPLIT_LINE_FORMAT
 {
-    NORMAL=1,
-    EMPTY=2,
-    REPEAT=3
+    NORMAL,EMPTY,REPEAT
 };
 
 #include "../wnh_base_class/wnh_base_class.h"
@@ -52,7 +42,7 @@ private:
     {
         vector<string> value; //成员值
         int num;              //成员数量
-        vector<WNH_SHELL_TABLES_FONT_COLOR> color; //每个成员渲染颜色
+        vector<WNH_SHELL_TABLES_FONT_STYLE> color; //每个成员渲染颜色
         vector<WNH_SHELL_TABLES_ALIGN_MODE> align; //每个成员对齐方式
         vector<unsigned int> value_width; //每个成员使用的宽度
         WNH_SHELL_TABLES_SPLIT_LINE_FORMAT split_line_format;//分割线模式
@@ -76,34 +66,34 @@ public:
 
     bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
     bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
-    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
 
-    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
-    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
 
     bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
     bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
 
-    bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
-    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
 
-    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
-    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
 
-    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
-    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<unsigned int> & value_width, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
 
-    bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
-    bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
+    bool add_unit(const vector<string> & value, const vector<unsigned int> & value_width, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color, const vector<WNH_SHELL_TABLES_ALIGN_MODE> & align, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT & split_line_format = WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::NORMAL); //添加成员数据
 
-    bool set_unit(const int & num, const vector<WNH_SHELL_TABLES_FONT_COLOR> & color); //设置成员渲染颜色
+    bool set_unit(const int & num, const vector<WNH_SHELL_TABLES_FONT_STYLE> & color); //设置成员渲染颜色
     bool set_unit(const int & num, const vector<WNH_SHELL_TABLES_ALIGN_MODE> align); //设置成员对齐方式
     bool set_unit(const int & num, const vector<unsigned int> value_width); //设置成员使用的宽度
     bool set_unit(const int & num, const WNH_SHELL_TABLES_SPLIT_LINE_FORMAT split_line_format); //设置分割线模式
     bool set_unit(const int & num, const vector<bool> separator_format); //设置成员分隔符模式
 
     void show_unit(); //显示成员
-    string color_transform(WNH_SHELL_TABLES_FONT_COLOR color, bool mode); //颜色转换
+    string sytle_transform(WNH_SHELL_TABLES_FONT_STYLE color, bool mode); //颜色转换
     string align_transform(WNH_SHELL_TABLES_ALIGN_MODE align); //对齐方式转换
     string split_line_format_transform(WNH_SHELL_TABLES_SPLIT_LINE_FORMAT split_line_format); //分隔行格式转换
     void show_tables(); //显示表格

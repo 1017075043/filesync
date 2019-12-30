@@ -73,7 +73,7 @@ void wnh_shell_tables::show_unit() //显示成员
     {
         for(int j = 0; j < tables_unit[i].num; j++)
         {
-            WNHINFO("tables_unit[" << i << "].unit[" << j << "]: value=" << tables_unit[i].value[j] << ", color=" << color_transform(tables_unit[i].color[j], false) << ", align=" << align_transform(tables_unit[i].align[j]) << ", value_width=" << tables_unit[i].value_width[j] << ", split_line_format=" << split_line_format_transform(tables_unit[i].split_line_format));
+            WNHINFO("tables_unit[" << i << "].unit[" << j << "]: value=" << tables_unit[i].value[j] << ", color=" << sytle_transform(tables_unit[i].color[j], false) << ", align=" << align_transform(tables_unit[i].align[j]) << ", value_width=" << tables_unit[i].value_width[j] << ", split_line_format=" << split_line_format_transform(tables_unit[i].split_line_format));
         }
     }
 }
@@ -121,12 +121,12 @@ void wnh_shell_tables::show_tables() //显示表格
                 if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                 {
                     //WNHDEBUG("1");
-                    cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
+                    cout << sytle_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
                 }
                 else
                 {
                     //WNHDEBUG("2");
-                    cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << " ";
+                    cout << sytle_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << " ";
                 }
             }
             else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::centro)
@@ -134,13 +134,13 @@ void wnh_shell_tables::show_tables() //显示表格
                 if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                 {
                     //WNHDEBUG("3");
-                    cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
+                    cout << sytle_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
                     //WNHDEBUG("4");
                 }
                 else
                 {
                     //WNHDEBUG("4");
-                    cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << " ";
+                    cout << sytle_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << " ";
                 }
             }
             else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::left)
@@ -148,12 +148,12 @@ void wnh_shell_tables::show_tables() //显示表格
                 if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                 {
                     //WNHDEBUG("5");
-                    cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
+                    cout << sytle_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
                 }
                 else
                 {
                     //WNHDEBUG("6");
-                    cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << " ";
+                    cout << sytle_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit[i].value[j], tables_unit[i].value_width[j], ' ') << " ";
                 }
             }
         }
@@ -168,33 +168,33 @@ void wnh_shell_tables::show_tables() //显示表格
                 {
                     if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                     {
-                        cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
+                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
                     }
                     else
                     {
-                        cout << color_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
+                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
                     }
                 }
                 else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::centro)
                 {
                     if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                     {
-                        cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
+                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
                     }
                     else
                     {
-                        cout << color_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
+                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
                     }
                 }
                 else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::left)
                 {
                     if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                     {
-                        cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
+                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
                     }
                     else
                     {
-                        cout << color_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
+                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
                     }
                 }
             }

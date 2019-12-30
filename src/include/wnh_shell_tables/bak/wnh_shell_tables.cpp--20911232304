@@ -151,7 +151,7 @@ void wnh_shell_tables::show_unit() //显示成员
     {
         for(int j = 0; j < tables_unit[i].num; j++)
         {
-            WNHINFO("tables_unit[" << i << "].unit[" << j << "]: value=" << tables_unit[i].value[j] << ", color=" << color_transform(tables_unit[i].color[j]) << ", align=" << tables_unit[i].align[j] << ", value_width=" << tables_unit[i].value_width[j]);
+            WNHINFO("tables_unit[" << i << "].unit[" << j << "]: value=" << tables_unit[i].value[j] << ", color=" << sytle_transform(tables_unit[i].color[j]) << ", align=" << tables_unit[i].align[j] << ", value_width=" << tables_unit[i].value_width[j]);
         }
     }
 }
@@ -259,24 +259,24 @@ void wnh_shell_tables::show_tables() //显示表格
     cout << WNH_TABLES_RIGHT_ON << endl;
 }
 
-string wnh_shell_tables::color_transform(string color) //颜色转换
+string wnh_shell_tables::sytle_transform(string color) //颜色转换
 {
-    if(color == WNH_COLOR_RESET) return "WNH_COLOR_RESET";
-    if(color == WNH_COLOR_BLACK) return "WNH_COLOR_BLACK";
-    if(color == WNH_COLOR_RED) return "WNH_COLOR_RED";
-    if(color == WNH_COLOR_GREEN) return "WNH_COLOR_GREEN";
-    if(color == WNH_COLOR_YELLOW) return "WNH_COLOR_YELLOW";
-    if(color == WNH_COLOR_BLUE) return "WNH_COLOR_BLUE";
-    if(color == WNH_COLOR_MAGENTA) return "WNH_COLOR_MAGENTA";
-    if(color == WNH_COLOR_CYAN) return "WNH_COLOR_CYAN";
-    if(color == WNH_COLOR_WHITE) return "WNH_COLOR_WHITE";
-    if(color == WNH_COLOR_BOLDBLACK) return "WNH_COLOR_BOLDBLACK";
-    if(color == WNH_COLOR_BOLDRED) return "WNH_COLOR_BOLDRED";
-    if(color == WNH_COLOR_BOLDGREEN) return "WNH_COLOR_BOLDGREEN";
-    if(color == WNH_COLOR_BOLDYELLOW) return "WNH_COLOR_BOLDYELLOW";
-    if(color == WNH_COLOR_BOLDBLUE) return "WNH_COLOR_BOLDBLUE";
-    if(color == WNH_COLOR_BOLDMAGENTA) return "WNH_COLOR_BOLDMAGENTA";
-    if(color == WNH_COLOR_BOLDCYAN) return "WNH_COLOR_BOLDCYAN";
-    if(color == WNH_COLOR_BOLDWHITE) return "WNH_COLOR_BOLDWHITE";
+    if(color == WNH_FONT_COLOR_RESET) return "WNH_FONT_COLOR_RESET";
+    if(color == WNH_FONT_COLOR_BLACK) return "WNH_FONT_COLOR_BLACK";
+    if(color == WNH_FONT_COLOR_RED) return "WNH_FONT_COLOR_RED";
+    if(color == WNH_FONT_COLOR_GREEN) return "WNH_FONT_COLOR_GREEN";
+    if(color == WNH_FONT_COLOR_YELLOW) return "WNH_FONT_COLOR_YELLOW";
+    if(color == WNH_FONT_COLOR_BLUE) return "WNH_FONT_COLOR_BLUE";
+    if(color == WNH_FONT_COLOR_MAGENTA) return "WNH_FONT_COLOR_MAGENTA";
+    if(color == WNH_FONT_COLOR_CYAN) return "WNH_FONT_COLOR_CYAN";
+    if(color == WNH_FONT_COLOR_WHITE) return "WNH_FONT_COLOR_WHITE";
+    if(color == WNH_FONT_COLOR_BOLDBLACK) return "WNH_FONT_COLOR_BOLDBLACK";
+    if(color == WNH_FONT_COLOR_BOLDRED) return "WNH_FONT_COLOR_BOLDRED";
+    if(color == WNH_FONT_COLOR_BOLDGREEN) return "WNH_FONT_COLOR_BOLDGREEN";
+    if(color == WNH_FONT_COLOR_BOLDYELLOW) return "WNH_FONT_COLOR_BOLDYELLOW";
+    if(color == WNH_FONT_COLOR_BOLDBLUE) return "WNH_FONT_COLOR_BOLDBLUE";
+    if(color == WNH_FONT_COLOR_BOLDMAGENTA) return "WNH_FONT_COLOR_BOLDMAGENTA";
+    if(color == WNH_FONT_COLOR_BOLDCYAN) return "WNH_FONT_COLOR_BOLDCYAN";
+    if(color == WNH_FONT_COLOR_BOLDWHITE) return "WNH_FONT_COLOR_BOLDWHITE";
     return "null";
 }

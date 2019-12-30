@@ -54,12 +54,12 @@
 			{ \
 				case WNH_LOGS_MODE_S: \
 					LOGS_MUTEX_LOCK.lock(); \
-					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
 					LOGS_MUTEX_LOCK.unlock(); \
 					break; \
 				case WNH_LOGS_MODE_XS: \
 					LOGS_MUTEX_LOCK.lock(); \
-					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
 					LOGS_MUTEX_LOCK.unlock(); \
 					break; \
 			} \
@@ -71,34 +71,34 @@
 			{ \
 				case WNH_LOGS_MODE_S: \
 					LOGS_MUTEX_LOCK.lock(); \
-					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
 					LOGS_MUTEX_LOCK.unlock(); \
 					break; \
 				case WNH_LOGS_MODE_XS: \
 					LOGS_MUTEX_LOCK.lock(); \
-					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
 					LOGS_MUTEX_LOCK.unlock(); \
 					break; \
 				case WNH_LOGS_MODE_W: \
 					LOGS_MUTEX_LOCK.lock(); \
-					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
 					LOGS_MUTEX_LOCK.unlock(); \
 					break; \
 				case WNH_LOGS_MODE_XW: \
 					LOGS_MUTEX_LOCK.lock(); \
-					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
 					LOGS_MUTEX_LOCK.unlock(); \
 					break; \
 				case WNH_LOGS_MODE_SW: \
 					LOGS_MUTEX_LOCK.lock(); \
-					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
+					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
 					LOGS_MUTEX_LOCK.unlock(); \
 					break; \
 				case WNH_LOGS_MODE_XSW: \
 					LOGS_MUTEX_LOCK.lock(); \
-					cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+					cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
+					WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
 					LOGS_MUTEX_LOCK.unlock(); \
 				break; \
 			} \
@@ -115,12 +115,12 @@
         { \
             case WNH_LOGS_MODE_S: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XS: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
         } \
@@ -132,34 +132,34 @@
         { \
             case WNH_LOGS_MODE_S: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XS: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_W: \
                 LOGS_MUTEX_LOCK.lock(); \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XW: \
                 LOGS_MUTEX_LOCK.lock(); \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_SW: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XSW: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
         } \
@@ -173,12 +173,12 @@
         { \
             case WNH_LOGS_MODE_S: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XS: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
         } \
@@ -190,34 +190,34 @@
         { \
             case WNH_LOGS_MODE_S: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XS: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_W: \
                 LOGS_MUTEX_LOCK.lock(); \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XW: \
                 LOGS_MUTEX_LOCK.lock(); \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_SW: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XSW: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             } \
@@ -231,12 +231,12 @@
     { \
         case WNH_LOGS_MODE_S: \
             LOGS_MUTEX_LOCK.lock(); \
-            cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+            cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
             LOGS_MUTEX_LOCK.unlock(); \
             break; \
         case WNH_LOGS_MODE_XS: \
             LOGS_MUTEX_LOCK.lock(); \
-            cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+            cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
             LOGS_MUTEX_LOCK.unlock(); \
             break; \
     } \
@@ -248,34 +248,34 @@
         { \
             case WNH_LOGS_MODE_S: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XS: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_W: \
                 LOGS_MUTEX_LOCK.lock(); \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XW: \
                 LOGS_MUTEX_LOCK.lock(); \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_SW: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
             case WNH_LOGS_MODE_XSW: \
                 LOGS_MUTEX_LOCK.lock(); \
-                cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
-                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \
+                cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
+                WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \
                 LOGS_MUTEX_LOCK.unlock(); \
                 break; \
         } \
@@ -293,34 +293,34 @@
 /*      { \                                                                                                                                                                                                 */
 /*          case WNH_LOGS_MODE_S: \                                                                                                                                                                         */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \            */
+/*              cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \            */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XS: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                            */
+/*              cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                            */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_W: \                                                                                                                                                                         */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                      */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                      */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XW: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                                      */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                                      */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_SW: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \            */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                      */
+/*              cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \            */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                      */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XSW: \                                                                                                                                                                       */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                            */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                                      */
+/*              cout << WNH_FONT_COLOR_GREEN << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                            */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[DEBUG]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                                      */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*          break; \                                                                                                                                                                                        */
 /*      } \                                                                                                                                                                                                 */
@@ -332,34 +332,34 @@
 /*      { \                                                                                                                                                                                                 */
 /*          case WNH_LOGS_MODE_S: \                                                                                                                                                                         */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \             */
+/*              cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \             */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XS: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                             */
+/*              cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                             */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_W: \                                                                                                                                                                         */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                       */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                       */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XW: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                                       */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                                       */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_SW: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \             */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                       */
+/*              cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \             */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                       */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XSW: \                                                                                                                                                                       */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                             */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                                       */
+/*              cout << WNH_FONT_COLOR_WHITE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                             */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[INFO]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                                       */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*      } \                                                                                                                                                                                                 */
@@ -371,34 +371,34 @@
 /*      { \                                                                                                                                                                                                 */
 /*          case WNH_LOGS_MODE_S: \                                                                                                                                                                         */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \            */
+/*              cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \            */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XS: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                            */
+/*              cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                            */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_W: \                                                                                                                                                                         */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                       */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                       */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XW: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                                       */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                                       */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_SW: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \            */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                       */
+/*              cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \            */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                       */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XSW: \                                                                                                                                                                       */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                            */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                                       */
+/*              cout << WNH_FONT_COLOR_YELLOW << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                            */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[WARN]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                                       */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          } \                                                                                                                                                                                             */
@@ -410,34 +410,34 @@
 /*      { \                                                                                                                                                                                                 */
 /*          case WNH_LOGS_MODE_S: \                                                                                                                                                                         */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \              */
+/*              cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \              */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XS: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                              */
+/*              cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                              */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_W: \                                                                                                                                                                         */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                      */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                      */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XW: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                                      */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                                      */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_SW: \                                                                                                                                                                        */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \              */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                      */
+/*              cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \              */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __FILE__ << "]-[" << __func__ << "]-[" << __LINE__ << "]--[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                      */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*          case WNH_LOGS_MODE_XSW: \                                                                                                                                                                       */
 /*              LOGS_MUTEX_LOCK.lock(); \                                                                                                                                                                   */
-/*              cout << WNH_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                              */
-/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_COLOR_WHITE << endl; \                                                                                      */
+/*              cout << WNH_FONT_COLOR_RED << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                              */
+/*              WNH_LOGS_FILE << "[" << LOCALTIME << "]-[ERROR]-[" << __VA_ARGS__ << "]" << WNH_FONT_COLOR_WHITE << endl; \                                                                                      */
 /*              LOGS_MUTEX_LOCK.unlock(); \                                                                                                                                                                 */
 /*              break; \                                                                                                                                                                                    */
 /*      } \                                                                                                                                                                                                 */

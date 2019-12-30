@@ -101,21 +101,21 @@ bool wnh_filesync_control::send_get_client_status_info(string & client_status_in
 
 vector<string> wnh_filesync_control::get_client_status_info(const string & client_status_info_file_path) //获取客户端状态信息
 {
-    status_info.read_config_ini(client_status_info_file_path, false);\
+    status_info.read_config_ini(client_status_info_file_path, false);
     bool status_temp = true;
     vector<string> values_ss_temp;
-    for(int i = 0; i <= status_info.unit_num; i++)
+    for(int i = 0; i <= status_info.config_unit_num; i++)
     {
-        if(status_info.unit[i]->name.substr(0, strlen(WNH_FILESYNC_CLIENT_STATUS_ID)) == WNH_FILESYNC_CLIENT_STATUS_ID)
+        if(status_info.config_unit[i].name.substr(0, strlen(WNH_FILESYNC_CLIENT_STATUS_ID)) == WNH_FILESYNC_CLIENT_STATUS_ID)
         {
-            string client_ip = status_info.unit[i]->conf.get_one_config("client_ip"); //客户端IP
-            string status = status_info.unit[i]->conf.get_one_config("status"); //状态
-            string begin_connect_time = status_info.unit[i]->conf.get_one_config("begin_connect_time"); //启动时间
-            string last_connect_time = status_info.unit[i]->conf.get_one_config("last_connect_time"); //最后活动时间
-            string task_num = status_info.unit[i]->conf.get_one_config("task_num"); //全部任务数
-            string complete_task_num = status_info.unit[i]->conf.get_one_config("complete_task_num"); //已完成任务数
-            string unfinished_task_num = status_info.unit[i]->conf.get_one_config("unfinished_task_num"); //未完成任务数
-            string fail_task_num = status_info.unit[i]->conf.get_one_config("fail_task_num"); //失败任务数
+            string client_ip = status_info.get_conf_one(i, "client_ip"); //客户端IP
+            string status = status_info.get_conf_one(i, "status"); //状态
+            string begin_connect_time = status_info.get_conf_one(i, "begin_connect_time"); //启动时间
+            string last_connect_time = status_info.get_conf_one(i, "last_connect_time"); //最后活动时间
+            string task_num = status_info.get_conf_one(i, "task_num"); //全部任务数
+            string complete_task_num = status_info.get_conf_one(i, "complete_task_num"); //已完成任务数
+            string unfinished_task_num = status_info.get_conf_one(i, "unfinished_task_num"); //未完成任务数
+            string fail_task_num = status_info.get_conf_one(i, "fail_task_num"); //失败任务数
             status == "0" ? status_temp = false : status_temp = true;
             status == "0" ? status = "离线" : status = "在线";
             char timestring[20] = "";
@@ -138,7 +138,7 @@ vector<string> wnh_filesync_control::get_client_status_info(const string & clien
             values_ss_temp.push_back(fail_task_num);
         }
     }
-    status_info.clean_configure_ini();
+    //status_info.clean_configure_ini();
     if(unlink(client_status_info_file_path.c_str()) != 0)
     {
         WNHWARN("临时文件," << client_status_info_file_path << ", 删除失败, errno=" << errno << ", mesg=" << strerror(errno));
@@ -182,18 +182,18 @@ int wnh_filesync_control::show_client_status_info(const string & client_status_i
 bool wnh_filesync_control::show_client_status_info_son(const vector<string> & values_ss_temp)
 {
     vector<string> values;
-    vector<WNH_SHELL_TABLES_FONT_COLOR> color;
+    vector<WNH_SHELL_TABLES_FONT_STYLE> color;
     vector<unsigned int> values_width;
 
     string str_temp;
     str_temp = str_temp + PROGRAM_NAME + " 客户端状态信息显示";
     set_vector_values(true, values, str_temp);
-    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDMAGENTA);
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDMAGENTA);
     set_vector_values(true, values_width, 132);
     shell_tables.add_unit(values, color, values_width);
 
     set_vector_values(true, values, "客户端IP", "客户端状态", "客户端启动时间", "客户端最后活动时间", "全部任务数", "已完成任务数", "未完成任务数", "失败任务数");
-    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN);
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN);
     set_vector_values(true, values_width, 33, 10, 19, 19, 10, 12, 12, 10);
     shell_tables.add_unit(values, color, values_width);
 
@@ -202,11 +202,25 @@ bool wnh_filesync_control::show_client_status_info_son(const vector<string> & va
         set_vector_values(true, values, values_ss_temp[i * 8 + 0], values_ss_temp[i * 8 + 1], values_ss_temp[i * 8 + 2], values_ss_temp[i * 8 + 3], values_ss_temp[i * 8 + 4], values_ss_temp[i * 8 + 5], values_ss_temp[i * 8 + 6], values_ss_temp[i * 8 + 7]);
         if(values_ss_temp[i * 8 + 1] == "在线")
         {
-            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDGREEN, WNH_SHELL_TABLES_FONT_COLOR::BOLDGREEN, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED);
+            if(values_ss_temp[i * 8 + 7] != "0")
+            {
+                set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::FLASHINGBOLDRED);
+            }
+            else
+            {
+                set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN);
+            }
         }
         else
         {
-            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED);
+            if(values_ss_temp[i * 8 + 7] != "0")
+            {
+                set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::FLASHINGBOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::FLASHINGBOLDRED);
+            }
+            else
+            {
+                set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::FLASHINGBOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN);
+            }
         }
         shell_tables.add_unit(values, color, values_width);
         //WNHINFO("客户端IP:" << values_ss_temp[i * 8 + 0] << ", 状态:" << values_ss_temp[i * 8 + 1] << ", 启动时间:" << values_ss_temp[i * 8 + 2] << ", 最后活动时间:" << values_ss_temp[i * 8 + 3] << ", 全部任务数:" << values_ss_temp[i * 8 + 4] << ", 已完成任务数:" << values_ss_temp[i * 8 + 5] << ", 未完成任务数:" << values_ss_temp[i * 8 + 6] << ", 失败任务数:" << values_ss_temp[i * 8 + 7]);

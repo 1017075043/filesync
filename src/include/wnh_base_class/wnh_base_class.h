@@ -21,7 +21,7 @@ class wnh_base_class
 public:
     wnh_base_class();
     ~wnh_base_class();
-    void trim(string &s, const string &mark);//去掉首尾空格
+    void trim(string &s, const string &mark);//删除指定字符
     void delete_last_char(string &s, const char &mark);//删除最后一个字符
 
     string & replace_all(string & str, const string & old_value, const string & new_value); //字符串替换(循环)
@@ -51,6 +51,8 @@ public:
 
     string safe_str_substr_left(string & str, const int & num); //安全的字符串切割(从左到右),处理切割到临界点是中文会乱码的问题
     int transform_display_width(const string & str, const int & display_width); //转换显示宽度为字符串长度
+
+    string get_uuid(); //获取uuid
 
     //template <typename Type>
     //bool copy_vector_values(Type & vector_1, const Type & vector_2);

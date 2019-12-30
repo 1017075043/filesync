@@ -13,7 +13,6 @@ int main(int argc, char **argv)
     filesync program; //定义一个程序类
     program.init.INIT(); //初始化
     program.startup_mode((const int)argc, (const char**)argv);
-
     return 0;
 }
 

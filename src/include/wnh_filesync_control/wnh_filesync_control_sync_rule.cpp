@@ -59,17 +59,17 @@ vector<string>  wnh_filesync_control::get_sync_info_info(const string & sync_inf
 {
     sync_rule_info.read_config_ini(sync_info_info_file_path, false);
     vector<string> values_ss_temp;
-    for(int i = 0; i <= sync_rule_info.unit_num; i++)
+    for(int i = 0; i <= sync_rule_info.config_unit_num; i++)
     {
-        if(sync_rule_info.unit[i]->name.substr(0, strlen(WNH_FILESYNC_GET_SYNC_RULE_ID)) == WNH_FILESYNC_GET_SYNC_RULE_ID)
+        if(sync_rule_info.config_unit[i].name.substr(0, strlen(WNH_FILESYNC_GET_SYNC_RULE_ID)) == WNH_FILESYNC_GET_SYNC_RULE_ID)
         {
-            values_ss_temp.push_back("src_dir=" + sync_rule_info.unit[i]->conf.get_one_config("src_dir"));
+            values_ss_temp.push_back("src_dir=" + sync_rule_info.get_conf_one(i, "src_dir"));
             vector<string> dst_ip_and_dir;
             vector<string> ignore_rule;
             vector<string> ignore_dir;
-            dst_ip_and_dir = sync_rule_info.unit[i]->conf.get_config("dst_ip_and_dir");
-            ignore_rule = sync_rule_info.unit[i]->conf.get_config("ignore_rule");
-            ignore_dir = sync_rule_info.unit[i]->conf.get_config("ignore_dir");
+            dst_ip_and_dir = sync_rule_info.get_conf(i, "dst_ip_and_dir");
+            ignore_rule = sync_rule_info.get_conf(i, "ignore_rule");
+            ignore_dir = sync_rule_info.get_conf(i, "ignore_dir");
             for(unsigned int j = 0; j < dst_ip_and_dir.size(); j++)
             {
                 values_ss_temp.push_back("dst_ip_and_dir=" + dst_ip_and_dir[j]);
@@ -84,7 +84,7 @@ vector<string>  wnh_filesync_control::get_sync_info_info(const string & sync_inf
             }
         }
     }
-    sync_rule_info.clean_configure_ini();
+    //sync_rule_info.clean_configure_ini();
     if(unlink(sync_info_info_file_path.c_str()) != 0)
     {
         WNHWARN("临时文件," << sync_info_info_file_path << ", 删除失败, errno=" << errno << ", mesg=" << strerror(errno));
@@ -96,18 +96,18 @@ bool wnh_filesync_control::show_sync_info_info(const string & sync_info_info_fil
 {
     vector<string> values_ss_temp = get_sync_info_info(sync_info_info_file_path);
     vector<string> values;
-    vector<WNH_SHELL_TABLES_FONT_COLOR> color;
+    vector<WNH_SHELL_TABLES_FONT_STYLE> color;
     vector<WNH_SHELL_TABLES_ALIGN_MODE> align;
     vector<unsigned int> values_width;
 
     string str_temp;
     str_temp = str_temp + PROGRAM_NAME + " 同步规则信息显示";
     set_vector_values(true, values, str_temp);
-    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDMAGENTA);
-    set_vector_values(true, values_width, 70);
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDMAGENTA);
+    set_vector_values(true, values_width, 100);
     shell_tables.add_unit(values, color, values_width);
 
-    set_vector_values(true, values_width, 19, 50);
+    set_vector_values(true, values_width, 19, 80);
     set_vector_values(true, align, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left);
     for(unsigned int i = 0; i < values_ss_temp.size(); i++)
     {
@@ -115,8 +115,8 @@ bool wnh_filesync_control::show_sync_info_info(const string & sync_info_info_fil
         if(values_ss_temp[i].substr(0, values_ss_temp[i].find("=")) == "src_dir")
         {
             set_vector_values(true, values, " 服务端IP", " " + ip, " 源目录", " " + str_temp_ss );
-            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW);
-            set_vector_values(true, values_width, 10, 17, 10, 30);
+            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW);
+            set_vector_values(true, values_width, 10, 17, 10, 60);
             set_vector_values(true, align, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left);
 
             shell_tables.add_unit(values, color, align, values_width);
@@ -124,24 +124,24 @@ bool wnh_filesync_control::show_sync_info_info(const string & sync_info_info_fil
         else if(values_ss_temp[i].substr(0, values_ss_temp[i].find("=")) == "dst_ip_and_dir")
         {
             set_vector_values(true, values, " 客户端IP", " " + str_temp_ss.substr(0, str_temp_ss.find(",")), " 目标目录", " " + str_temp_ss.substr(str_temp_ss.find(",") + 1));
-            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDGREEN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDGREEN);
-            set_vector_values(true, values_width, 10, 17, 10, 30);
+            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN);
+            set_vector_values(true, values_width, 10, 17, 10, 60);
             set_vector_values(true, align, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left);
             shell_tables.add_unit(values, color, align, values_width);
         }
         else if(values_ss_temp[i].substr(0, values_ss_temp[i].find("=")) == "ignore_rule")
         {
             set_vector_values(true, values, " 忽略同步规则", " " + str_temp_ss);
-            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW);
-            set_vector_values(true, values_width, 14, 55);
+            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW);
+            set_vector_values(true, values_width, 14, 85);
             set_vector_values(true, align, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left);
             shell_tables.add_unit(values, color, align, values_width);
         }
         else if(values_ss_temp[i].substr(0, values_ss_temp[i].find("=")) == "ignore_dir")
         {
             set_vector_values(true, values, " 忽略监视目录", " " + str_temp_ss);
-            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE);
-            set_vector_values(true, values_width, 14, 55);
+            set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE);
+            set_vector_values(true, values_width, 14, 85);
             set_vector_values(true, align, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left);
             shell_tables.add_unit(values, color, align, values_width, WNH_SHELL_TABLES_SPLIT_LINE_FORMAT::REPEAT);
         }

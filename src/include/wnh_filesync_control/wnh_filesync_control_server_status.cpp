@@ -121,27 +121,22 @@ bool wnh_filesync_control::show_server_status_info(const string & server_status_
     string unfinished_task_num; //未完成任务数(全部客户端)
     string fail_task_num; //失败任务数(全部客户端)
     string event_num; //未转化事件数量(全部客户端)
-    for(int i = 0; i <= status_info.unit_num; i++)
-    {
-        if(status_info.unit[i]->name == WNH_FILESYNC_SERVER_STATUS_ID)
-        {
-            pid = status_info.unit[i]->conf.get_one_config("pid");
-            start_time = status_info.unit[i]->conf.get_one_config("start_time");
-            client_num = status_info.unit[i]->conf.get_one_config("client_num");
-            online_client_num = status_info.unit[i]->conf.get_one_config("online_client_num");
-            offline_client_num = status_info.unit[i]->conf.get_one_config("offline_client_num");
-            task_num = status_info.unit[i]->conf.get_one_config("task_num");
-            complete_task_num = status_info.unit[i]->conf.get_one_config("complete_task_num");
-            unfinished_task_num = status_info.unit[i]->conf.get_one_config("unfinished_task_num");
-            fail_task_num = status_info.unit[i]->conf.get_one_config("fail_task_num");
-            event_num = status_info.unit[i]->conf.get_one_config("event_num");
 
-            WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
-            show_server_status_info_son(pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
-            break;
-        }
-    }
-    status_info.clean_configure_ini();
+    pid = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "pid");
+    start_time = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "start_time");
+    client_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "client_num");
+    online_client_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "online_client_num");
+    offline_client_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "offline_client_num");
+    task_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "task_num");
+    complete_task_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "complete_task_num");
+    unfinished_task_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "unfinished_task_num");
+    fail_task_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "fail_task_num");
+    event_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "event_num");
+
+    WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
+    show_server_status_info_son(pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
+
+    //status_info.clean_configure_ini();
     if(unlink(server_status_info_file_path.c_str()) != 0)
     {
         WNHWARN("临时文件," << server_status_info_file_path << ", 删除失败, errno=" << errno << ", mesg=" << strerror(errno));
@@ -171,27 +166,22 @@ int wnh_filesync_control::show_server_status_info(const string & server_status_i
     string unfinished_task_num; //未完成任务数(全部客户端)
     string fail_task_num; //失败任务数(全部客户端)
     string event_num; //未转化事件数量(全部客户端)
-    for(int i = 0; i <= status_info.unit_num; i++)
-    {
-        if(status_info.unit[i]->name == WNH_FILESYNC_SERVER_STATUS_ID)
-        {
-            pid = status_info.unit[i]->conf.get_one_config("pid");
-            start_time = status_info.unit[i]->conf.get_one_config("start_time");
-            client_num = status_info.unit[i]->conf.get_one_config("client_num");
-            online_client_num = status_info.unit[i]->conf.get_one_config("online_client_num");
-            offline_client_num = status_info.unit[i]->conf.get_one_config("offline_client_num");
-            task_num = status_info.unit[i]->conf.get_one_config("task_num");
-            complete_task_num = status_info.unit[i]->conf.get_one_config("complete_task_num");
-            unfinished_task_num = status_info.unit[i]->conf.get_one_config("unfinished_task_num");
-            fail_task_num = status_info.unit[i]->conf.get_one_config("fail_task_num");
-            event_num = status_info.unit[i]->conf.get_one_config("event_num");
 
-            WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
-            show_server_status_info_son(pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
-            break;
-        }
-    }
-    status_info.clean_configure_ini();
+    pid = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "pid");
+    start_time = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "start_time");
+    client_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "client_num");
+    online_client_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "online_client_num");
+    offline_client_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "offline_client_num");
+    task_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "task_num");
+    complete_task_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "complete_task_num");
+    unfinished_task_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "unfinished_task_num");
+    fail_task_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "fail_task_num");
+    event_num = status_info.get_conf_one(WNH_FILESYNC_SERVER_STATUS_ID, "event_num");
+
+    WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
+    show_server_status_info_son(pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
+
+    //status_info.clean_configure_ini();
     if(unlink(server_status_info_file_path.c_str()) != 0)
     {
         WNHWARN("临时文件," << server_status_info_file_path << ", 删除失败, errno=" << errno << ", mesg=" << strerror(errno));
@@ -385,23 +375,31 @@ int wnh_filesync_control::show_server_status_info_v1(const string & server_statu
 bool wnh_filesync_control::show_server_status_info_son(string & pid, string & start_time, string & client_num, string & online_client_num, string & offline_client_num, string & task_num, string & complete_task_num, string & unfinished_task_num, string & fail_task_num, string & event_num) //显示服务端状态
 {
     vector<string> values;
-    vector<WNH_SHELL_TABLES_FONT_COLOR> color;
+    vector<WNH_SHELL_TABLES_FONT_STYLE> color;
     vector<unsigned int> values_width;
 
     string str_temp;
     str_temp = str_temp + PROGRAM_NAME + " 服务端状态信息显示";
     set_vector_values(true, values, str_temp);
-    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDMAGENTA);
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDMAGENTA);
     set_vector_values(true, values_width, 132);
     shell_tables.add_unit(values, color, values_width);
 
     set_vector_values(true, values, "服务端PID", "服务端启动时间", "客户端数" ,"在线客户端数" ,"离线客户端数" ,"全部任务数" ,"已完成任务数" ,"未完成任务数" ,"失败任务数" ,"未转化事件数");
-    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN, WNH_SHELL_TABLES_FONT_COLOR::BOLDCYAN);
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN);
     set_vector_values(true, values_width, 9, 19, 8, 12, 12, 15, 14, 12, 10, 12);
     shell_tables.add_unit(values, color, values_width);
 
     set_vector_values(true, values, pid, start_time, client_num, online_client_num, offline_client_num, task_num, complete_task_num, unfinished_task_num, fail_task_num, event_num);
-    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDBLUE, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW, WNH_SHELL_TABLES_FONT_COLOR::BOLDRED, WNH_SHELL_TABLES_FONT_COLOR::BOLDYELLOW);
+    if(fail_task_num != "0")
+    {
+        set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::FLASHINGBOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW);
+    }
+    else
+    {
+        set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW);
+    }
+
     shell_tables.add_unit(values, color, values_width);
 
     WNH_DISPLAY_STYLE_HIDE_CURSOR();

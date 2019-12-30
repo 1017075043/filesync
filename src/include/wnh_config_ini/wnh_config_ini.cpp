@@ -111,7 +111,7 @@ void wnh_config_ini::show_configure_ini()
 {
     for(int i = 0; i <= unit_num; i++)
     {
-        WNHDEBUG("节点名：" << unit[i]->name);
+        WNHINFO("节点名：" << unit[i]->name);
         unit[i]->conf.show_config();
     }
 }

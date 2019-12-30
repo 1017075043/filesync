@@ -30,6 +30,7 @@ include/wnh_string_one_list/wnh_string_one_list.cpp \
 include/wnh_string_rule_one_list/wnh_string_rule_one_list.cpp \
 include/wnh_string_string_one_list/wnh_string_string_one_list.cpp \
 include/wnh_config_ini/wnh_config_ini.cpp \
+include/wnh_config_ini_ex/wnh_config_ini_ex.cpp \
 include/wnh_config/wnh_config.cpp \
 include/wnh_jwsmtp/mailer.cpp \
 include/wnh_jwsmtp/compat.cpp \

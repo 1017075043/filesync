@@ -45,7 +45,6 @@ public:
 
     string get_sysntem_core_info(); //获取linux操作系统内核信息
 
-    string get_uuid(); //获取uuid
     string get_server_serial_number(); //获取服务器序列号
     string create_license_file(const string & server_serial_number,const unsigned long & validity_time); //创建许可文件
     unsigned long check_license_file_effectiveness(const string & license_file); //检查许可的有效性,返回许可的有效期时间

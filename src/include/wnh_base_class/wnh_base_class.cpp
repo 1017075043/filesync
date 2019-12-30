@@ -223,6 +223,18 @@ string wnh_base_class::safe_str_substr_left(string & str, const int & num) //安
     return str_temp;
 }
 
+string wnh_base_class::get_uuid() //获取uuid
+{
+    uuid_t uuid;
+    char str[36];
+    uuid_generate(uuid);
+    uuid_unparse(uuid, str);
+    string uuid_str_temp = str;
+    trim(uuid_str_temp, "-");
+    WNHDEBUG("uuid_str_temp=" << uuid_str_temp);
+    return uuid_str_temp;
+}
+
 //template <typename Type>
 //bool wnh_base_class::copy_vector_values(Type & vector_1, const Type & vector_2)
 //{

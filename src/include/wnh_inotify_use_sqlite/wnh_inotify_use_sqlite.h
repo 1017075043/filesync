@@ -13,7 +13,8 @@ using namespace std;
 #include "../wnh_string_rule_one_list/wnh_string_rule_one_list.h"
 #include "../wnh_system_operation/wnh_system_operation.h"
 #include "../wnh_sqlite/wnh_sqlite.h"
-#include "../wnh_openssl//wnh_openssl.h"
+#include "../wnh_openssl/wnh_openssl.h"
+#include "../wnh_license/wnh_license.h"
 
 
 //inotify监听的事件,代号
@@ -26,11 +27,12 @@ using namespace std;
 
 //inotify监听的事件
 #define WNH_INOTIFY_WATCH_EVENT IN_ATTRIB|IN_CREATE|IN_DELETE|IN_MODIFY|IN_MOVED_FROM|IN_MOVED_TO
-#define DB_NAME "filesync_watch_list.db"
+#define DB_NAME "filesync.db"
 #define WATCH_LIST_TABLE_NAME "watch_list_table"
 #define EVENT_LIST_TABLE_NAME "event_list_table"
 #define TASK_LIST_TABLE_NAME "task_list_table"
 #define TAIL_TASK_LIST_TABLE_NAME "fail_task_list_table"
+#define COMPLETE_TASK_LIST_TABLE_NAME "complete_task_list_table"
 
 #define TASK_ATTR_DEFAULT_FILE_USER "root"
 #define TASK_ATTR_DEFAULT_FILE_GROUP "root"
@@ -139,11 +141,17 @@ public:
     bool fail_task_list_create_table(); //创建一张数据表-失败任务列表
     bool add_fail_task_info(const string & client_ip, const string & event_id, const string & src_path); //添加一行失败任务信息
     bool add_fail_task_info(const string & client_ip, const string & event_id, const string & src_path, const string & dst_path); //添加一行失败任务信息
+
+    bool complete_task_list_create_table(); //创建一张数据表-成功任务列表
+    bool add_complete_task_info(const string & client_ip, const string & event_id, const string & src_path); //添加一行失败任务信息
+    bool add_complete_task_info(const string & client_ip, const string & event_id, const string & src_path, const string & dst_path); //添加一行失败任务信息
+
     unsigned long get_event_list_num(); //获取失败任务数量
     unsigned long get_task_list_num(); //获取失败任务数量
     unsigned long get_fail_task_list_num(); //获取失败任务数量
     unsigned long get_fail_task_list_num(const string & client_ip); //根据客户端IP,获取失败任务数量
     unsigned long get_task_list_num(const string & client_ip); //根据客户端IP,获取任务数量
+    vector<vector<string> > get_real_time_complete_task_list(const int & real_time, const int & num); //获取同步完成实时数据
 
 };
 #endif

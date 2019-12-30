@@ -66,6 +66,10 @@ void filesync::control_mode()
     {
         control.show_server_license();
     }
+    else if(filesync_control_use_parameter == "11" || filesync_control_use_parameter == "show transfer")
+    {
+        control.get_sync_transfer_info();
+    }
     else
     {
         control.ues_instructions();
