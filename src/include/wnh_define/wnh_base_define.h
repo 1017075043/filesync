@@ -19,7 +19,7 @@
 #include <list>
 #include <uuid/uuid.h>
 
-#define PROGRAM_NAME "filesync v1.0.9"
+#define PROGRAM_NAME "filesync v1.1.0"
 
 #define LOCALTIMELENGTH 20    //记录实时的系统当前时间的数组的长度
 #define GETSYSTEMLOCALTIMESONUSEINTERVAL 1000*100*5   //记录实时的系统当前时间的运行间隔,执行间隔1000*100*5=0.5秒

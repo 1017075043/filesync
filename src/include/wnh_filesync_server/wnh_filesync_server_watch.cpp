@@ -8,13 +8,6 @@ void wnh_filesync_server::watch_core() //使用wnh_inotify_use_sqlite进行目�
     {
         if((rule+j)->rule_status)
         {
-            watch.add_watch_dir((rule+j)->src_dir); //添加同步目录
-        }
-    }
-    for(int j = 0; j < rule_num; j ++)
-    {
-        if((rule+j)->rule_status)
-        {
             for(int n = 0; n < (int)(rule+j)->ignore_dir.size(); n++)
             {
                 watch.add_ignore_watch_dir((rule+j)->ignore_dir[n]);//删除不同步目录
@@ -31,6 +24,14 @@ void wnh_filesync_server::watch_core() //使用wnh_inotify_use_sqlite进行目�
             }
         }
     }
+    for(int j = 0; j < rule_num; j ++)
+    {
+        if((rule+j)->rule_status)
+        {
+            watch.add_watch_dir((rule+j)->src_dir); //添加同步目录
+        }
+    }
+    //watch.start_ignore_watch_dir_action();
     watch.start_watch(wnh_inotify_use_sqlite::USE_MODE::back_record);
 
     thread start_event_into_task_pthread(&wnh_filesync_server::event_into_task, this);
@@ -44,10 +45,6 @@ void wnh_filesync_server::watch_core_v1() //使用wnh_inotify_use_sqlite进行�
     watch.init();
     watch.create();
     set<string>::iterator it; //定义前向迭代器
-    for(int i = 0; i < sync_rule_num; i++)
-    {
-        watch.add_watch_dir(sync_rule[i].src_dir); //添加同步目录
-    }
 
     set<string> rule_temp;
     for(int i = 0; i < sync_rule_num; i++)
@@ -76,6 +73,12 @@ void wnh_filesync_server::watch_core_v1() //使用wnh_inotify_use_sqlite进行�
     }
     rule_temp.clear();
 
+    for(int i = 0; i < sync_rule_num; i++)
+    {
+        watch.add_watch_dir(sync_rule[i].src_dir); //添加同步目录
+    }
+
+    //watch.start_ignore_watch_dir_action();
     watch.start_watch(wnh_inotify_use_sqlite::USE_MODE::back_record);
 
     thread start_event_into_task_pthread(&wnh_filesync_server::event_into_task, this);

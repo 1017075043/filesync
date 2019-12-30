@@ -107,6 +107,8 @@ public:
 
     void add_ignore_watch_dir(const string & ignore_dir); //添加忽略目录监听
     bool find_ignore_watch_dir(const string & ignore_dir); //查找忽略目录监听
+    bool matching_ignore_watch_dir(const string & unit); //匹配忽略目录监听
+    void start_ignore_watch_dir_action(); //执行忽略目录监听
 
     int register_wd;
     string register_watch_dir_path;

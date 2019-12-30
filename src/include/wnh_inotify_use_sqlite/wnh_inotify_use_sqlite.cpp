@@ -48,6 +48,11 @@ bool wnh_inotify_use_sqlite::create()//创建监听inotify实例
 
 bool wnh_inotify_use_sqlite::add_watch_unit(const string unit)//向inotify中添加一个监控
 {
+    if(matching_ignore_watch_dir(unit) == true)
+    {
+        WNHINFO("忽略监听: " << unit);
+        return true;
+    }
     int wd = inotify_add_watch(fd, unit.c_str(), WNH_INOTIFY_WATCH_EVENT);
     if (wd < 0)
     {
@@ -965,8 +970,36 @@ void wnh_inotify_use_sqlite::add_ignore_watch_dir(const string & ignore_dir) //�
     if(!find_ignore_watch_dir(ignore_dir))
     {
         ignore_watch_dir_list.push_back(ignore_dir);
-        del_watch_dir_from_watch_list(ignore_dir);
+        //del_watch_dir_from_watch_list(ignore_dir);
         add_ignore_rule(ignore_dir);
+        WNHINFO("添加一个忽略同步目录 unit=" << ignore_dir << " 成功");
+    }
+}
+
+bool wnh_inotify_use_sqlite::matching_ignore_watch_dir(const string & unit) //匹配忽略目录监听
+{
+    static int temp_i = 0;
+    if(unit.substr(0, ignore_watch_dir_list[temp_i].length()) == ignore_watch_dir_list[temp_i])
+    {
+        return true;
+    }
+    for(int i = 0; i < (int)ignore_watch_dir_list.size(); i ++)
+    {
+        //WNHWARN(unit << " = " << ignore_watch_dir_list[i]);
+        if(unit.substr(0, ignore_watch_dir_list[i].length()) == ignore_watch_dir_list[i])
+        {
+            temp_i = i;
+            return true;
+        }
+    }
+    return false;
+}
+
+void wnh_inotify_use_sqlite::start_ignore_watch_dir_action() //执行忽略目录监听
+{
+    for(int i = 0; i < (int)ignore_watch_dir_list.size(); i ++)
+    {
+        del_watch_dir_from_watch_list(ignore_watch_dir_list[i]);
     }
 }
 
