@@ -39,6 +39,7 @@ public:
     wnh_config_ini_ex status_info;
     wnh_config_ini_ex sync_rule_info;
     wnh_config_ini_ex sync_transfer_info;
+    wnh_config_ini_ex sync_fail_task_list_info;
 
     wnh_shell_tables shell_tables;
 
@@ -86,6 +87,10 @@ public:
     bool send_get_sync_transfer_info(string & sync_transfer_file_path); //向服务器发送获取同步传输过程信息信号, 且获取同步传输过程信息文件路径
     vector<string> get_sync_transfer_data_info(const string & sync_transfer_file_path); //获取同步传输过程数据信息
     bool show_sync_transfer_info(const string & sync_transfer_file_path); //显示同步传输过程数据信息
+
+    void get_sync_fail_task_list_info(); //获取同步失败任务列表信息
+    bool send_get_fail_task_list_info(string & sync_fail_task_list_file_path); //向服务器发送获取同步失败任务列表信号, 且获取同步失败任务列表文件路径
+    bool show_sync_fail_task_list_info(const string & sync_fail_task_list_file_path); //显示同步失败任务列表信息
 };
 
 #endif

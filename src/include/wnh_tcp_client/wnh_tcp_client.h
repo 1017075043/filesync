@@ -29,9 +29,13 @@ using namespace std;
 #include "../wnh_define/wnh_tcp_define.h"
 #include "../wnh_base_class/wnh_base_class.h"
 #include "../wnh_system_operation/wnh_system_operation.h"
+#include "../wnh_openssl/wnh_openssl.h"
 
 class wnh_tcp_client : public wnh_base_class
 {
+private:
+    wnh_openssl ssl_des;
+
 protected:
     int socket_num; //socket句柄数
     struct sockaddr_in teraccept_address; //服务器地址信息
@@ -61,6 +65,7 @@ public:
     wnh_tcp_client();
     ~wnh_tcp_client();
 
+    bool is_ssl;
     int set_non_blocking(int fd);
     bool create_socket(); //创建一个socket,返回句柄数
     void set_teraccept_address(string ip, int portnum); //设置目标服务器的地址信息

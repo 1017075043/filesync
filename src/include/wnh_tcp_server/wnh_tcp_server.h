@@ -19,6 +19,7 @@ using namespace std;
 #include "../wnh_define/wnh_tcp_define.h"
 #include "../wnh_base_class/wnh_base_class.h"
 #include "../wnh_system_operation/wnh_system_operation.h"
+#include "../wnh_openssl/wnh_openssl.h"
 
 class wnh_tcp_server : public wnh_base_class
 {

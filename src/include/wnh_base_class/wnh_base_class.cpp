@@ -1,4 +1,5 @@
 #include "wnh_base_class.h"
+#include "wnh_base_class_keyboard_input.cpp"
 
 wnh_base_class::wnh_base_class()
 {
@@ -234,41 +235,3 @@ string wnh_base_class::get_uuid() //获取uuid
     WNHDEBUG("uuid_str_temp=" << uuid_str_temp);
     return uuid_str_temp;
 }
-
-//template <typename Type>
-//bool wnh_base_class::copy_vector_values(Type & vector_1, const Type & vector_2)
-//{
-//    for(unsigned int i = 0; i < vector_2.size(); i++)
-//    {
-//        vector_1.push_back(vector_2[i]);
-//    }
-//    return true;
-//}
-
-//template <typename Type_v, typename Type>
-//void wnh_base_class::set_vector_values(Type_v & values, const Type & arg) //设置vector变量值
-//{
-//    WNHINFO("argc=" << arg);
-//    values.push_back(arg);
-//}
-
-//template <typename Type_v, typename Type, typename ... Types>
-//void wnh_base_class::set_vector_values(Type_v & values, const Type & arg,const Types & ... args) //设置vector变量值
-//{
-//    WNHINFO("argc=" << arg);
-//    values.push_back(arg);
-//    set_vector_values(values, args...);
-//}
-
-//template <typename Type>
-//void wnh_base_class::print(const Type & arg)
-//{
-//    WNHINFO("argc=" << arg);
-//}
-
-//template <typename Type, typename ... Types>
-//void wnh_base_class::print(const Type & arg,const Types & ... args)
-//{
-//     WNHINFO("argc=" << arg);
-//     print(args...);
-//}

@@ -214,6 +214,9 @@ void wnh_filesync_control::control_use_instructions() //控制端使用说明
     set_vector_values(true, values, "11", "show transfer", "显示同步传输过程信息", "filesync 11", "filesync \"show transfer\"");
     shell_tables.add_unit(values, color, values_width);
 
+    set_vector_values(true, values, "12", "show fail task", "显示同步失败任务信息", "filesync 12", "filesync \"show fail task\"");
+    shell_tables.add_unit(values, color, values_width);
+
     shell_tables.show_tables();
     shell_tables.clear();
 }

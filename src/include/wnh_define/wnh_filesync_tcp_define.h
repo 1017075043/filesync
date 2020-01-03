@@ -70,5 +70,20 @@
 //同步传输过程标识头
 #define WNH_FILESYNC_RULE_TRANSFER_ID "sync_transfer"
 
+//客户端向服务端发送请求获取同步失败任务列表信息
+#define WNH_FILESYNC_SYNC_FAIL_TASk_LIST_INFO "WNH_FILESYNC_SYNC_FAIL_TASk_LIST_INFO:"
+//服务端向客户端回复请求获取同步失败任务列表信息:查询不到最新的数据时
+#define WNH_FILESYNC_NOT_OR_FAIL_SYNC_FAIL_TASk_LIST_INFO "WNH_FILESYNC_NOT_OR_FAIL_SYNC_FAIL_TASk_LIST_INFO"
+//同步同步失败任务列表标识头
+#define WNH_FILESYNC_RULE_FAIL_TASk_LIST_ID "sync_fail_task_list"
 
 #endif
+
+
+
+
+
+
+
+
+

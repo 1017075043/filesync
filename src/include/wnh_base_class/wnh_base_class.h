@@ -7,6 +7,7 @@ using namespace std;
 #include <cctype>
 #include <string>
 #include <algorithm>
+#include <termios.h>
 
 #include "../wnh_define/wnh_base_define.h"
 #include "../wnh_define/wnh_base_define_function.h"
@@ -53,6 +54,10 @@ public:
     int transform_display_width(const string & str, const int & display_width); //转换显示宽度为字符串长度
 
     string get_uuid(); //获取uuid
+
+    void  reset_keypress (void);//获取键盘输入
+    void  set_keypress (void);//获取键盘输入
+    string get_keyboard_input_string();//获取键盘输入
 
     //template <typename Type>
     //bool copy_vector_values(Type & vector_1, const Type & vector_2);

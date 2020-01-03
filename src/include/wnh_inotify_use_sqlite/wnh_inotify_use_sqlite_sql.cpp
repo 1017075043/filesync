@@ -784,7 +784,7 @@ vector<vector<string> > wnh_inotify_use_sqlite::get_real_time_complete_task_list
         }
         result_data.push_back(temp_line_date);
         temp_sql = temp_sql + "'" + result[i][ncolumn - 1] + "',";
-        //WNHWARN("client_ip: " << result[i][0] << ", event_id: " << result[i][1] << ", src_path: " << result[i][2] << ", dst_path: " << result[i][3] << ", update_date: " << result[i][4] << ", complete_date: " << result[i][5] << ", read_id:" << result[i][6]);
+        //WNHWARN("client_ip:" << result[i][0] << ", event_id:" << result[i][1] << ", src_path:" << result[i][2] << ", dst_path:" << result[i][3] << ", update_date:" << result[i][4] << ", complete_date:" << result[i][5] << ", read_id:" << result[i][6]);
     }
     sql = "";
     delete_last_char(temp_sql, ',');
@@ -792,6 +792,35 @@ vector<vector<string> > wnh_inotify_use_sqlite::get_real_time_complete_task_list
     if(!sqlite_op.sql_query(sql))
     {
         WNHWARN("执行更新" << COMPLETE_TASK_LIST_TABLE_NAME << "表, read_id = '1', 失败了");
+    }
+    return result_data;
+}
+
+vector<vector<string> > wnh_inotify_use_sqlite::get_fail_task_list(const string & line, const string & num) //获取同步失败任务数据
+{
+    string sql = "";
+    sql = sql + "SELECT client_ip, event_id, src_path, dst_path, update_date FROM " + TAIL_TASK_LIST_TABLE_NAME + " ORDER BY update_date ASC LIMIT " + num + " OFFSET " + line + ";";
+    vector<vector<string> > result_data;
+    string **result;
+    int nrow;
+    int ncolumn;
+    //sql_query(string sql, string **&result, int &nrow ,int &ncolumn);
+    if(!sqlite_op.sql_query(sql, result, nrow, ncolumn))
+    {
+        WNHERROR("获取同步完成实时数据失败了");
+        return result_data;
+    }
+    string temp_sql;
+    for(int i = 0; i < nrow; i ++)
+    {
+        vector<string> temp_line_date;
+        for(int j = 0; j < ncolumn; j ++)
+        {
+            temp_line_date.push_back(result[i][j]);
+        }
+        result_data.push_back(temp_line_date);
+        temp_sql = temp_sql + "'" + result[i][ncolumn - 1] + "',";
+        //WNHWARN("client_ip: " << result[i][0] << ", event_id:" << result[i][1] << ", src_path:" << result[i][2] << ", dst_path:" << result[i][3] << ", update_date:" << result[i][4]);
     }
     return result_data;
 }

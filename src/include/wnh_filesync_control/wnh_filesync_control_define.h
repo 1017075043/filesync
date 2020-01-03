@@ -34,5 +34,11 @@
 #define CLIENT_STATUS_INFO_DISPLAY_8  WNH_FONT_COLOR_BOLDWHITE << "└──────────────────────────┴───────────┴───────────────────┴───────────────────┴────────────┴──────────────┴─────────────┴───────────┘" << WNH_FONT_COLOR_WHITE
     
 //同步传输过程数据文件后缀
-#define SYNC_RULE_TRANSFER_INFO_FILE_SUFFIX ".control"
+#define SYNC_TRANSFER_INFO_FILE_SUFFIX ".control"
+
+//同步失败任务列表文件后缀
+#define SYNC_FAIL_TASK_LIST_INFO_FILE_SUFFIX ".control"
+
+//同步失败任务列表单次查询行数
+#define SYNC_FAIL_TASK_LIST_INFO_LINE_NUM 10
 #endif

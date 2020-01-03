@@ -23,12 +23,12 @@ void wnh_filesync_control::get_sync_transfer_info() //获取同步传输过程�
         }
         if(sync_transfer_file_path != WNH_FILESYNC_NOT_OR_FAIL_SYNC_TRANSFER_INFO)
         {
-            if(!download_file(sync_transfer_file_path, sync_transfer_file_path + SYNC_RULE_TRANSFER_INFO_FILE_SUFFIX))
+            if(!download_file(sync_transfer_file_path, sync_transfer_file_path + SYNC_TRANSFER_INFO_FILE_SUFFIX))
             {
                 close(socket_num);
                 return;
             }
-            show_sync_transfer_info(sync_transfer_file_path + SYNC_RULE_TRANSFER_INFO_FILE_SUFFIX); //显示同步传输过程数据信息
+            show_sync_transfer_info(sync_transfer_file_path + SYNC_TRANSFER_INFO_FILE_SUFFIX); //显示同步传输过程数据信息
         }
         else
         {
@@ -96,7 +96,7 @@ bool wnh_filesync_control::show_sync_transfer_info(const string & sync_transfer_
     //get_sync_transfer_data_info(sync_transfer_file_path);
     sync_transfer_info.read_config_ini(sync_transfer_file_path, false);
     //sync_transfer_info.show_configure_ini();
-    vector<string> values_ss_temp;
+    //vector<string> values_ss_temp;
     for(int i = 0; i < sync_transfer_info.config_unit_num; i ++)
     {
         if(sync_transfer_info.config_unit[i].name.substr(0, strlen(WNH_FILESYNC_RULE_TRANSFER_ID)) == WNH_FILESYNC_RULE_TRANSFER_ID)

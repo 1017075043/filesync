@@ -155,5 +155,7 @@ public:
     unsigned long get_task_list_num(const string & client_ip); //根据客户端IP,获取任务数量
     vector<vector<string> > get_real_time_complete_task_list(const int & real_time, const int & num); //获取同步完成实时数据
 
+    vector<vector<string> > get_fail_task_list(const string & line, const string & num); //获取同步失败任务数据
+
 };
 #endif

@@ -6,6 +6,7 @@
 #include "wnh_filesync_control_sync_rule.cpp"
 #include "wnh_filesync_control_license.cpp"
 #include "wnh_filesync_control_sync_transfer.cpp"
+#include "wnh_filesync_control_sync_fail_task_list.cpp"
 
 wnh_filesync_control::wnh_filesync_control()
 {

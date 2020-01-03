@@ -27,7 +27,7 @@ AC_PROG_LIBTOOL
 # Checks for libraries.
 
 # Checks for header files.
-AC_CHECK_HEADERS([vector iostream fstream string.h thread errno.h stdio.h stdlib.h fcntl.h sys/types.h unistd.h sys/wait.h signal.h sys/stat.h sstream mutex list time.h string sys/inotify.h algorithm sys/socket.h netdb.h netinet/in.h arpa/inet.h sys/ioctl.h net/if.h cstdio cstring cstdlib cpuid.h map sys/utsname.h uuid/uuid.h cassert openssl/md5.h openssl/sha.h openssl/des.h openssl/rsa.h openssl/pem.h sqlite3.h dirent.h pwd.h grp.h assert.h iterator future sys/select.h set functional])
+AC_CHECK_HEADERS([curses.h termios.h vector iostream fstream string.h thread errno.h stdio.h stdlib.h fcntl.h sys/types.h unistd.h sys/wait.h signal.h sys/stat.h sstream mutex list time.h string sys/inotify.h algorithm sys/socket.h netdb.h netinet/in.h arpa/inet.h sys/ioctl.h net/if.h cstdio cstring cstdlib cpuid.h map sys/utsname.h uuid/uuid.h cassert openssl/md5.h openssl/sha.h openssl/des.h openssl/rsa.h openssl/pem.h sqlite3.h dirent.h pwd.h grp.h assert.h iterator future sys/select.h set functional])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_HEADER_STDBOOL

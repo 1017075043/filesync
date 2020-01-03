@@ -173,6 +173,9 @@ public:
 
     bool accept_get_sync_transfer_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO); //接收获取同步传输过程信息
     bool create_sync_transfer_info(const string & sync_transfer_file_path); //创建同步传输过程文件
+
+    bool accept_get_sync_fail_task_list_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO); //接收获取同步失败任务列表信息
+    bool create_sync_fail_task_list_info(const string & sync_fail_task_list_file_path, const string & line, const string & num); //创建同步失败任务列表信息文件
 };
 
 #endif

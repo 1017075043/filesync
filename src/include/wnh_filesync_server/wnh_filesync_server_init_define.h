@@ -45,5 +45,7 @@
 #define SYNC_TRANSFER_MAXIMUM_TIME 600
 //单次同步传输过程数据最大数量
 #define SYNC_TRANSFER_MAXIMUM_LINE_NUM 20
+//默认同步失败任务列表信息路径格式
+#define DEFAULT_SYNC_FAIL_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_fail_task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
 
 #endif
