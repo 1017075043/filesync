@@ -29,6 +29,8 @@ private:
     template <typename Type_v, typename Type, typename ... Types>
     void set_vector_values(const bool & status, Type_v & values, const Type & arg,const Types & ... args); //设置vector变量值
 
+    int fail_task_list_info_page; //失败页码数
+
 public:
     wnh_filesync_control();
     wnh_filesync_control(const string &conf_parameter);
@@ -90,7 +92,10 @@ public:
 
     void get_sync_fail_task_list_info(); //获取同步失败任务列表信息
     bool send_get_fail_task_list_info(string & sync_fail_task_list_file_path); //向服务器发送获取同步失败任务列表信号, 且获取同步失败任务列表文件路径
+    vector<string> get_sync_fail_task_list_info(const string & sync_fail_task_list_file_path); //获取同步失败任务列表信息
     bool show_sync_fail_task_list_info(const string & sync_fail_task_list_file_path); //显示同步失败任务列表信息
+    bool show_sync_fail_task_list_info_son(const vector<string> & values_ss_temp); //显示同步失败任务列表信息
+    bool get_fail_task_list_info_page(); //同步失败任务列表信号换页选择
 };
 
 #endif

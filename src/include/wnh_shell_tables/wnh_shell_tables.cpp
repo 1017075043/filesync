@@ -48,6 +48,11 @@ void wnh_shell_tables::clear() //清理数据
     local_son_line_num = 0;
 }
 
+int wnh_shell_tables::get_display_line_num() //获取显示的行数
+{
+    return local_son_line_num + line_num * 2 + 1;
+}
+
 template <typename Type, typename Types>
 bool wnh_shell_tables::copy_vector_values(Type & vec_1, Types & vec_2)
 {

@@ -158,7 +158,7 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsig
         values_display_width = tables_unit[line_num].value[i].size() - get_chinese_num(tables_unit[line_num].value[i]);
         if(values_display_width > tables_unit[line_num].value_width[i])
         {
-            WNHWARN("当前显示的值将要使用的行宽大于设置的行宽, 配置的行宽:" << tables_unit[line_num].value_width[i] << ", 需要的行宽: " << values_display_width << ", 进行自动换行");
+            WNHDEBUG("当前显示的值将要使用的行宽大于设置的行宽, 配置的行宽:" << tables_unit[line_num].value_width[i] << ", 需要的行宽: " << values_display_width << ", 进行自动换行");
             add_son_unit(line_num);
             break;
         }

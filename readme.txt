@@ -1,3 +1,10 @@
+2020年01月06日
+升级版本为filesync-v1.1.1
+更新内容
+1.完成失败任务列表信息查看功能,实现了可以分页查询的功能
+2.wnh_base添加get_keyboard_input_string方法,获取键盘任意键的输入,以字符串的形式返回
+3.使用wnh_tables类添加get_display_line_num方法,获取显示的行数
+
 2019年12月30日
 升级版本为filesync-v1.1.0
 更新内容

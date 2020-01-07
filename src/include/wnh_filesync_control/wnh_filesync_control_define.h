@@ -40,5 +40,5 @@
 #define SYNC_FAIL_TASK_LIST_INFO_FILE_SUFFIX ".control"
 
 //同步失败任务列表单次查询行数
-#define SYNC_FAIL_TASK_LIST_INFO_LINE_NUM 10
+#define SYNC_FAIL_TASK_LIST_INFO_LINE_NUM 15
 #endif

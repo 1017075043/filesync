@@ -107,6 +107,7 @@ public:
     bool copy_vector_values(Type & vec_1, Types & vec_2);
 
     void clear(); //清理数据
+    int get_display_line_num(); //获取显示的行数
 };
 
 #endif
