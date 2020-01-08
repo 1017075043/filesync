@@ -28,6 +28,7 @@ bool wnh_filesync_server::accept_get_sync_fail_task_list_info(const int & nfp, c
 bool wnh_filesync_server::create_sync_fail_task_list_info(const string & sync_fail_task_list_file_path, const string & line, const string & num) //创建同步失败任务列表信息文件
 {
     vector<vector<string> > result_data = watch.get_fail_task_list(line, num);
+    unsigned long result_num = watch.get_fail_task_list_num();
     //for(int i = 0; i < (int)result_data.size(); i++)
     //{
     //    WNHWARN("client_ip: " << result_data[i][0] << ", event_id: " << result_data[i][1] << ", src_path: " << result_data[i][2] << ", dst_path: " << result_data[i][3] << ", update_date: " << result_data[i][4]);
@@ -50,9 +51,13 @@ bool wnh_filesync_server::create_sync_fail_task_list_info(const string & sync_fa
         file_open << "update_date=" << result_data[i][4] << endl;
         WNHDEBUG("client_ip: " << result_data[i][0] << ", event_id: " << result_data[i][1] << ", src_path: " << result_data[i][2] << ", dst_path: " << result_data[i][3] << ", update_date: " << result_data[i][4]);
     }
+    file_open << "[" << WNH_FILESYNC_RULE_FAIL_TASk_LIST_NUM_ID << "]" << endl;
+    file_open << "num=" << to_string(result_num) << endl;
+
     if((int)result_data.size() == 0)
     {
         WNHDEBUG("查询到当前不存在同步失败任务列表数据");
+        file_open.close();
         return false;
     }
     file_open.close();
@@ -110,6 +115,7 @@ bool wnh_filesync_server::create_sync_transfer_info(const string & sync_transfer
     if((int)result_data.size() == 0)
     {
         WNHDEBUG("查询到当前不存在实时同步传输过程数据");
+        file_open.close();
         return false;
     }
     file_open.close();

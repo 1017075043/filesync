@@ -159,34 +159,13 @@ void wnh_shell_tables::show_tables() //显示表格
         }
         cout << endl;
         //判断是否存在子行
+        //WNHWARN(tables_unit[i].son_line_num.size());
         for(int k = 0; k < (int)tables_unit[i].son_line_num.size(); k++)
         {
             cout << WNH_TABLES_VERTICAL;
             for(int j = 0; j < tables_unit[i].num; j++)
             {
-                if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::right)
-                {
-                    if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
-                    {
-                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
-                    }
-                    else
-                    {
-                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
-                    }
-                }
-                else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::centro)
-                {
-                    if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
-                    {
-                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
-                    }
-                    else
-                    {
-                        cout << sytle_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
-                    }
-                }
-                else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::left)
+                if(is_son_line_align_left == true)
                 {
                     if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
                     {
@@ -195,6 +174,42 @@ void wnh_shell_tables::show_tables() //显示表格
                     else
                     {
                         cout << sytle_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
+                    }
+                }
+                else
+                {
+                    if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::right)
+                    {
+                        if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
+                        {
+                            cout << sytle_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
+                        }
+                        else
+                        {
+                            cout << sytle_transform(tables_unit[i].color[j], true) << format_string_left_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
+                        }
+                    }
+                    else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::centro)
+                    {
+                        if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
+                        {
+                            cout << sytle_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
+                        }
+                        else
+                        {
+                            cout << sytle_transform(tables_unit[i].color[j], true) << format_string_centro_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
+                        }
+                    }
+                    else if(tables_unit[i].align[j] == WNH_SHELL_TABLES_ALIGN_MODE::left)
+                    {
+                        if(tables_unit[i].separator_format[j] || j == tables_unit[i].num -1)
+                        {
+                            cout << sytle_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << WNH_TABLES_VERTICAL;
+                        }
+                        else
+                        {
+                            cout << sytle_transform(tables_unit[i].color[j], true) << format_string_right_fill(tables_unit_son[tables_unit[i].son_line_num[k]][j], tables_unit[i].value_width[j], ' ') << " ";
+                        }
                     }
                 }
             }

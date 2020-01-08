@@ -14,6 +14,7 @@ wnh_shell_tables::wnh_shell_tables()
     max_line_num = 0;
     is_use_smart_line_width = false;
     local_son_line_num = 0;
+    is_son_line_align_left = false;
 }
 
 wnh_shell_tables::~wnh_shell_tables()

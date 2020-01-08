@@ -59,6 +59,7 @@ public:
     int max_line_width; //最大行宽度
     int max_line_num; //最大行数
     bool is_use_smart_line_width; //是否使用智能行宽
+    bool is_son_line_align_left; //是否开启子行默认左对齐
     wnh_shell_tables();
     ~wnh_shell_tables();
 

@@ -145,6 +145,12 @@ bool wnh_shell_tables::add_unit(const vector<string> & value, const vector<unsig
     tables_unit[line_num].num = value.size();
     tables_unit[line_num].split_line_format = split_line_format;
 
+    vector<bool> separator_format_temp;
+    tables_unit[line_num].separator_format = separator_format_temp; //每个成员分隔符模式
+
+    vector<unsigned int> son_line_num_temp;
+    tables_unit[line_num].son_line_num = son_line_num_temp; //子行行号
+
 
     if(max_row_num < tables_unit[line_num].num)
     {

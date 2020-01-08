@@ -76,6 +76,8 @@
 #define WNH_FILESYNC_NOT_OR_FAIL_SYNC_FAIL_TASk_LIST_INFO "WNH_FILESYNC_NOT_OR_FAIL_SYNC_FAIL_TASk_LIST_INFO"
 //同步同步失败任务列表标识头
 #define WNH_FILESYNC_RULE_FAIL_TASk_LIST_ID "sync_fail_task_list"
+//同步同步失败任务列表数量标识头
+#define WNH_FILESYNC_RULE_FAIL_TASk_LIST_NUM_ID "sync_fail_task_list_num"
 
 #endif
 

@@ -112,7 +112,11 @@ public:
 
     int register_wd;
     string register_watch_dir_path;
+
+    //wnh_inotify_use_sqlite_sql_create_db.cpp
     bool watch_list_create_db(); //创建一个数据进行数据存储-监控目录
+
+    //wnh_inotify_use_sqlite_sql_watch_list.cpp
     bool watch_list_create_table(); //创建一张数据表-监控目录
     bool watch_list_drop_table(); //删除数据表-监控目录
     bool watch_list_add_one_record(const int wd, const string watch_dir_path);//添加一行数据-监控目录
@@ -127,35 +131,40 @@ public:
     string watch_list_get_record(const int wd);//使用key获取value-监控目录
     bool watch_list_get_record(const string watch_dir_path, string **& result, int &list, int &rows);//使用value模糊查询获取key-监控目录
 
+    //wnh_inotify_use_sqlite_sql_event_list.cpp
     bool event_list_create_table(); //创建一张数据表-事件列表
     bool event_list_drop_table(); //删除数据表-事件列表
     bool event_list_add_one_record(const int & event_id, const string & event_path); //添加一行数据-事件列表
     bool event_list_add_one_record(const string & event_id, const string & event_path); //添加一行数据-事件列表
     bool event_list_show(); //查询事件表里面的所有数据
+    unsigned long get_event_list_num(); //获取事件列表数量
+
+    //wnh_inotify_use_sqlite_sql_task_list.cpp
     bool task_list_create_table(); //创建一张数据表-任务列表
-    bool event_into_task(const string & src_dir, const string & dst_dir, const vector<string> & client_ip); //将事件转为任务,多IP
-    bool event_into_task(const string & src_dir, const vector<string> & dst_dir, const vector<string> & client_ip); //将事件转为任务,多IP，多目标目录
     bool query_task_num(const string & client_ip, unsigned long & task_num); //根据客户端IP查询任务数量
-    bool create_task_list_file(const string & client_ip, const string & task_list_path, const int & max_task_num); //根据客户端IP生成任务列表文件
     bool delete_one_task(const string & client_ip, const string & event_id, const string & src_path); //根据客户端IP、事件ID、源路径删除一个任务
     bool delete_one_task(const string & client_ip, const string & event_id, const string & src_path, const string & dst_path); //根据客户端IP、事件ID、源路径、目标路径删除一个任务
+    bool create_task_list_file(const string & client_ip, const string & task_list_path, const int & max_task_num); //根据客户端IP生成任务列表文件
+    unsigned long get_task_list_num(); //获取获取任务列表数量
+    unsigned long get_task_list_num(const string & client_ip); //根据客户端IP,获取任务数量
 
+    //wnh_inotify_use_sqlite_sql_event_into_task.cpp
+    bool event_into_task(const string & src_dir, const string & dst_dir, const vector<string> & client_ip); //将事件转为任务,多IP
+    bool event_into_task(const string & src_dir, const vector<string> & dst_dir, const vector<string> & client_ip); //将事件转为任务,多IP，多目标目录
+
+    //wnh_inotify_use_sqlite_sql_fail_task_list.cpp
     bool fail_task_list_create_table(); //创建一张数据表-失败任务列表
     bool add_fail_task_info(const string & client_ip, const string & event_id, const string & src_path); //添加一行失败任务信息
     bool add_fail_task_info(const string & client_ip, const string & event_id, const string & src_path, const string & dst_path); //添加一行失败任务信息
+    unsigned long get_fail_task_list_num(); //获取失败任务数量
+    unsigned long get_fail_task_list_num(const string & client_ip); //根据客户端IP,获取失败任务数量
+    vector<vector<string> > get_fail_task_list(const string & line, const string & num); //获取同步失败任务数据
 
+    //wnh_inotify_use_sqlite_sql_complete_task_list.cpp
     bool complete_task_list_create_table(); //创建一张数据表-成功任务列表
     bool add_complete_task_info(const string & client_ip, const string & event_id, const string & src_path); //添加一行失败任务信息
     bool add_complete_task_info(const string & client_ip, const string & event_id, const string & src_path, const string & dst_path); //添加一行失败任务信息
-
-    unsigned long get_event_list_num(); //获取失败任务数量
-    unsigned long get_task_list_num(); //获取失败任务数量
-    unsigned long get_fail_task_list_num(); //获取失败任务数量
-    unsigned long get_fail_task_list_num(const string & client_ip); //根据客户端IP,获取失败任务数量
-    unsigned long get_task_list_num(const string & client_ip); //根据客户端IP,获取任务数量
     vector<vector<string> > get_real_time_complete_task_list(const int & real_time, const int & num); //获取同步完成实时数据
-
-    vector<vector<string> > get_fail_task_list(const string & line, const string & num); //获取同步失败任务数据
 
 };
 #endif
