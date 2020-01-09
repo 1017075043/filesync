@@ -146,3 +146,13 @@ void wnh_filesync_server::check_client_info_status()//检查更新客户端状�
         sleep(network_timeout);
     }
 }
+
+void wnh_filesync_server::update_client_task_num_and_fail_task_num()//更新客户端任务数和失败任务数
+{
+    for(unsigned int i = 0; i < client_num; i ++)
+    {
+        (client_info+i)->task_num = watch.get_complete_task_list_num((client_info+i)->client_ip);
+        (client_info+i)->fail_task_num = watch.get_fail_task_list_num((client_info+i)->client_ip);
+        WNHDEBUG("(client_info+" << i << ")->client_ip=" << (client_info+i)->client_ip << ", (client_info+" << i << ")->task_num=" << (client_info+i)->task_num << ", (client_info+" << i << ")->fail_task_num=" << (client_info+i)->fail_task_num);
+    }
+}

@@ -72,7 +72,7 @@ vector<string> wnh_filesync_control::get_sync_transfer_data_info(const string & 
     vector<string> values_ss_temp;
     for(int i = 0; i < sync_transfer_info.config_unit_num; i ++)
     {
-        if(sync_transfer_info.config_unit[i].name.substr(0, strlen(WNH_FILESYNC_RULE_TRANSFER_ID)) == WNH_FILESYNC_RULE_TRANSFER_ID)
+        if(sync_transfer_info.config_unit[i].name.substr(0, strlen(WNH_FILESYNC_TRANSFER_ID)) == WNH_FILESYNC_TRANSFER_ID)
         {
             values_ss_temp.push_back(sync_transfer_info.get_conf_one(i, "client_ip"));
             values_ss_temp.push_back(sync_transfer_info.get_conf_one(i, "event_id"));
@@ -99,7 +99,7 @@ bool wnh_filesync_control::show_sync_transfer_info(const string & sync_transfer_
     //vector<string> values_ss_temp;
     for(int i = 0; i < sync_transfer_info.config_unit_num; i ++)
     {
-        if(sync_transfer_info.config_unit[i].name.substr(0, strlen(WNH_FILESYNC_RULE_TRANSFER_ID)) == WNH_FILESYNC_RULE_TRANSFER_ID)
+        if(sync_transfer_info.config_unit[i].name.substr(0, strlen(WNH_FILESYNC_TRANSFER_ID)) == WNH_FILESYNC_TRANSFER_ID)
         {
             string client_ip = sync_transfer_info.get_conf_one(i, "client_ip");
             string event_id = sync_transfer_info.get_conf_one(i, "event_id");

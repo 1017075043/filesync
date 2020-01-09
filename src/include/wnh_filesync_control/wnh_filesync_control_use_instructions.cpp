@@ -217,6 +217,12 @@ void wnh_filesync_control::control_use_instructions() //控制端使用说明
     set_vector_values(true, values, "12", "show fail task", "显示同步失败任务信息", "filesync 12", "filesync \"show fail task\"");
     shell_tables.add_unit(values, color, values_width);
 
+    set_vector_values(true, values, "13", "show fail task", "显示同步失败任务信息", "filesync 13", "filesync \"show complete task\"");
+    shell_tables.add_unit(values, color, values_width);
+
+    set_vector_values(true, values, "14", "show wait sync task", "显示等待同步任务信息", "filesync 14", "filesync \"show wait sync task\"");
+    shell_tables.add_unit(values, color, values_width);
+
     shell_tables.show_tables();
     shell_tables.clear();
 }

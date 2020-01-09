@@ -29,7 +29,9 @@ private:
     template <typename Type_v, typename Type, typename ... Types>
     void set_vector_values(const bool & status, Type_v & values, const Type & arg,const Types & ... args); //设置vector变量值
 
-    int fail_task_list_info_page; //失败页码数
+    int fail_task_list_info_page; //同步失败页码数
+    int complete_task_list_info_page; //同步失败页码数
+    int wait_sync_task_list_info_page; //等待同步页码数
 
 public:
     wnh_filesync_control();
@@ -42,6 +44,8 @@ public:
     wnh_config_ini_ex sync_rule_info;
     wnh_config_ini_ex sync_transfer_info;
     wnh_config_ini_ex sync_fail_task_list_info;
+    wnh_config_ini_ex sync_complete_task_list_info;
+    wnh_config_ini_ex wait_sync_task_list_info;
 
     wnh_shell_tables shell_tables;
 
@@ -90,12 +94,25 @@ public:
     vector<string> get_sync_transfer_data_info(const string & sync_transfer_file_path); //获取同步传输过程数据信息
     bool show_sync_transfer_info(const string & sync_transfer_file_path); //显示同步传输过程数据信息
 
+    bool get_direction_keyboard_input_update_page(int & num, const int & change_num); //通过获取方向键输入更新页码
+
     void get_sync_fail_task_list_info(); //获取同步失败任务列表信息
     bool send_get_fail_task_list_info(string & sync_fail_task_list_file_path); //向服务器发送获取同步失败任务列表信号, 且获取同步失败任务列表文件路径
     vector<string> get_sync_fail_task_list_info(const string & sync_fail_task_list_file_path); //获取同步失败任务列表信息
     bool show_sync_fail_task_list_info(const string & sync_fail_task_list_file_path); //显示同步失败任务列表信息
     bool show_sync_fail_task_list_info_son(const vector<string> & values_ss_temp); //显示同步失败任务列表信息
-    bool get_fail_task_list_info_page(); //同步失败任务列表信号换页选择
+
+    void get_sync_complete_task_list_info(); //获取同步完成任务列表信息
+    bool send_get_complete_task_list_info(string & sync_complete_task_list_file_path); //向服务器发送获取同步完成任务列表信号, 且获取同步完成任务列表文件路径
+    vector<string> get_sync_complete_task_list_info(const string & sync_complete_task_list_file_path); //获取同步完成任务列表信息
+    bool show_sync_complete_task_list_info(const string & sync_complete_task_list_file_path); //显示同步完成任务列表信息
+    bool show_sync_complete_task_list_info_son(const vector<string> & values_ss_temp); //显示同步完成任务列表信息
+
+    void get_wait_sync_task_list_info(); //获取等待同步任务列表信息
+    bool send_get_wait_sync_task_list_info(string & wait_sync_task_list_file_path); //向服务器发送获取等待同步任务列表信号, 且获取等待同步任务列表文件路径
+    vector<string> get_wait_sync_task_list_info(const string & wait_sync_task_list_file_path); //获取等待同步任务列表信息
+    bool show_wait_sync_task_list_info(const string & wait_sync_task_list_file_path); //显示等待同步任务列表信息
+    bool show_wait_sync_task_list_info_son(const vector<string> & values_ss_temp); //显示等待同步任务列表信息
 };
 
 #endif

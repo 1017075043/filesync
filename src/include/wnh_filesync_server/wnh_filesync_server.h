@@ -131,6 +131,7 @@ public:
     bool sub_session(const int nfp); //将一个会话从会话记录列表中删除
     bool manage_session_pthread(); //管理会话线程
     bool check_target_ip(const string & client_ip); //检查客户端IP是否为允许连接
+    void update_client_task_num_and_fail_task_num(); //更新客户端任务数和失败任务数
 
     void event_into_task(); //将事件转换成任务
     void again_created_event(); //再次创建事件
@@ -176,6 +177,13 @@ public:
 
     bool accept_get_sync_fail_task_list_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO); //接收获取同步失败任务列表信息
     bool create_sync_fail_task_list_info(const string & sync_fail_task_list_file_path, const string & line, const string & num); //创建同步失败任务列表信息文件
+
+    bool accept_get_sync_complete_task_list_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO); //接收获取同步完成任务列表信息
+    bool create_sync_complete_task_list_info(const string & sync_complete_task_list_file_path, const string & line, const string & num); //创建同步完成任务列表信息文件
+
+    bool accept_get_wait_sync_task_list_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO); //接收获取等待同步任务列表信息
+    bool create_wait_sync_task_list_info(const string & wait_sync_task_list_file_path, const string & line, const string & num); //创建等待同步任务列表信息文件
+
 };
 
 #endif

@@ -1,12 +1,140 @@
 #include "wnh_filesync_server.h"
 
+bool wnh_filesync_server::accept_get_wait_sync_task_list_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO) //接收获取等待同步任务列表信息
+{
+    if(info.substr(0, strlen(WNH_FILESYNC_WAIT_SYNC_TASK_LIST_INFO)) == WNH_FILESYNC_WAIT_SYNC_TASK_LIST_INFO)
+    {
+        string wait_sync_task_list_file_path;
+        wait_sync_task_list_file_path = wait_sync_task_list_file_path + DEFAULT_WAIT_SYNC_TASK_LIST_PATH_FORMAT;
+        string line = info.substr(strlen(WNH_FILESYNC_WAIT_SYNC_TASK_LIST_INFO), info.find(",") - strlen(WNH_FILESYNC_WAIT_SYNC_TASK_LIST_INFO));
+        string num = info.substr(info.find(",") + 1);
+        //WNHWARN("line:" << line << ", num:" << num);
+        if(create_wait_sync_task_list_info(wait_sync_task_list_file_path, line, num) == false)
+        {
+            wait_sync_task_list_file_path.clear();
+            wait_sync_task_list_file_path = wait_sync_task_list_file_path + WNH_FILESYNC_NOT_OR_FAIL_WAIT_SYNC_TASK_LIST_INFO;
+        }
+        if(send_info(nfp, WNH_FILESYNC_WAIT_SYNC_TASK_LIST_INFO + wait_sync_task_list_file_path))
+        {
+            WNHINFO(CONNECT_INFO_LOGS << "接收获取等待同步任务列表信息, 等待同步任务列表信息文件路径:" << wait_sync_task_list_file_path);
+            return true;
+        }
+        WNHERROR(CONNECT_INFO_LOGS << "回复接收获取等待同步任务列表信息时完成了, 等待同步任务列表信息文件路径:" << wait_sync_task_list_file_path);
+        return true;
+    }
+    return false;
+}
+
+bool wnh_filesync_server::create_wait_sync_task_list_info(const string & wait_sync_task_list_file_path, const string & line, const string & num) //创建等待同步任务列表信息文件
+{
+    vector<vector<string> > result_data = watch.get_task_list(line, num);
+    unsigned long result_num = watch.get_task_list_num();
+    //for(int i = 0; i < (int)result_data.size(); i++)
+    //{
+    //    WNHWARN("client_ip: " << result_data[i][0] << ", event_id: " << result_data[i][1] << ", src_path: " << result_data[i][2] << ", dst_path: " << result_data[i][3] << ", update_date: " << result_data[i][4]);
+    //}
+
+    ofstream file_open;
+    file_open.open(wait_sync_task_list_file_path, ios::out | ios::trunc);
+    if(!file_open.is_open())
+    {
+        WNHERROR("打开文件" << wait_sync_task_list_file_path <<  "成功, errno=" << errno << ", mesg=" << strerror(errno));
+        return false;
+    }
+    for(int i = 0; i < (int)result_data.size(); i++)
+    {
+        file_open << "[" << WNH_FILEFILE_WAIT_SYNC_TASK_LIST_ID << "_" << i << "]" << endl;
+        file_open << "client_ip=" << result_data[i][0] << endl;
+        file_open << "event_id=" << watch.event_transform(result_data[i][1]) << endl;
+        file_open << "src_path=" << result_data[i][2] << endl;
+        file_open << "dst_path=" << result_data[i][3] << endl;
+        file_open << "update_date=" << result_data[i][4] << endl;
+        WNHDEBUG("client_ip: " << result_data[i][0] << ", event_id: " << result_data[i][1] << ", src_path: " << result_data[i][2] << ", dst_path: " << result_data[i][3] << ", update_date: " << result_data[i][4]);
+    }
+    file_open << "[" << WNH_FILEFILE_WAIT_SYNC_TASK_LIST_NUM_ID << "]" << endl;
+    file_open << "num=" << to_string(result_num) << endl;
+
+    if((int)result_data.size() == 0)
+    {
+        WNHDEBUG("查询到当前不存在等待同步任务列表数据");
+        file_open.close();
+        return false;
+    }
+    file_open.close();
+    return true;
+}
+
+bool wnh_filesync_server::accept_get_sync_complete_task_list_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO) //接收获取同步完成任务列表信息
+{
+    if(info.substr(0, strlen(WNH_FILESYNC_SYNC_COMPLETE_TASK_LIST_INFO)) == WNH_FILESYNC_SYNC_COMPLETE_TASK_LIST_INFO)
+    {
+        string sync_complete_task_list_file_path;
+        sync_complete_task_list_file_path = sync_complete_task_list_file_path + DEFAULT_SYNC_COMPLETE_TASK_LIST_PATH_FORMAT;
+        string line = info.substr(strlen(WNH_FILESYNC_SYNC_COMPLETE_TASK_LIST_INFO), info.find(",") - strlen(WNH_FILESYNC_SYNC_COMPLETE_TASK_LIST_INFO));
+        string num = info.substr(info.find(",") + 1);
+        //WNHWARN("line:" << line << ", num:" << num);
+        if(create_sync_complete_task_list_info(sync_complete_task_list_file_path, line, num) == false)
+        {
+            sync_complete_task_list_file_path.clear();
+            sync_complete_task_list_file_path = sync_complete_task_list_file_path + WNH_FILESYNC_NOT_OR_FAIL_SYNC_COMPLETE_TASK_LIST_INFO;
+        }
+        if(send_info(nfp, WNH_FILESYNC_SYNC_COMPLETE_TASK_LIST_INFO + sync_complete_task_list_file_path))
+        {
+            WNHINFO(CONNECT_INFO_LOGS << "接收获取同步完成任务列表信息, 同步完成任务列表信息文件路径:" << sync_complete_task_list_file_path);
+            return true;
+        }
+        WNHERROR(CONNECT_INFO_LOGS << "回复接收获取同步完成任务列表信息时完成了, 同步完成任务列表信息文件路径:" << sync_complete_task_list_file_path);
+        return true;
+    }
+    return false;
+}
+
+bool wnh_filesync_server::create_sync_complete_task_list_info(const string & sync_complete_task_list_file_path, const string & line, const string & num) //创建同步成功任务列表信息文件
+{
+    vector<vector<string> > result_data = watch.get_complete_task_list(line, num);
+    unsigned long result_num = watch.get_complete_task_list_num();
+    //for(int i = 0; i < (int)result_data.size(); i++)
+    //{
+    //    WNHWARN("client_ip: " << result_data[i][0] << ", event_id: " << result_data[i][1] << ", src_path: " << result_data[i][2] << ", dst_path: " << result_data[i][3] << ", update_date: " << result_data[i][4]);
+    //}
+
+    ofstream file_open;
+    file_open.open(sync_complete_task_list_file_path, ios::out | ios::trunc);
+    if(!file_open.is_open())
+    {
+        WNHERROR("打开文件" << sync_complete_task_list_file_path <<  "成功, errno=" << errno << ", mesg=" << strerror(errno));
+        return false;
+    }
+    for(int i = 0; i < (int)result_data.size(); i++)
+    {
+        file_open << "[" << WNH_FILESYNC_COMPLETE_TASK_LIST_ID << "_" << i << "]" << endl;
+        file_open << "client_ip=" << result_data[i][0] << endl;
+        file_open << "event_id=" << watch.event_transform(result_data[i][1]) << endl;
+        file_open << "src_path=" << result_data[i][2] << endl;
+        file_open << "dst_path=" << result_data[i][3] << endl;
+        file_open << "update_date=" << result_data[i][4] << endl;
+        WNHDEBUG("client_ip: " << result_data[i][0] << ", event_id: " << result_data[i][1] << ", src_path: " << result_data[i][2] << ", dst_path: " << result_data[i][3] << ", update_date: " << result_data[i][4]);
+    }
+    file_open << "[" << WNH_FILESYNC_COMPLETE_TASK_LIST_NUM_ID << "]" << endl;
+    file_open << "num=" << to_string(result_num) << endl;
+
+    if((int)result_data.size() == 0)
+    {
+        WNHDEBUG("查询到当前不存在同步成功任务列表数据");
+        file_open.close();
+        return false;
+    }
+    file_open.close();
+    return true;
+}
+
 bool wnh_filesync_server::accept_get_sync_fail_task_list_info(const int & nfp, const string & info,  const CONNECT_INFO & CONNECT_INFO) //接收获取同步失败任务列表信息
 {
-    if(info.substr(0, strlen(WNH_FILESYNC_SYNC_FAIL_TASk_LIST_INFO)) == WNH_FILESYNC_SYNC_FAIL_TASk_LIST_INFO)
+    if(info.substr(0, strlen(WNH_FILESYNC_SYNC_FAIL_TASkK_LIST_INFO)) == WNH_FILESYNC_SYNC_FAIL_TASkK_LIST_INFO)
     {
         string sync_fail_task_list_file_path;
         sync_fail_task_list_file_path = sync_fail_task_list_file_path + DEFAULT_SYNC_FAIL_TASK_LIST_PATH_FORMAT;
-        string line = info.substr(strlen(WNH_FILESYNC_SYNC_FAIL_TASk_LIST_INFO), info.find(",") - strlen(WNH_FILESYNC_SYNC_FAIL_TASk_LIST_INFO));
+        string line = info.substr(strlen(WNH_FILESYNC_SYNC_FAIL_TASkK_LIST_INFO), info.find(",") - strlen(WNH_FILESYNC_SYNC_FAIL_TASkK_LIST_INFO));
         string num = info.substr(info.find(",") + 1);
         //WNHWARN("line:" << line << ", num:" << num);
         if(create_sync_fail_task_list_info(sync_fail_task_list_file_path, line, num) == false)
@@ -14,12 +142,12 @@ bool wnh_filesync_server::accept_get_sync_fail_task_list_info(const int & nfp, c
             sync_fail_task_list_file_path.clear();
             sync_fail_task_list_file_path = sync_fail_task_list_file_path + WNH_FILESYNC_NOT_OR_FAIL_SYNC_FAIL_TASk_LIST_INFO;
         }
-        if(send_info(nfp, WNH_FILESYNC_SYNC_FAIL_TASk_LIST_INFO + sync_fail_task_list_file_path))
+        if(send_info(nfp, WNH_FILESYNC_SYNC_FAIL_TASkK_LIST_INFO + sync_fail_task_list_file_path))
         {
-            WNHINFO(CONNECT_INFO_LOGS << "接收获取同步传输过程信息, 同步传输过程信息文件路径:" << sync_fail_task_list_file_path);
+            WNHINFO(CONNECT_INFO_LOGS << "接收获取同步失败任务列表信息, 同步失败任务列表信息文件路径:" << sync_fail_task_list_file_path);
             return true;
         }
-        WNHERROR(CONNECT_INFO_LOGS << "回复接收获取同步传输过程信息时失败了, 同步传输过程信息文件路径:" << sync_fail_task_list_file_path);
+        WNHERROR(CONNECT_INFO_LOGS << "回复接收获取同步失败任务列表信息时失败了, 同步失败任务列表信息文件路径:" << sync_fail_task_list_file_path);
         return true;
     }
     return false;
@@ -43,7 +171,7 @@ bool wnh_filesync_server::create_sync_fail_task_list_info(const string & sync_fa
     }
     for(int i = 0; i < (int)result_data.size(); i++)
     {
-        file_open << "[" << WNH_FILESYNC_RULE_FAIL_TASk_LIST_ID << "_" << i << "]" << endl;
+        file_open << "[" << WNH_FILESYNC_FAIL_TASK_LIST_ID << "_" << i << "]" << endl;
         file_open << "client_ip=" << result_data[i][0] << endl;
         file_open << "event_id=" << watch.event_transform(result_data[i][1]) << endl;
         file_open << "src_path=" << result_data[i][2] << endl;
@@ -51,7 +179,7 @@ bool wnh_filesync_server::create_sync_fail_task_list_info(const string & sync_fa
         file_open << "update_date=" << result_data[i][4] << endl;
         WNHDEBUG("client_ip: " << result_data[i][0] << ", event_id: " << result_data[i][1] << ", src_path: " << result_data[i][2] << ", dst_path: " << result_data[i][3] << ", update_date: " << result_data[i][4]);
     }
-    file_open << "[" << WNH_FILESYNC_RULE_FAIL_TASk_LIST_NUM_ID << "]" << endl;
+    file_open << "[" << WNH_FILESYNC_FAIL_TASK_LIST_NUM_ID << "]" << endl;
     file_open << "num=" << to_string(result_num) << endl;
 
     if((int)result_data.size() == 0)
@@ -103,7 +231,7 @@ bool wnh_filesync_server::create_sync_transfer_info(const string & sync_transfer
     }
     for(int i = 0; i < (int)result_data.size(); i++)
     {
-        file_open << "[" << WNH_FILESYNC_RULE_TRANSFER_ID << "_" << i << "]" << endl;
+        file_open << "[" << WNH_FILESYNC_TRANSFER_ID << "_" << i << "]" << endl;
         file_open << "client_ip=" << result_data[i][0] << endl;
         file_open << "event_id=" << watch.event_transform(result_data[i][1]) << endl;
         //file_open << "src_path=" << result_data[i][2] << endl;

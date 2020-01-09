@@ -41,4 +41,16 @@
 
 //同步失败任务列表单次查询行数
 #define SYNC_FAIL_TASK_LIST_INFO_LINE_NUM 10
+
+//同步完成任务列表文件后缀
+#define SYNC_COMPLETE_TASK_LIST_INFO_FILE_SUFFIX ".control"
+
+//同步完成任务列表单次查询行数
+#define SYNC_COMPLETE_TASK_LIST_INFO_LINE_NUM 10
+
+//等待同步任务列表文件后缀
+#define WAIT_SYNC_TASK_LIST_INFO_FILE_SUFFIX ".control"
+
+//等待同步任务列表单次查询行数
+#define WAIT_SYNC_TASK_LIST_INFO_LINE_NUM 10
 #endif

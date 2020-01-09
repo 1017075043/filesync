@@ -74,6 +74,14 @@ void filesync::control_mode()
     {
         control.get_sync_fail_task_list_info();
     }
+    else if(filesync_control_use_parameter == "13" || filesync_control_use_parameter == "show complete task")
+    {
+        control.get_sync_complete_task_list_info();
+    }
+    else if(filesync_control_use_parameter == "14" || filesync_control_use_parameter == "show wait sync task")
+    {
+        control.get_wait_sync_task_list_info();
+    }
     else
     {
         control.ues_instructions();

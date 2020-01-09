@@ -7,6 +7,8 @@
 #include "wnh_filesync_control_license.cpp"
 #include "wnh_filesync_control_sync_transfer.cpp"
 #include "wnh_filesync_control_sync_fail_task_list.cpp"
+#include "wnh_filesync_control_sync_complete_task_list.cpp"
+#include "wnh_filesync_control_wait_sync_task_list.cpp"
 
 wnh_filesync_control::wnh_filesync_control()
 {
@@ -71,6 +73,36 @@ void wnh_filesync_control::create_temp_list_dir()
         }
     }
     sys_oper.chmod_wnh(WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH, "755");
+}
+
+bool wnh_filesync_control::get_direction_keyboard_input_update_page(int & num, const int & change_num) //通过获取方向键输入更新页码
+{
+    while(1)
+    {
+        string stemp_s = get_keyboard_input_string();
+        if(stemp_s == "up" || stemp_s == "W" || stemp_s == "w")
+        {
+            if(num >= change_num )
+            {
+                num = num - change_num;
+                break;
+            }
+            else
+            {
+                continue;
+            }
+        }
+        else if(stemp_s == "down" || stemp_s == "S" || stemp_s == "s")
+        {
+            num = num + change_num;
+            break;
+        }
+        else
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 template <typename Type_v, typename Type>

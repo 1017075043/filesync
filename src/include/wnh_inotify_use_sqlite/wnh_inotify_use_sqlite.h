@@ -147,6 +147,7 @@ public:
     bool create_task_list_file(const string & client_ip, const string & task_list_path, const int & max_task_num); //根据客户端IP生成任务列表文件
     unsigned long get_task_list_num(); //获取获取任务列表数量
     unsigned long get_task_list_num(const string & client_ip); //根据客户端IP,获取任务数量
+    vector<vector<string> > get_task_list(const string & line, const string & num); //获取等待同步任务列表数据
 
     //wnh_inotify_use_sqlite_sql_event_into_task.cpp
     bool event_into_task(const string & src_dir, const string & dst_dir, const vector<string> & client_ip); //将事件转为任务,多IP
@@ -165,6 +166,9 @@ public:
     bool add_complete_task_info(const string & client_ip, const string & event_id, const string & src_path); //添加一行失败任务信息
     bool add_complete_task_info(const string & client_ip, const string & event_id, const string & src_path, const string & dst_path); //添加一行失败任务信息
     vector<vector<string> > get_real_time_complete_task_list(const int & real_time, const int & num); //获取同步完成实时数据
+    vector<vector<string> > get_complete_task_list(const string & line, const string & num); //获取同步完成任务数据
+    unsigned long get_complete_task_list_num(); //获取完成任务数量
+    unsigned long get_complete_task_list_num(const string & client_ip); //根据客户端IP,获取完成任务数量
 
 };
 #endif

@@ -71,3 +71,73 @@ vector<vector<string> > wnh_inotify_use_sqlite::get_real_time_complete_task_list
     }
     return result_data;
 }
+
+vector<vector<string> > wnh_inotify_use_sqlite::get_complete_task_list(const string & line, const string & num) //获取同步完成任务数据
+{
+    string sql = "";
+    sql = sql + "SELECT client_ip, event_id, src_path, dst_path, update_date FROM " + COMPLETE_TASK_LIST_TABLE_NAME + " ORDER BY update_date DESC LIMIT " + num + " OFFSET " + line + ";";
+    //WNHWARN(sql);
+    vector<vector<string> > result_data;
+    string **result;
+    int nrow;
+    int ncolumn;
+    //sql_query(string sql, string **&result, int &nrow ,int &ncolumn);
+    if(!sqlite_op.sql_query(sql, result, nrow, ncolumn))
+    {
+        WNHERROR("获取同步失败任务数据失败了");
+        return result_data;
+    }
+    string temp_sql;
+    for(int i = 0; i < nrow; i ++)
+    {
+        vector<string> temp_line_date;
+        for(int j = 0; j < ncolumn; j ++)
+        {
+            temp_line_date.push_back(result[i][j]);
+        }
+        result_data.push_back(temp_line_date);
+        temp_sql = temp_sql + "'" + result[i][ncolumn - 1] + "',";
+        //WNHWARN("client_ip: " << result[i][0] << ", event_id:" << result[i][1] << ", src_path:" << result[i][2] << ", dst_path:" << result[i][3] << ", update_date:" << result[i][4]);
+    }
+    return result_data;
+}
+
+unsigned long wnh_inotify_use_sqlite::get_complete_task_list_num() //获取完成任务数量
+{
+    string sql = "";
+    sql = sql + "SELECT count(1) FROM " + COMPLETE_TASK_LIST_TABLE_NAME + ";";
+    string sql_result;
+    if(!sqlite_op.sql_query(sql, sql_result))
+    {
+        WNHERROR("查询完成任务列表获取失败任务数量失败了");
+        return -1;
+    }
+    if(sql_result.empty())
+    {
+        WNHDEBUG("查询完成任务列表获取到完成任务数量:0");
+        return 0;
+    }
+    unsigned long num = stoul(sql_result, 0, 10);
+    WNHDEBUG("查询完成任务列表获取到完成任务数量:" << num);
+    return num;
+}
+
+unsigned long wnh_inotify_use_sqlite::get_complete_task_list_num(const string & client_ip) //根据客户端IP,获取完成任务数量
+{
+    string sql = "";
+    sql = sql + "SELECT count(1) FROM " + COMPLETE_TASK_LIST_TABLE_NAME + " WHERE client_ip = '" + client_ip + "';";
+    string sql_result;
+    if(!sqlite_op.sql_query(sql, sql_result))
+    {
+        WNHERROR("根据客户端IP查询完成任务列表获取完成任务数量失败了");
+        return -1;
+    }
+    if(sql_result.empty())
+    {
+        WNHDEBUG("根据客户端IP查询完成任务列表获取到完成任务数量:0");
+        return 0;
+    }
+    unsigned long num = stoul(sql_result, 0, 10);
+    WNHDEBUG("根据客户端IP查询完成任务列表获取到完成任务数量:" << num);
+    return num;
+}

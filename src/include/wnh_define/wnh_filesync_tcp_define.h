@@ -68,16 +68,34 @@
 //服务端向客户端回复请求获取同步传输信息:查询不到最新的数据时
 #define WNH_FILESYNC_NOT_OR_FAIL_SYNC_TRANSFER_INFO "WNH_FILESYNC_NOT_OR_FAIL_SYNC_TRANSFER_INFO"
 //同步传输过程标识头
-#define WNH_FILESYNC_RULE_TRANSFER_ID "sync_transfer"
+#define WNH_FILESYNC_TRANSFER_ID "sync_transfer"
 
 //客户端向服务端发送请求获取同步失败任务列表信息
-#define WNH_FILESYNC_SYNC_FAIL_TASk_LIST_INFO "WNH_FILESYNC_SYNC_FAIL_TASk_LIST_INFO:"
+#define WNH_FILESYNC_SYNC_FAIL_TASkK_LIST_INFO "WNH_FILESYNC_SYNC_FAIL_TASkK_LIST_INFO:"
 //服务端向客户端回复请求获取同步失败任务列表信息:查询不到最新的数据时
 #define WNH_FILESYNC_NOT_OR_FAIL_SYNC_FAIL_TASk_LIST_INFO "WNH_FILESYNC_NOT_OR_FAIL_SYNC_FAIL_TASk_LIST_INFO"
-//同步同步失败任务列表标识头
-#define WNH_FILESYNC_RULE_FAIL_TASk_LIST_ID "sync_fail_task_list"
-//同步同步失败任务列表数量标识头
-#define WNH_FILESYNC_RULE_FAIL_TASk_LIST_NUM_ID "sync_fail_task_list_num"
+//同步失败任务列表标识头
+#define WNH_FILESYNC_FAIL_TASK_LIST_ID "sync_fail_task_list"
+//同步失败任务列表数量标识头
+#define WNH_FILESYNC_FAIL_TASK_LIST_NUM_ID "sync_fail_task_list_num"
+
+//客户端向服务端发送请求获取同步完成任务列表信息
+#define WNH_FILESYNC_SYNC_COMPLETE_TASK_LIST_INFO "WNH_FILESYNC_SYNC_COMPLETE_TASK_LIST_INFO:"
+//服务端向客户端回复请求获取同步完成任务列表信息:查询不到最新的数据时
+#define WNH_FILESYNC_NOT_OR_FAIL_SYNC_COMPLETE_TASK_LIST_INFO "WNH_FILESYNC_NOT_OR_FAIL_SYNC_COMPLETE_TASK_LIST_INFO"
+//同步完成任务列表标识头
+#define WNH_FILESYNC_COMPLETE_TASK_LIST_ID "sync_complete_task_list"
+//同步完成任务列表数量标识头
+#define WNH_FILESYNC_COMPLETE_TASK_LIST_NUM_ID "sync_complete_task_list_num"
+
+//客户端向服务端发送请求获取等待同步任务列表信息
+#define WNH_FILESYNC_WAIT_SYNC_TASK_LIST_INFO "WNH_FILESYNC_WAIT_SYNC_TASK_LIST_INFO:"
+//服务端向客户端回复请求获取等待同步任务列表信息:查询不到最新的数据时
+#define WNH_FILESYNC_NOT_OR_FAIL_WAIT_SYNC_TASK_LIST_INFO "WNH_FILESYNC_NOT_OR_FAIL_WAIT_SYNC_TASK_LIST_INFO"
+//等待同步任务列表标识头
+#define WNH_FILEFILE_WAIT_SYNC_TASK_LIST_ID "wait_sync_task_list"
+//等待同步任务列表数量标识头
+#define WNH_FILEFILE_WAIT_SYNC_TASK_LIST_NUM_ID "wait_sync_task_list_num"
 
 #endif
 

@@ -16,5 +16,6 @@ void wnh_filesync_server::core()
     WNHINFO("启动核心服务");
     watch_core_v1();//watch核心服务
     timer_task();//定时任务
+    update_client_task_num_and_fail_task_num(); //更新客户端任务数和失败任务数
     tcp_core();//tcp核心服务
 }

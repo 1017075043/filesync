@@ -192,3 +192,33 @@ unsigned long wnh_inotify_use_sqlite::get_task_list_num(const string & client_ip
     WNHDEBUG("根据客户端IP查询任务列表获取到任务数量:" << num);
     return num;
 }
+
+vector<vector<string> > wnh_inotify_use_sqlite::get_task_list(const string & line, const string & num) //获取等待同步任务列表数据
+{
+    string sql = "";
+    sql = sql + "SELECT client_ip, event_id, src_path, dst_path, update_date FROM " + TASK_LIST_TABLE_NAME + " ORDER BY update_date ASC LIMIT " + num + " OFFSET " + line + ";";
+    //WNHWARN(sql);
+    vector<vector<string> > result_data;
+    string **result;
+    int nrow;
+    int ncolumn;
+    //sql_query(string sql, string **&result, int &nrow ,int &ncolumn);
+    if(!sqlite_op.sql_query(sql, result, nrow, ncolumn))
+    {
+        WNHERROR("获取等待同步任务列表数据失败了");
+        return result_data;
+    }
+    string temp_sql;
+    for(int i = 0; i < nrow; i ++)
+    {
+        vector<string> temp_line_date;
+        for(int j = 0; j < ncolumn; j ++)
+        {
+            temp_line_date.push_back(result[i][j]);
+        }
+        result_data.push_back(temp_line_date);
+        temp_sql = temp_sql + "'" + result[i][ncolumn - 1] + "',";
+        //WNHWARN("client_ip: " << result[i][0] << ", event_id:" << result[i][1] << ", src_path:" << result[i][2] << ", dst_path:" << result[i][3] << ", update_date:" << result[i][4]);
+    }
+    return result_data;
+}
