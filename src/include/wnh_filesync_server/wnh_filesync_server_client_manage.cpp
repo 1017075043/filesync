@@ -133,16 +133,16 @@ void wnh_filesync_server::check_client_info_status()//检查更新客户端状�
                 }
             }
         }
-        if(offline_client_ip.size() != 0)
+        if(offline_client_ip.size() != 0 && email_info.status == true)
         {
             email_client_offline_alert_info(offline_client_ip, begin_connect_time, last_connect_time, task_num, complete_task_num, fail_task_num);
-            offline_client_ip.clear();
-            begin_connect_time.clear();
-            last_connect_time.clear();
-            task_num.clear();
-            complete_task_num.clear();
-            fail_task_num.clear();
         }
+        offline_client_ip.clear();
+        begin_connect_time.clear();
+        last_connect_time.clear();
+        task_num.clear();
+        complete_task_num.clear();
+        fail_task_num.clear();
         sleep(network_timeout);
     }
 }

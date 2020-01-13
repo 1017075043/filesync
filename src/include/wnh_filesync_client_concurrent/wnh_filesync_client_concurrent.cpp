@@ -69,16 +69,35 @@ void wnh_filesync_client_concurrent::start_client(const string &ip, const int &p
     wnh_filesync_client client_status_core(ip, port);
     client_status_core.status_core();
 
-    wnh_filesync_client client_sync_core(ip, port);
-    client_sync_core.sync_core();
-    //检查状态线程和同步线程
-    while(client_sync_core.live_sign && client_status_core.live_sign)
+    wnh_filesync_client client_sync_core[WNH_FILESYNC_CLIENT_SYNC_THREADS_NUM]; //多线程启动客户端
+    for(int i = 0; i < WNH_FILESYNC_CLIENT_SYNC_THREADS_NUM; i ++)
     {
+        client_sync_core[i].set_client_ip_port(ip, port);
+        client_sync_core[i].sync_core();
+        sleep(1);
+    }
+    //检查状态线程和同步线程
+    while(1)
+    {
+        if(client_status_core.live_sign == false)
+        {
+            break;
+        }
+        for(int i = 0; i < WNH_FILESYNC_CLIENT_SYNC_THREADS_NUM; i ++)
+        {
+            if(client_sync_core[i].live_sign == false)
+            {
+                break;
+            }
+        }
         sleep(1);
     }
     //当更新状态线程或者同步线程出现异常时,将这两个线程的存活标志设置为false,并使用5秒的时间等待线程结束。
-    client_sync_core.live_sign = false;
     client_status_core.live_sign = false;
+    for(int i = 0; i < WNH_FILESYNC_CLIENT_SYNC_THREADS_NUM; i ++)
+    {
+        client_sync_core[i].live_sign = false;
+    }
     sleep(5);
 }
 

@@ -29,8 +29,11 @@ public:
 public:
     wnh_filesync_client();
     wnh_filesync_client(const string & ip_address_and_port);
+    void set_client_ip_port(const string &ip_address_and_port);
     wnh_filesync_client(const int argc, const char **argv);
+    void set_client_ip_port(const int argc, const char **argv);
     wnh_filesync_client(const string & ip, const int & port);
+    void set_client_ip_port(const string & ip, const int & port);
     ~wnh_filesync_client();
 
     void init(); //初始化

@@ -31,7 +31,7 @@ bool wnh_inotify_use_sqlite::event_into_task(const string & src_dir, const strin
             if(temp_sql_result == 0)
             {
                 sql = "";
-                sql = sql + "REPLACE INTO " + TASK_LIST_TABLE_NAME + " (client_ip, event_id, src_path, dst_path, update_date) VALUES ('" + client_ip[n] + "', '" + event_id + "', '" + sqlite_op.sqlite_escape(src_path) + "', '" + sqlite_op.sqlite_escape(dst_path) + "', datetime(CURRENT_TIMESTAMP,'localtime'));";
+                sql = sql + "REPLACE INTO " + TASK_LIST_TABLE_NAME + " (id, client_ip, event_id, src_path, dst_path, update_date, sync_lock) VALUES ('" + get_uuid() + "', '" + client_ip[n] + "', '" + event_id + "', '" + sqlite_op.sqlite_escape(src_path) + "', '" + sqlite_op.sqlite_escape(dst_path) + "', datetime(CURRENT_TIMESTAMP,'localtime'), 0);";
                 sqlite_op.sql_query(sql);
                 WNHINFO("成功添加一个任务, 客户端IP:" << client_ip[n] << ", 动作:" << event_transform(event_id) << ", 源路径:" << src_path << ", 目标路径:" << dst_path);
                 continue;
@@ -125,7 +125,7 @@ bool wnh_inotify_use_sqlite::event_into_task(const string & src_dir, const vecto
             if(temp_sql_result == 0)
             {
                 sql = "";
-                sql = sql + "REPLACE INTO " + TASK_LIST_TABLE_NAME + " (client_ip, event_id, src_path, dst_path, update_date) VALUES ('" + client_ip[n] + "', '" + event_id + "', '" + sqlite_op.sqlite_escape(src_path) + "', '" + sqlite_op.sqlite_escape(dst_path) + "', datetime(CURRENT_TIMESTAMP,'localtime'));";
+                sql = sql + "REPLACE INTO " + TASK_LIST_TABLE_NAME + " (id, client_ip, event_id, src_path, dst_path, update_date, sync_lock) VALUES ('" + get_uuid() + "', '" + client_ip[n] + "', '" + event_id + "', '" + sqlite_op.sqlite_escape(src_path) + "', '" + sqlite_op.sqlite_escape(dst_path) + "', datetime(CURRENT_TIMESTAMP,'localtime'), 0);";
                 //sql = sql + "INSERT INTO " + TASK_LIST_TABLE_NAME + " (client_ip, event_id, src_path, dst_path, update_date) VALUES ('" + client_ip[n] + "', '" + event_id + "', '" + sqlite_op.sqlite_escape(src_path) + "', '" + sqlite_op.sqlite_escape(dst_path) + "', datetime(CURRENT_TIMESTAMP,'localtime'));";
                 sqlite_op.sql_query(sql);
                 WNHINFO("成功添加一个任务, 客户端IP:" << client_ip[n] << ", 动作:" << event_transform(event_id) << ", 源路径:" << src_path << ", 目标路径:" << dst_path);

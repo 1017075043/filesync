@@ -107,13 +107,13 @@ bool wnh_filesync_server::build_session(const int & nfp, const CONNECT_INFO & CO
             if(info.empty())
             {
                 WNHERROR(CONNECT_INFO_LOGS << "会话异常结束, errno=" << errno << ", mesg=" << strerror(errno));
-                close_session(nfp, false);
+                close_session(nfp, CONNECT_INFO, false);
                 return false;
             }
             if(info == WNH_TCP_EXCLUSIVE_SESSION_TIMEOUT_ID)
             {
                 WNHERROR(CONNECT_INFO_LOGS ", 等待超时或者会话异常, 接收到信息错误, 会话异常结束" << ", errno=" << errno << ", mesg=" << strerror(errno));
-                close_session(nfp, false);
+                close_session(nfp, CONNECT_INFO, false);
                 return false;
             }
             WNHWARN(CONNECT_INFO_LOGS << "接收到无法识别的信息:" << info);
@@ -125,7 +125,7 @@ bool wnh_filesync_server::build_session(const int & nfp, const CONNECT_INFO & CO
         else
         {
             WNHERROR("nfp:" << nfp << ", 客户端IP:" << CONNECT_INFO.client_ip << ", 会话异常结束, errno=" << errno << ", mesg=" << strerror(errno));
-            close_session(nfp, false);
+            close_session(nfp, CONNECT_INFO, false);
             return false;
         }
     }
@@ -186,7 +186,7 @@ void wnh_filesync_server::tcp_core() //tcp核心服务
         else
         {
             WNHERROR("nfp:" << nfp << ", 会话异常, 忽略该会话, errno=" << errno << ", mesg=" << strerror(errno));
-            close_session(nfp, true);
+            close_session(nfp, CONNECT_INFO, true);
         }
     }
 }
@@ -236,6 +236,13 @@ bool wnh_filesync_server::accept_start_session_info(const int nfp, const string 
         WNHERROR("nfp:" << nfp << ", 接收到开始会话信息,但是回复时失败了");
     }
     return false;
+}
+
+bool wnh_filesync_server::close_session(const int nfp, const CONNECT_INFO & CONNECT_INFO, const bool status = false) //关闭一个会话
+{
+    watch.update_task_sync_lock_status(CONNECT_INFO.client_ip, "0");
+    WNHERROR("解开任务同步锁, 关闭临时句柄数nfp=" << CONNECT_INFO.client_nfp << ", 客户端的IP:" << CONNECT_INFO.client_ip << ", 使用的临时端口:" << CONNECT_INFO.client_port);
+    return close_session(nfp, false);
 }
 
 bool wnh_filesync_server::close_session(const int nfp, const bool status = false) //关闭一个会话
@@ -379,7 +386,7 @@ int wnh_filesync_server::accept_apply_downinfo_file_info(const int nfp, const st
     else
     {
         WNHERROR(CONNECT_INFO_LOGS << "会话异常结束, errno=" << errno << ", mesg=" << strerror(errno));
-        close_session(nfp, false);
+        close_session(nfp, CONNECT_INFO, false);
     }
     return WNH_TCP_FAIL_RESULTS;
 }

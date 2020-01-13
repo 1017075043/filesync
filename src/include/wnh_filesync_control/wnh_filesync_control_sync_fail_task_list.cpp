@@ -172,8 +172,17 @@ bool wnh_filesync_control::show_sync_fail_task_list_info_son(const vector<string
         //shell_tables.set_unit(shell_tables.line_num - 1, separator_format);
     }
     string local_page_num = to_string((fail_task_list_info_page/SYNC_FAIL_TASK_LIST_INFO_LINE_NUM) + 1);
+    unsigned long tatal_page_num_temp = stoul(values_ss_temp[values_ss_temp.size()-1], 0 , 10) % SYNC_FAIL_TASK_LIST_INFO_LINE_NUM;
+    if(tatal_page_num_temp == 0)
+    {
+        tatal_page_num_temp = stoul(values_ss_temp[values_ss_temp.size()-1], 0 , 10) / SYNC_FAIL_TASK_LIST_INFO_LINE_NUM;
+    }
+    else
+    {
+        tatal_page_num_temp = stoul(values_ss_temp[values_ss_temp.size()-1], 0 , 10) / SYNC_FAIL_TASK_LIST_INFO_LINE_NUM + 1;
+    }
     string total_page_num;
-    total_page_num = total_page_num + "共" + to_string(stoul(values_ss_temp[values_ss_temp.size()-1], 0 , 10) / SYNC_FAIL_TASK_LIST_INFO_LINE_NUM + 1) + "页, " + values_ss_temp[values_ss_temp.size()-1] + "条记录";
+    total_page_num = total_page_num + "共" + to_string(tatal_page_num_temp) + "页, " + values_ss_temp[values_ss_temp.size()-1] + "条记录";
     set_vector_values(true, values, "当前页数:", local_page_num, total_page_num,"按向上键或者W键, 查看上一页,按向下键或者S键, 查看下一页, 按其他键退出");
     set_vector_values(true, values_width, 10, 4, 24, 91);
     set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::RESET, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::RESET, WNH_SHELL_TABLES_FONT_STYLE::RESET);

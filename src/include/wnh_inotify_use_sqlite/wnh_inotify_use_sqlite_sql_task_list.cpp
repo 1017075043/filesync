@@ -1,21 +1,23 @@
 #include "wnh_inotify_use_sqlite.h"
 
+mutex create_task_line_file_lock;
+
 bool wnh_inotify_use_sqlite::task_list_create_table() //创建一张数据表-任务列表
 {
     WNHINFO("使用数据表" << TASK_LIST_TABLE_NAME << "来进行数据记录");
     string sql;
     //sql = sql + "CREATE TABLE " + TASK_LIST_TABLE_NAME + " (client_ip TEXT NOT NULL, event_id INT NOT NULL, src_path TEXT NOT NULL, dst_path src_path TEXT NOT NULL, update_date DATE NOT NULL, PRIMARY KEY (client_ip, src_path, dst_path));";
-    sql = sql + "CREATE TABLE IF NOT EXISTS " + TASK_LIST_TABLE_NAME + " (client_ip TEXT NOT NULL, event_id INT NOT NULL, src_path TEXT NOT NULL, dst_path TEXT NOT NULL, update_date DATE NOT NULL, PRIMARY KEY (client_ip, src_path, dst_path));";
+    sql = sql + "CREATE TABLE IF NOT EXISTS " + TASK_LIST_TABLE_NAME + " (id TEXT NOT NULL, client_ip TEXT NOT NULL, event_id INT NOT NULL, src_path TEXT NOT NULL, dst_path TEXT NOT NULL, update_date DATE NOT NULL, sync_lock INT NULL, PRIMARY KEY (client_ip, src_path, dst_path));";
     sqlite_op.sql_query(sql);
     sql = "";
-    sql = sql + "REPLACE INTO task_list_table (client_ip, event_id, src_path, dst_path, update_date) VALUES ('0', '0', '0', '0', datetime(CURRENT_TIMESTAMP,'localtime'));";
+    sql = sql + "REPLACE INTO task_list_table (id, client_ip, event_id, src_path, dst_path, update_date, sync_lock) VALUES ('" + get_uuid() + "', '0', '0', '0', '0', datetime(CURRENT_TIMESTAMP,'localtime'), 0);";
     return sqlite_op.sql_query(sql);
 }
 
 bool wnh_inotify_use_sqlite::query_task_num(const string & client_ip, unsigned long & task_num) //根据客户端IP查询任务数量
 {
     string sql, result;
-    sql = sql + "SELECT COUNT(1) AS 'task_num' FROM " + TASK_LIST_TABLE_NAME + " t WHERE t.client_ip = '" + client_ip + "' AND (datetime(CURRENT_TIMESTAMP, 'localtime', '-3 seconds') > datetime(update_date));";
+    sql = sql + "SELECT COUNT(1) AS 'task_num' FROM " + TASK_LIST_TABLE_NAME + " t WHERE t.sync_lock = 0 AND t.client_ip = '" + client_ip + "' AND (datetime(CURRENT_TIMESTAMP, 'localtime', '-3 seconds') > datetime(update_date));";
     if(sqlite_op.sql_query(sql, result))
     {
         task_num = strtoull(result.c_str(), NULL, 10);
@@ -54,10 +56,27 @@ bool wnh_inotify_use_sqlite::create_task_list_file(const string & client_ip, con
 {
     wnh_system_operation wnh_sys_op;
     wnh_openssl file_hash;
-    string sql;
+    string sql = "";
     string **result;
     int row, column;
-    sql = sql + "SELECT event_id, src_path, dst_path FROM " + TASK_LIST_TABLE_NAME + " t WHERE t.client_ip = '" + client_ip + "' AND (datetime(CURRENT_TIMESTAMP, 'localtime', '-3 seconds') > datetime(update_date)) ORDER BY update_date DESC LIMIT " + to_string(max_task_num) + ";";
+    create_task_line_file_lock.lock(); //保证事务的原子性,添加互斥锁
+
+    //分解任务到线程中
+    unsigned long get_task_num_temp = 0;
+    query_task_num(client_ip, get_task_num_temp);
+    get_task_num_temp = get_task_num_temp / WNH_FILESYNC_CLIENT_SYNC_THREADS_NUM;
+    if(get_task_num_temp == 0)
+    {
+        get_task_num_temp = 1;
+    }
+    if((long)get_task_num_temp > max_task_num)
+    {
+        get_task_num_temp = max_task_num;
+    }
+
+    sql = "";
+    sql = sql + "SELECT event_id, src_path, dst_path, id FROM " + TASK_LIST_TABLE_NAME + " t WHERE t.sync_lock = 0 AND t.client_ip = '" + client_ip + "' AND (datetime(CURRENT_TIMESTAMP, 'localtime', '-3 seconds') > datetime(update_date)) ORDER BY update_date DESC LIMIT " + to_string(get_task_num_temp) + ";";
+    WNHWARN(sql);
     if(sqlite_op.sql_query(sql, result, row, column))
     {
         ofstream file_open;
@@ -65,6 +84,7 @@ bool wnh_inotify_use_sqlite::create_task_list_file(const string & client_ip, con
         if(!file_open.is_open())
         {
             WNHERROR("打开文件" << task_list_path <<  "失败, errno=" << errno << ", mesg=" << strerror(errno));
+            create_task_line_file_lock.unlock(); //保证事务的原子性,添加互斥锁
             for( int i=0; i<row; i++ )
             {
                 delete [] result[i];
@@ -78,6 +98,7 @@ bool wnh_inotify_use_sqlite::create_task_list_file(const string & client_ip, con
         //#define WNH_INOTIFY_IN_MODIFY 4
         //#define WNH_INOTIFY_IN_MOVED_FROM 5
         //#define WNH_INOTIFY_IN_MOVED_TO 3
+        string id_list_temp_sql = "";
         for(int i = 0; i< row; i++)
         {
             TASK_ATTR task_info;
@@ -87,6 +108,7 @@ bool wnh_inotify_use_sqlite::create_task_list_file(const string & client_ip, con
             task_info.event_id = result[i][0];
             task_info.src_path = result[i][1];
             task_info.dst_path = result[i][2];
+            id_list_temp_sql = id_list_temp_sql + "'" + result[i][3] + "',";
 
             file_open << task_info.task_name << endl;
             file_open << "event_id=" << task_info.event_id << endl;
@@ -138,6 +160,14 @@ bool wnh_inotify_use_sqlite::create_task_list_file(const string & client_ip, con
             file_open << endl;
         }
         file_open.close();
+        delete_last_char(id_list_temp_sql, ',');
+        sql = "";
+        sql = sql + "UPDATE " + TASK_LIST_TABLE_NAME + " SET sync_lock = '1' WHERE id in (" + id_list_temp_sql + ");";
+        if(!sqlite_op.sql_query(sql))
+        {
+            WNHWARN("执行更新" << TASK_LIST_TABLE_NAME << "表, sync_lock = '1', 失败了");
+        }
+        create_task_line_file_lock.unlock(); //保证事务的原子性,添加互斥锁
         for( int i=0; i<row; i++ )
         {
             delete [] result[i];
@@ -145,6 +175,7 @@ bool wnh_inotify_use_sqlite::create_task_list_file(const string & client_ip, con
         delete result;
         return true;
     }
+    create_task_line_file_lock.unlock(); //保证事务的原子性,添加互斥锁
     for( int i=0; i<row; i++ )
     {
         delete [] result[i];
@@ -168,7 +199,7 @@ unsigned long wnh_inotify_use_sqlite::get_task_list_num() //获取任务数量
         WNHDEBUG("查询任务列表获取到任务数量:0");
         return 0;
     }
-    unsigned long num = stoul(sql_result, 0, 10);
+    unsigned long num = stoul(sql_result, 0, 10) - 1;
     WNHDEBUG("查询任务列表获取到任务数量:" << num);
     return num;
 }
@@ -196,7 +227,7 @@ unsigned long wnh_inotify_use_sqlite::get_task_list_num(const string & client_ip
 vector<vector<string> > wnh_inotify_use_sqlite::get_task_list(const string & line, const string & num) //获取等待同步任务列表数据
 {
     string sql = "";
-    sql = sql + "SELECT client_ip, event_id, src_path, dst_path, update_date FROM " + TASK_LIST_TABLE_NAME + " ORDER BY update_date ASC LIMIT " + num + " OFFSET " + line + ";";
+    sql = sql + "SELECT client_ip, event_id, src_path, dst_path, update_date FROM " + TASK_LIST_TABLE_NAME + " WHERE client_ip != '0' AND event_id != '0' AND src_path != '0' AND dst_path != '0' ORDER BY update_date ASC LIMIT " + num + " OFFSET " + line + ";";
     //WNHWARN(sql);
     vector<vector<string> > result_data;
     string **result;
@@ -221,4 +252,20 @@ vector<vector<string> > wnh_inotify_use_sqlite::get_task_list(const string & lin
         //WNHWARN("client_ip: " << result[i][0] << ", event_id:" << result[i][1] << ", src_path:" << result[i][2] << ", dst_path:" << result[i][3] << ", update_date:" << result[i][4]);
     }
     return result_data;
+}
+
+bool wnh_inotify_use_sqlite::update_task_sync_lock_status(const string & client_ip, const string & lock_status) //根据客户端IP更新锁状态
+{
+    string sql = "";
+    sql = sql + "UPDATE " + TASK_LIST_TABLE_NAME + " SET sync_lock = " + lock_status + " WHERE client_ip = '" + client_ip + "';";
+    if(!sqlite_op.sql_query(sql))
+    {
+        WNHWARN("根据客户端IP " << client_ip << "更新锁状态为" << lock_status << ", 失败了");
+        return false;
+    }
+    else
+    {
+        WNHDEBUG("根据客户端IP " << client_ip << "更新锁状态为" << lock_status << ", 成功");
+        return true;
+    }
 }

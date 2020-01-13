@@ -1,6 +1,9 @@
 #ifndef __wnh_filesync_tcp_define__
 #define __wnh_filesync_tcp_define__
 
+//客户端同步使用线程数
+#define WNH_FILESYNC_CLIENT_SYNC_THREADS_NUM 4
+
 //默认存放任务列表路径
 #define WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH "temp_list"
 

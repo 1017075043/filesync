@@ -8,6 +8,7 @@ using namespace std;
 #include <algorithm>
 
 #include "../wnh_base_class/wnh_base_class.h"
+#include "../wnh_define/wnh_filesync_tcp_define.h"
 #include "../wnh_int_string_one_list/wnh_int_string_one_list.h"
 #include "../wnh_unsigned_long_string_one_list/wnh_unsigned_long_string_one_list.h"
 #include "../wnh_string_rule_one_list/wnh_string_rule_one_list.h"
@@ -37,6 +38,8 @@ using namespace std;
 #define TASK_ATTR_DEFAULT_FILE_USER "root"
 #define TASK_ATTR_DEFAULT_FILE_GROUP "root"
 #define TASK_ATTR_DEFAULT_FILE_POWER "755"
+
+extern mutex create_task_line_file_lock;
 
 class wnh_inotify_use_sqlite : public wnh_base_class
 {
@@ -148,6 +151,7 @@ public:
     unsigned long get_task_list_num(); //获取获取任务列表数量
     unsigned long get_task_list_num(const string & client_ip); //根据客户端IP,获取任务数量
     vector<vector<string> > get_task_list(const string & line, const string & num); //获取等待同步任务列表数据
+    bool update_task_sync_lock_status(const string & client_ip, const string & lock_status); //根据客户端IP更新锁状态
 
     //wnh_inotify_use_sqlite_sql_event_into_task.cpp
     bool event_into_task(const string & src_dir, const string & dst_dir, const vector<string> & client_ip); //将事件转为任务,多IP

@@ -128,6 +128,7 @@ public:
     int accept_apply_downinfo_file_info(const int nfp, const string info, string & accept_file_name, const CONNECT_INFO & CONNECT_INFO); //接收请求文件下载信息
     bool add_session(thread *session, const int nfp, const CONNECT_INFO & CONNECT_INFO); //将一个会话添加进入会话记录列表
     bool close_session(const int nfp, const bool status); //关闭一个会话
+    bool close_session(const int nfp, const CONNECT_INFO & CONNECT_INFO, const bool status); //关闭一个会话
     bool sub_session(const int nfp); //将一个会话从会话记录列表中删除
     bool manage_session_pthread(); //管理会话线程
     bool check_target_ip(const string & client_ip); //检查客户端IP是否为允许连接

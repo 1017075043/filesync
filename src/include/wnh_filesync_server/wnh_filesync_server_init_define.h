@@ -32,23 +32,23 @@
 //单次任务列表最大数量
 #define SINGLE_TASK_LIST_MAX_NUM 10
 //默认任务列表路径格式
-#define DEFAULT_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".list"
+#define DEFAULT_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + "-" + get_uuid() + ".list"
 //默认服务端状态状态路径格式
-#define DEFAULT_SERVER_STATUS_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "server_status-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+#define DEFAULT_SERVER_STATUS_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "server_status-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + "-" + get_uuid() + ".info"
 //默认客户端状态状态路径格式
-#define DEFAULT_client_STATUS_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "client_status-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+#define DEFAULT_client_STATUS_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "client_status-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + "-" + get_uuid() + ".info"
 //默认同步规则信息路径格式
-#define DEFAULT_SYNC_RULE_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_rule-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+#define DEFAULT_SYNC_RULE_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_rule-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + "-" + get_uuid() + ".info"
 //默认同步传输过程信息路径格式
-#define DEFAULT_SYNC_TRANSFER_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_transfer-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+#define DEFAULT_SYNC_TRANSFER_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_transfer-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + "-" + get_uuid() + ".info"
 //同步传输过程数据最久时间，单位：秒
 #define SYNC_TRANSFER_MAXIMUM_TIME 600
 //单次同步传输过程数据最大数量
 #define SYNC_TRANSFER_MAXIMUM_LINE_NUM 20
 //默认同步失败任务列表信息路径格式
-#define DEFAULT_SYNC_FAIL_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_fail_task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+#define DEFAULT_SYNC_FAIL_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_fail_task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + "-" + get_uuid() + ".info"
 //默认同步失败任务列表信息路径格式
-#define DEFAULT_SYNC_COMPLETE_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_complete_task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+#define DEFAULT_SYNC_COMPLETE_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "sync_complete_task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + "-" + get_uuid() + ".info"
 //默认登台同步列表信息路径格式
-#define DEFAULT_WAIT_SYNC_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "wait_sync_task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + ".info"
+#define DEFAULT_WAIT_SYNC_TASK_LIST_PATH_FORMAT  WNH_FILESYNC_DEFAULT_TASK_LIST_DIR_PATH + "/" + "wait_sync_task_list-" + CONNECT_INFO.client_ip + "-" + to_string(LOCALTIMENUM) + "-" + get_uuid() + ".info"
 #endif
