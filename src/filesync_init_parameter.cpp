@@ -48,7 +48,12 @@ void filesync::init_parameter(const int argc,const char **argv) //初始化配�
         sequential_mode_get_values(argc, argv); //顺序方式取值
     }
 
-    if(filesync_start_mode == "server")
+    string is_help_mode = argv[argc -1];
+    if(is_help_mode == "--help" || is_help_mode == "--HELP" || is_help_mode == "help" || is_help_mode == "HELP")
+    {
+        filesync_start_mode = "control";
+    }
+    else if(filesync_start_mode == "server")
     {
 
         WNHDEBUG("启动参数, filesync_start_mode=" << filesync_start_mode << ", filesync_server_config_path=" << filesync_server_config_path << ", filesync_server_pid_path=" << filesync_server_pid_path << ", filesync_server_root_limit=" << filesync_server_root_limit << ", filesync_server_logs_level=" << filesync_server_logs_level);

@@ -162,66 +162,68 @@ void wnh_filesync_control::control_use_instructions() //控制端使用说明
 {
     vector<string> values;
     vector<WNH_SHELL_TABLES_FONT_STYLE> color;
+    vector<WNH_SHELL_TABLES_ALIGN_MODE> align;
     vector<unsigned int> values_width;
 
     string str_temp;
     str_temp = str_temp + PROGRAM_NAME + " 控制端使用说明";
     set_vector_values(true, values, str_temp);
     set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDMAGENTA);
-    set_vector_values(true, values_width, 114);
+    set_vector_values(true, values_width, 135);
     shell_tables.add_unit(values, color, values_width);
 
-    set_vector_values(true, values, "序号", "参数", "说明", "使用范例");
+    set_vector_values(true, values, "序号", "说明", "使用范例(本地模式)", "使用范例(远程模式)");
     set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN, WNH_SHELL_TABLES_FONT_STYLE::BOLDCYAN);
-    set_vector_values(true, values_width, 6, 24, 30, 51);
+    set_vector_values(true, values_width, 4, 28, 47, 53);
     shell_tables.add_unit(values, color, values_width);
 
-    set_vector_values(true, values, "0", "show use", "显示使用帮助", "filesync 0", "filesync \"show use\"");
-    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW);
-    set_vector_values(true, values_width, 6, 24, 30, 15, 35);
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values_width, 4, 28, 13, 33, 53);
+    set_vector_values(true, align, WNH_SHELL_TABLES_ALIGN_MODE::centro, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left, WNH_SHELL_TABLES_ALIGN_MODE::left);
+    set_vector_values(true, values, "0", " 显示使用帮助", " filesync 0", " filesync \"show use\"", " filesync control 0 --ip=服务端IP --port=服务端端口");
+    set_vector_values(true, color, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDGREEN, WNH_SHELL_TABLES_FONT_STYLE::BOLDRED, WNH_SHELL_TABLES_FONT_STYLE::BOLDYELLOW, WNH_SHELL_TABLES_FONT_STYLE::BOLDBLUE);
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "1", "show list", "显示使用命令列表", "filesync 1", "filesync \"show list\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "1", " 显示使用命令列表", " filesync 1", " filesync \"show list\"", " filesync control 1 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "2", "show server client", "显示服务端和客户端状态", "filesync 2", "filesync \"show server client\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "2", " 显示服务端和客户端状态", " filesync 2", " filesync \"show server client\"", " filesync control 2 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "3", "show server client s", "实时显示服务端和客户端状态", "filesync 3", "filesync \"show server client s\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "3", " 实时显示服务端和客户端状态", " filesync 3",  " filesync \"show server client s\"", " filesync control 3 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "4", "show server", "显示服务端列表", "filesync 4", "filesync \"show server\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "4", " 显示服务端列表", " filesync 4", " filesync \"show server\"", " filesync control 4 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "5", "show server s", "实时显示服务端列表", "filesync 5", "filesync \"show server s\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "5", " 实时显示服务端列表", " filesync 5", " filesync \"show server s\"", " filesync control 5 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "6", "show client", "显示客户端列表", "filesync 6", "filesync \"show client\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "6", " 显示客户端列表", " filesync 6", " filesync \"show client\"", " filesync control 6 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "7", "show client s", "实时显示客户端列表", "filesync 7", "filesync \"show client s\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "7", " 实时显示客户端列表", " filesync 7", " filesync \"show client s\"", " filesync control 7 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "8", "show sync rule", "显示同步规则列表", "filesync 8", "filesync \"show sync rule\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "8", " 显示同步规则列表", " filesync 8", " filesync \"show sync rule\"", " filesync control 8 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "9", "show system var", "显示系统环境变量说明", "filesync 9", "filesync \"show system var\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "9", " 显示系统环境变量说明", " filesync 9", " filesync \"show system var\"", " filesync control 9 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "10", "show license", "显示服务端许可信息", "filesync 10", "filesync \"show license\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "10", " 显示服务端许可信息", " filesync 10", " filesync \"show license\"", " filesync control 10 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "11", "show transfer", "显示同步传输过程信息", "filesync 11", "filesync \"show transfer\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "11", " 显示同步传输过程信息", " filesync 11", " filesync \"show transfer\"", " filesync control 11 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "12", "show fail task", "显示同步失败任务信息", "filesync 12", "filesync \"show fail task\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "12", " 显示同步失败任务信息", " filesync 12", " filesync \"show fail task\"", " filesync control 12 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "13", "show fail task", "显示同步失败任务信息", "filesync 13", "filesync \"show complete task\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "13", " 显示同步完成任务信息", " filesync 13", " filesync \"show complete task\"", " filesync control 13 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
-    set_vector_values(true, values, "14", "show wait sync task", "显示等待同步任务信息", "filesync 14", "filesync \"show wait sync task\"");
-    shell_tables.add_unit(values, color, values_width);
+    set_vector_values(true, values, "14", " 显示等待同步任务信息", " filesync 14", " filesync \"show wait sync task\"", " filesync control 14 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
 
     shell_tables.show_tables();
     shell_tables.clear();
