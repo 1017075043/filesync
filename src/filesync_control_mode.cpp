@@ -81,6 +81,17 @@ void filesync::control_mode()
     else if(filesync_control_use_parameter == "14" || filesync_control_use_parameter == "show wait sync task")
     {
         control.get_wait_sync_task_list_info();
+    }    else if(filesync_control_use_parameter == "15" || filesync_control_use_parameter == "clear fail task")
+    {
+        WNHINFO("清空同步失败任务");
+    }
+    else if(filesync_control_use_parameter == "16" || filesync_control_use_parameter == "clear complete task")
+    {
+        WNHINFO("清空同步完成任务");
+    }
+    else if(filesync_control_use_parameter == "17" || filesync_control_use_parameter == "clear wait sync task")
+    {
+        WNHINFO("清空等待同步任务");
     }
     else
     {

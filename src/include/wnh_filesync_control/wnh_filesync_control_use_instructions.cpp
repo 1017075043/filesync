@@ -225,6 +225,15 @@ void wnh_filesync_control::control_use_instructions() //控制端使用说明
     set_vector_values(true, values, "14", " 显示等待同步任务信息", " filesync 14", " filesync \"show wait sync task\"", " filesync control 14 --ip=服务端IP --port=服务端端口");
     shell_tables.add_unit(values, color, align, values_width);
 
+    set_vector_values(true, values, "15", " 清空同步失败任务", " filesync 15", " filesync \"clear fail task\"", " filesync control 15 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
+
+    set_vector_values(true, values, "16", " 清空同步完成任务", " filesync 16", " filesync \"clear complete task\"", " filesync control 16 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
+
+    set_vector_values(true, values, "17", " 清空等待同步任务", " filesync 17", " filesync \"clear wait sync task\"", " filesync control 17 --ip=服务端IP --port=服务端端口");
+    shell_tables.add_unit(values, color, align, values_width);
+
     shell_tables.show_tables();
     shell_tables.clear();
 }
