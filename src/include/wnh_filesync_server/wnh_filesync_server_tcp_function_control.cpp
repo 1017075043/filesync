@@ -399,7 +399,7 @@ string wnh_filesync_server::create_server_status_info() //创建服务端状态�
     }
 
     offline_client_num = client_num - online_client_num;
-    unfinished_task_num = watch.get_task_list_num() - 1;
+    unfinished_task_num = watch.get_task_list_num();
     event_num = watch.get_event_list_num();
     task_num = complete_task_num + unfinished_task_num + fail_task_num;
     WNHDEBUG("pid:" << pid << ", 启动时间:" << start_time << ", 客户端数量:" << client_num << ", 在线客户端数量:" << online_client_num << ", 离线客户端数量:" << offline_client_num << ", 全部任务数:" << task_num << ", 已完成任务数:" << complete_task_num << ", 未完成任务数:" << unfinished_task_num << ", 失败任务数" << fail_task_num << ", 未转化事件数量" << event_num);
