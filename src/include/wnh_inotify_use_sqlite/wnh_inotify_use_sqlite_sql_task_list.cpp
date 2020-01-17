@@ -76,7 +76,7 @@ bool wnh_inotify_use_sqlite::create_task_list_file(const string & client_ip, con
 
     sql = "";
     sql = sql + "SELECT event_id, src_path, dst_path, id FROM " + TASK_LIST_TABLE_NAME + " t WHERE t.sync_lock = 0 AND t.client_ip = '" + client_ip + "' AND (datetime(CURRENT_TIMESTAMP, 'localtime', '-3 seconds') > datetime(update_date)) ORDER BY update_date DESC LIMIT " + to_string(get_task_num_temp) + ";";
-    WNHWARN(sql);
+    //WNHWARN(sql);
     if(sqlite_op.sql_query(sql, result, row, column))
     {
         ofstream file_open;
